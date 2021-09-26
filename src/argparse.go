@@ -12,14 +12,15 @@ import (
 var (
 	// BUILDTAGS are injected ld flags during build
 	BUILDTAGS      string
-	appName        = "eagle-eye"
-	appDescription = "eagle-eye is a folder watcher that runs commands on change of files"
+	appName        = "sam"
+	appDescription = "string alteration machine"
 	appMainversion = "0.1"
 )
 
 var CLI struct {
 	Command           string   `help:"string transformation command" arg`
 	StringToTransform []string `help:"string to process" arg optional passthrough`
+	List              bool     `help:"list the available template functions" short:l`
 	VersionFlag       bool     `help:"display version" short:V`
 }
 

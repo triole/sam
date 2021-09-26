@@ -10,13 +10,15 @@ func main() {
 	parseArgs()
 	tr := transform.Init()
 
-	println(CLI.Command)
-	fmt.Printf("%q\n", CLI.StringToTransform)
 	stringToTransform := strings.Join(CLI.StringToTransform, " ")
-	fmt.Printf("%q\n", stringToTransform)
 	if stringToTransform == "" {
 		stringToTransform = getStdin()
 	}
 
-	fmt.Printf("%s\n", tr.Title(stringToTransform))
+	res, _ := tr.Call(CLI.Command, stringToTransform)
+	if res != nil {
+		fmt.Printf("%s\n", res)
+	} else {
+		tr.ListFunctions()
+	}
 }
