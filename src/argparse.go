@@ -18,14 +18,13 @@ var (
 )
 
 var CLI struct {
-	Command           string   `help:"string transformation command" arg`
+	Command           string   `help:"string transformation command" arg optional`
 	StringToTransform []string `help:"string to process" arg optional passthrough`
 	List              bool     `help:"list the available template functions" short:l`
 	VersionFlag       bool     `help:"display version" short:V`
 }
 
 func parseArgs() {
-	curdir, _ := os.Getwd()
 	ctx := kong.Parse(&CLI,
 		kong.Name(appName),
 		kong.Description(appDescription),
@@ -36,9 +35,6 @@ func parseArgs() {
 			NoAppSummary: true,
 			FlagsLast:    false,
 		}),
-		kong.Vars{
-			"curdir": curdir,
-		},
 	)
 	_ = ctx.Run()
 
