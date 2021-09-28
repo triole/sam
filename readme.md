@@ -44,5 +44,5 @@ Very likely there are more operations to be added in the future.
 |           |              |
 | md5       | md5 hash     |
 | sha1      | sha1 hash    |
-|           | sha256       |
+| sha256    | sha256 hash  |
 | sha512    | sha512 hash  |
