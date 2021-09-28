@@ -15,7 +15,7 @@ The **S**tring **A**lteration **M**achine is a tool that can be used to manipula
 Having simplicity in mind the syntax basically consists of two parts. The first part is the first arg and defines the command. Meaning what to do with the string afterwards. Everything from the second argument on is the string. It looks like this:
 
 ```shell
-# transform to title case
+# transform to title case or uppercase
 sam title hello world
 sam uppercase hello world
 
