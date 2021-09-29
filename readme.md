@@ -36,13 +36,16 @@ sam -h
 
 Very likely there are more operations to be added in the future.
 
-| name      | description  |
-|-----------|--------------|
-| lowercase | to lowercase |
-| title     | title case   |
-| uppercase | to uppercase |
-|           |              |
-| md5       | md5 hash     |
-| sha1      | sha1 hash    |
-| sha256    | sha256 hash  |
-| sha512    | sha512 hash  |
+| name      | description                                               |
+|-----------|-----------------------------------------------------------|
+| bool      | parse boolean: enable, enabled, 1, on and true equal true |
+| camelcase | to camelcase                                              |
+| snakecase | to snakecase                                              |
+| lowercase | to lowercase                                              |
+| title     | title case                                                |
+| uppercase | to uppercase                                              |
+|           |                                                           |
+| md5       | md5 hash                                                  |
+| sha1      | sha1 hash                                                 |
+| sha256    | sha256 hash                                               |
+| sha512    | sha512 hash                                               |

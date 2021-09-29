@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/alecthomas/kong v0.2.17
+	github.com/gobeam/stringy v0.0.4
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 )
 
