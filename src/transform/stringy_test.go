@@ -1,9 +1,7 @@
 package transform
 
-import "testing"
-
-var (
-	tr = Init()
+import (
+	"testing"
 )
 
 func TestSnakeCase(t *testing.T) {
@@ -26,10 +24,4 @@ func TestSnakeCase(t *testing.T) {
 	assert(tr.Bool("1"), "true", t)
 	assert(tr.Bool("0"), "false", t)
 	assert(tr.Bool("any_other_string"), "false", t)
-}
-
-func assert(in, exp string, t *testing.T) {
-	if in != exp {
-		t.Errorf("Assert failed: %q != %q", in, exp)
-	}
 }
