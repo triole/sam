@@ -1,7 +1,6 @@
 package transform
 
 import (
-	"strconv"
 	"strings"
 
 	"github.com/gobeam/stringy"
@@ -32,10 +31,9 @@ func (tr Transform) CamelCase(str string) string {
 func (tr Transform) Bool(str string) string {
 	s := strings.ToLower(str)
 	if s == "true" || s == "enable" || s == "enabled" || s == "1" || s == "on" {
-		s = "on"
+		s = "true"
 	} else {
-		s = "off"
+		s = "false"
 	}
-	sn := stringy.New(s)
-	return strconv.FormatBool(sn.Boolean())
+	return s
 }
