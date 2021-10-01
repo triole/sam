@@ -15,10 +15,11 @@ type tFuncList []tFunc
 type tFuncMap map[string]tFunc
 
 type tFunc struct {
-	Name   string
-	Desc   string
-	Func   interface{}
-	Sorter int
+	Name     string
+	Desc     string
+	Category string
+	Func     interface{}
+	Sorter   int
 }
 
 func (fl tFuncList) Len() int {
@@ -39,51 +40,70 @@ func (fl tFuncList) Swap(i, j int) {
 func makeFuncMap() (fm tFuncMap) {
 	tr := transform.Init()
 	fm = make(tFuncMap)
-	fm = addToMap(fm, tr.Title, "title", "title case", 0)
-	fm = addToMap(fm, tr.LowerCase, "lower", "to lowercase", 0)
-	fm = addToMap(fm, tr.UpperCase, "upper", "to uppercase", 0)
-	fm = addToMap(fm, tr.SnakeCase, "snake", "to snakecase", 0)
-	fm = addToMap(fm, tr.CamelCase, "camel", "to camelcase", 0)
-	fm = addToMap(fm, tr.Bool, "bool", "parse to boolean (enable, enabled, 1, on and true return true)", 0)
-	fm = addToMap(fm, tr.Md5, "md5", "md5 hash", 1)
-	fm = addToMap(fm, tr.Sha1, "sha1", "sha1 hash", 1)
-	fm = addToMap(fm, tr.Sha256, "sha256", "sha256 hash", 1)
-	fm = addToMap(fm, tr.Sha512, "sha512", "sha512 hash", 1)
+	fm = addToMap(
+		fm, tr.Title, "title", "title case", "case", 0,
+	)
+	fm = addToMap(
+		fm, tr.LowerCase, "lower", "to lowercase", "case", 0,
+	)
+	fm = addToMap(
+		fm, tr.UpperCase, "upper", "to uppercase", "case", 0,
+	)
+	fm = addToMap(
+		fm, tr.SnakeCase, "snake", "to snakecase", "case", 0,
+	)
+	fm = addToMap(
+		fm, tr.CamelCase, "camel", "to camelcase", "case", 0,
+	)
+	fm = addToMap(
+		fm, tr.Bool, "bool",
+		"return boolean: 1, enable, enabled, on and true return true, everything else false (case doesn't matter)",
+		"logical", 1,
+	)
+	fm = addToMap(
+		fm, tr.Md5, "md5", "md5 hash", "hashes", 2)
+	fm = addToMap(
+		fm, tr.Sha1, "sha1", "sha1 hash", "hashes", 2)
+	fm = addToMap(
+		fm, tr.Sha256, "sha256", "sha256 hash", "hashes", 2)
+	fm = addToMap(
+		fm, tr.Sha512, "sha512", "sha512 hash", "hashes", 2)
 	fm = addToMap(
 		fm, tr.TidyFileName1, "tfn1",
 		"tidy file names 1, remove multiple path separators",
-		2,
+		"file names", 4,
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName2, "tfn2",
 		"as tfn1, also replacing all characters not being alpha numerics, "+
 			"dashes, underscores or path separators by underscores",
-		2,
+		"file names", 4,
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName3, "tfn3",
 		"as tfn2, and converting to lower case",
-		2,
+		"file names", 4,
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName4, "tfn4",
 		"as tfn3, replacing double underscores by a single one",
-		2,
+		"file names", 4,
 	)
 	return
 }
 
-func addToMap(fm tFuncMap, f interface{}, name, desc string, sorter int) tFuncMap {
-	fm[name] = newFunc(f, name, desc, sorter)
+func addToMap(fm tFuncMap, f interface{}, name, desc, category string, sorter int) tFuncMap {
+	fm[name] = newFunc(f, name, desc, category, sorter)
 	return fm
 }
 
-func newFunc(function interface{}, name, desc string, sorter int) tFunc {
+func newFunc(function interface{}, name, desc, category string, sorter int) tFunc {
 	return tFunc{
-		Name:   name,
-		Desc:   desc,
-		Func:   function,
-		Sorter: sorter,
+		Name:     name,
+		Desc:     desc,
+		Category: category,
+		Func:     function,
+		Sorter:   sorter,
 	}
 }
 
@@ -148,7 +168,7 @@ func ListFunctions() {
 	})
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
-		"name", "description",
+		"name", "category", "description",
 	})
 	var lastSorter int
 	var currentSorter int
@@ -160,7 +180,7 @@ func ListFunctions() {
 		}
 		t.AppendRow(
 			[]interface{}{
-				el.Name, fm[el.Name].Desc,
+				el.Name, fm[el.Name].Category, fm[el.Name].Desc,
 			},
 		)
 	}
