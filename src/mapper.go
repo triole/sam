@@ -9,6 +9,7 @@ import (
 	"sort"
 
 	"github.com/jedib0t/go-pretty/table"
+	"github.com/jedib0t/go-pretty/text"
 )
 
 var (
@@ -66,32 +67,32 @@ func makeFuncMap() (fm tFuncMap) {
 	fm = addToMap(fm, tr.Sha512, "sha512", "sha512 hash", "hash", 3)
 
 	fm = addToMap(
-		fm, tr.DirName, "dir",
-		"folder of a file name, return everything up to last path separator, "+
+		fm, tr.DirName, "folder",
+		"folder of a path string, return everything up to last path separator, "+
 			"path separators trailing the input are ignored "+
 			"(i.e. /tmp/hello/ -> /tmp)",
-		"file name", 4,
+		"path", 4,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName1, "tfn1",
-		"tidy file names 1, remove multiple path separators",
-		"file name", 4,
+		fm, tr.TidyFileName1, "tp1",
+		"tidy path 1, remove multiple path separators",
+		"path", 4,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName2, "tfn2",
-		"as tfn1, but also remove all accents, then replace characters not being "+
+		fm, tr.TidyFileName2, "tp2",
+		"as tp1, but also remove all accents, then replace characters not being "+
 			"alpha numerics, dashes, underscores or path separators by underscores",
-		"file name", 4,
+		"path", 4,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName3, "tfn3",
-		"as tfn2, plus lower case conversion",
-		"file name", 4,
+		fm, tr.TidyFileName3, "tp3",
+		"as tp2, plus lower case conversion",
+		"path", 4,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName4, "tfn4",
-		"as tfn3, replace double underscores which may appear during conversion by a single one",
-		"file name", 4,
+		fm, tr.TidyFileName4, "tp4",
+		"as tp3, replace double underscores which may appear during conversion by a single one",
+		"path", 4,
 	)
 	return
 }
@@ -139,8 +140,6 @@ func ListFunctions() {
 		fl = append(fl, val)
 	}
 	sort.Sort(tFuncList(fl))
-	fmt.Printf("\n%s\n", "String transformation command not found.")
-	fmt.Printf("%s\n", "Please use one of the available...")
 	t := table.NewWriter()
 	t.SetStyle(table.Style{
 		Name: "myNewStyle",
@@ -151,7 +150,7 @@ func ListFunctions() {
 			Left:             "[",
 			LeftSeparator:    "{",
 			MiddleHorizontal: "-",
-			MiddleSeparator:  "|",
+			MiddleSeparator:  "+",
 			MiddleVertical:   "|",
 			PaddingLeft:      " ",
 			PaddingRight:     " ",
@@ -162,12 +161,15 @@ func ListFunctions() {
 			TopSeparator:     "^",
 			UnfinishedRow:    " ~~~",
 		},
+		Format: table.FormatOptions{
+			Header: text.FormatUpper,
+		},
 		Options: table.Options{
 			DrawBorder:      false,
 			SeparateColumns: true,
 			SeparateFooter:  true,
 			SeparateHeader:  true,
-			SeparateRows:    false,
+			SeparateRows:    true,
 		},
 	})
 
@@ -179,16 +181,9 @@ func ListFunctions() {
 
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
-		"name", "category", "description",
+		"command", "category", "description",
 	})
-	var lastSorter int
-	var currentSorter int
 	for _, el := range fl {
-		lastSorter = currentSorter
-		currentSorter = el.Sorter
-		if lastSorter != currentSorter {
-			t.AppendRow([]interface{}{""})
-		}
 		t.AppendRow(
 			[]interface{}{
 				el.Name, fm[el.Name].Category, wordWrap(fm[el.Name].Desc, tableDescMaxWidth),

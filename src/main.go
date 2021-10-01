@@ -18,5 +18,11 @@ func main() {
 		fmt.Printf("%s\n", res)
 	} else {
 		ListFunctions()
+		if CLI.List == false {
+			fmt.Printf("%s\n\n",
+				"String transformation command not found. "+
+					"Please use one of the above.",
+			)
+		}
 	}
 }
