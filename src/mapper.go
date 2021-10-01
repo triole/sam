@@ -40,15 +40,36 @@ func makeFuncMap() (fm tFuncMap) {
 	tr := transform.Init()
 	fm = make(tFuncMap)
 	fm = addToMap(fm, tr.Title, "title", "title case", 0)
-	fm = addToMap(fm, tr.LowerCase, "lowercase", "to lowercase", 0)
-	fm = addToMap(fm, tr.UpperCase, "uppercase", "to uppercase", 0)
-	fm = addToMap(fm, tr.SnakeCase, "snakecase", "to snakecase", 0)
-	fm = addToMap(fm, tr.CamelCase, "camelcase", "to camelcase", 0)
-	fm = addToMap(fm, tr.Bool, "bool", "parse boolean: enable, enabled, 1, on and true equal true", 0)
+	fm = addToMap(fm, tr.LowerCase, "lower", "to lowercase", 0)
+	fm = addToMap(fm, tr.UpperCase, "upper", "to uppercase", 0)
+	fm = addToMap(fm, tr.SnakeCase, "snake", "to snakecase", 0)
+	fm = addToMap(fm, tr.CamelCase, "camel", "to camelcase", 0)
+	fm = addToMap(fm, tr.Bool, "bool", "parse to boolean (enable, enabled, 1, on and true return true)", 0)
 	fm = addToMap(fm, tr.Md5, "md5", "md5 hash", 1)
 	fm = addToMap(fm, tr.Sha1, "sha1", "sha1 hash", 1)
 	fm = addToMap(fm, tr.Sha256, "sha256", "sha256 hash", 1)
 	fm = addToMap(fm, tr.Sha512, "sha512", "sha512 hash", 1)
+	fm = addToMap(
+		fm, tr.TidyFileName1, "tfn1",
+		"tidy file names 1, remove multiple path separators",
+		2,
+	)
+	fm = addToMap(
+		fm, tr.TidyFileName2, "tfn2",
+		"as tfn1, also replacing all characters not being alpha numerics, "+
+			"dashes, underscores or path separators by underscores",
+		2,
+	)
+	fm = addToMap(
+		fm, tr.TidyFileName3, "tfn3",
+		"as tfn2, and converting to lower case",
+		2,
+	)
+	fm = addToMap(
+		fm, tr.TidyFileName4, "tfn4",
+		"as tfn3, replacing double underscores by a single one",
+		2,
+	)
 	return
 }
 
