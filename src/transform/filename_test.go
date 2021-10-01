@@ -15,6 +15,8 @@ func TestTidyFileName2(t *testing.T) {
 	assert(tr.TidyFileName2("/tmp/A B C D E.docx"), "/tmp/A_B_C_D_E.docx", t)
 	assert(tr.TidyFileName2("/tmp//1!2@3#4$5.docx"), "/tmp/1_2_3_4_5.docx", t)
 	assert(tr.TidyFileName2("//tmp///1!!!2!!!.docx"), "/tmp/1___2___.docx", t)
+
+	assert(tr.TidyFileName2("ùûüÿ€àâæçéèêëïîôœ"), "uuuey_aa_ceeeeiio_", t)
 }
 
 func TestTidyFileName3(t *testing.T) {

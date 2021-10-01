@@ -4,6 +4,11 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"unicode"
+
+	"golang.org/x/text/runes"
+	"golang.org/x/text/transform"
+	"golang.org/x/text/unicode/norm"
 )
 
 var (
@@ -18,6 +23,8 @@ func (tr Transform) TidyFileName1(str string) (r string) {
 
 func (tr Transform) TidyFileName2(str string) (r string) {
 	r = tr.TidyFileName1(str)
+	r = tr.specialCharacterTreatment(r)
+	r = tr.removeAccents(r)
 	r = tr.sub(r, rxScheme, "_")
 	return
 }
@@ -32,6 +39,27 @@ func (tr Transform) TidyFileName4(str string) (r string) {
 	r = tr.TidyFileName3(str)
 	r = tr.removeMultiples(r)
 	return
+}
+
+func (tr Transform) specialCharacterTreatment(s string) (r string) {
+	r = s
+	r = strings.Replace(r, "ä", "ae", -1)
+	r = strings.Replace(r, "Ä", "Ae", -1)
+	r = strings.Replace(r, "ö", "oe", -1)
+	r = strings.Replace(r, "Ö", "Oe", -1)
+	r = strings.Replace(r, "ü", "ue", -1)
+	r = strings.Replace(r, "Ü", "Ue", -1)
+	r = strings.Replace(r, "ß", "ss", -1)
+	return
+}
+
+func (tr Transform) removeAccents(s string) string {
+	t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
+	output, _, e := transform.String(t, s)
+	if e != nil {
+		panic(e)
+	}
+	return output
 }
 
 func (tr Transform) removeMultiples(s string) (r string) {

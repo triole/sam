@@ -68,18 +68,18 @@ func makeFuncMap() (fm tFuncMap) {
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName2, "tfn2",
-		"as tfn1, also replacing all characters not being alpha numerics, "+
-			"dashes, underscores or path separators by underscores",
+		"as tfn1, but also remove all accents, then replace characters not being "+
+			"alpha numerics, dashes, underscores or path separators by underscores",
 		"file names", 4,
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName3, "tfn3",
-		"as tfn2, and converting to lower case",
+		"as tfn2, plus lower case conversion",
 		"file names", 4,
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName4, "tfn4",
-		"as tfn3, replacing double underscores by a single one",
+		"as tfn3, replace double underscores which may appear during conversion by a single one",
 		"file names", 4,
 	)
 	return
