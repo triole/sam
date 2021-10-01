@@ -36,16 +36,33 @@ sam -h
 
 Very likely there are more operations to be added in the future.
 
-| name      | description                                                                  |
-|-----------|------------------------------------------------------------------------------|
-| bool      | parse boolean: enable, enabled, 1, on and true equal true (case insensitive) |
-| camelcase | to camelcase                                                                 |
-| snakecase | to snakecase                                                                 |
-| lowercase | to lowercase                                                                 |
-| title     | title case                                                                   |
-| uppercase | to uppercase                                                                 |
-|           |                                                                              |
-| md5       | md5 hash                                                                     |
-| sha1      | sha1 hash                                                                    |
-| sha256    | sha256 hash                                                                  |
-| sha512    | sha512 hash                                                                  |
+| name   | category  | description                                          |
+|--------|-----------|------------------------------------------------------|
+| camel  | case      | to camelcase                                         |
+| lower  | case      | to lowercase                                         |
+| snake  | case      | to snakecase                                         |
+| title  | case      | title case                                           |
+| upper  | case      | to uppercase                                         |
+|        |           |                                                      |
+| bool   | logical   | return boolean: 1, enable, enabled, on and true      |
+|        |           | return true, everything else false (case doesn't     |
+|        |           | matter)                                              |
+|        |           |                                                      |
+| fr_b64 | encoding  | from base64 to string                                |
+| to_b64 | encoding  | to base64 from string                                |
+|        |           |                                                      |
+| md5    | hash      | md5 hash                                             |
+| sha1   | hash      | sha1 hash                                            |
+| sha256 | hash      | sha256 hash                                          |
+| sha512 | hash      | sha512 hash                                          |
+|        |           |                                                      |
+| dir    | file name | folder of a file name, return everything up to last  |
+|        |           | path separator, path separators trailing the input   |
+|        |           | are ignored (i.e. /tmp/hello/ -> /tmp)               |
+| tfn1   | file name | tidy file names 1, remove multiple path separators   |
+| tfn2   | file name | as tfn1, but also remove all accents, then replace   |
+|        |           | characters not being alpha numerics, dashes,         |
+|        |           | underscores or path separators by underscores        |
+| tfn3   | file name | as tfn2, plus lower case conversion                  |
+| tfn4   | file name | as tfn3, replace double underscores which may appear |
+|        |           | during conversion by a single one                    |

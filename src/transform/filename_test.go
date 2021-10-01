@@ -2,6 +2,13 @@ package transform
 
 import "testing"
 
+func TestDirName(t *testing.T) {
+	assert(tr.DirName("/home/username/document.txt"), "/home/username", t)
+	assert(tr.DirName("/home/username"), "/home", t)
+	assert(tr.DirName("/home/username/"), "/home", t)
+	assert(tr.DirName("/home/username///"), "/home", t)
+}
+
 func TestTidyFileName1(t *testing.T) {
 	assert(tr.TidyFileName1("///etc//crontab"), "/etc/crontab", t)
 	assert(tr.TidyFileName1("/tmp/HEllO   WORLD___.md"), "/tmp/HEllO   WORLD___.md", t)

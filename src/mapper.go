@@ -11,6 +11,10 @@ import (
 	"github.com/jedib0t/go-pretty/table"
 )
 
+var (
+	tableDescMaxWidth = 52
+)
+
 type tFuncList []tFunc
 type tFuncMap map[string]tFunc
 
@@ -53,34 +57,41 @@ func makeFuncMap() (fm tFuncMap) {
 		"logical", 1,
 	)
 
-	fm = addToMap(fm, tr.FromBase64, "fromb64", "from base64 to string", "encoding", 2)
-	fm = addToMap(fm, tr.ToBase64, "tob64", "to base64 from string", "encoding", 2)
+	fm = addToMap(fm, tr.FromBase64, "fr_b64", "from base64 to string", "encoding", 2)
+	fm = addToMap(fm, tr.ToBase64, "to_b64", "to base64 from string", "encoding", 2)
 
-	fm = addToMap(fm, tr.Md5, "md5", "md5 hash", "hashes", 3)
-	fm = addToMap(fm, tr.Sha1, "sha1", "sha1 hash", "hashes", 3)
-	fm = addToMap(fm, tr.Sha256, "sha256", "sha256 hash", "hashes", 3)
-	fm = addToMap(fm, tr.Sha512, "sha512", "sha512 hash", "hashes", 3)
+	fm = addToMap(fm, tr.Md5, "md5", "md5 hash", "hash", 3)
+	fm = addToMap(fm, tr.Sha1, "sha1", "sha1 hash", "hash", 3)
+	fm = addToMap(fm, tr.Sha256, "sha256", "sha256 hash", "hash", 3)
+	fm = addToMap(fm, tr.Sha512, "sha512", "sha512 hash", "hash", 3)
 
+	fm = addToMap(
+		fm, tr.DirName, "dir",
+		"folder of a file name, return everything up to last path separator, "+
+			"path separators trailing the input are ignored "+
+			"(i.e. /tmp/hello/ -> /tmp)",
+		"file name", 4,
+	)
 	fm = addToMap(
 		fm, tr.TidyFileName1, "tfn1",
 		"tidy file names 1, remove multiple path separators",
-		"file names", 4,
+		"file name", 4,
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName2, "tfn2",
 		"as tfn1, but also remove all accents, then replace characters not being "+
 			"alpha numerics, dashes, underscores or path separators by underscores",
-		"file names", 4,
+		"file name", 4,
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName3, "tfn3",
 		"as tfn2, plus lower case conversion",
-		"file names", 4,
+		"file name", 4,
 	)
 	fm = addToMap(
 		fm, tr.TidyFileName4, "tfn4",
 		"as tfn3, replace double underscores which may appear during conversion by a single one",
-		"file names", 4,
+		"file name", 4,
 	)
 	return
 }
@@ -140,7 +151,7 @@ func ListFunctions() {
 			Left:             "[",
 			LeftSeparator:    "{",
 			MiddleHorizontal: "-",
-			MiddleSeparator:  "+",
+			MiddleSeparator:  "|",
 			MiddleVertical:   "|",
 			PaddingLeft:      " ",
 			PaddingRight:     " ",
@@ -159,6 +170,13 @@ func ListFunctions() {
 			SeparateRows:    false,
 		},
 	})
+
+	t.SetColumnConfigs([]table.ColumnConfig{
+		{Number: 1},
+		{Number: 2},
+		{Number: 3, WidthMax: tableDescMaxWidth},
+	})
+
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
 		"name", "category", "description",
@@ -173,7 +191,7 @@ func ListFunctions() {
 		}
 		t.AppendRow(
 			[]interface{}{
-				el.Name, fm[el.Name].Category, fm[el.Name].Desc,
+				el.Name, fm[el.Name].Category, wordWrap(fm[el.Name].Desc, tableDescMaxWidth),
 			},
 		)
 	}
