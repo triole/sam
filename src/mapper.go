@@ -40,34 +40,27 @@ func (fl tFuncList) Swap(i, j int) {
 func makeFuncMap() (fm tFuncMap) {
 	tr := transform.Init()
 	fm = make(tFuncMap)
-	fm = addToMap(
-		fm, tr.Title, "title", "title case", "case", 0,
-	)
-	fm = addToMap(
-		fm, tr.LowerCase, "lower", "to lowercase", "case", 0,
-	)
-	fm = addToMap(
-		fm, tr.UpperCase, "upper", "to uppercase", "case", 0,
-	)
-	fm = addToMap(
-		fm, tr.SnakeCase, "snake", "to snakecase", "case", 0,
-	)
-	fm = addToMap(
-		fm, tr.CamelCase, "camel", "to camelcase", "case", 0,
-	)
+	fm = addToMap(fm, tr.Title, "title", "title case", "case", 0)
+	fm = addToMap(fm, tr.LowerCase, "lower", "to lowercase", "case", 0)
+	fm = addToMap(fm, tr.UpperCase, "upper", "to uppercase", "case", 0)
+	fm = addToMap(fm, tr.SnakeCase, "snake", "to snakecase", "case", 0)
+	fm = addToMap(fm, tr.CamelCase, "camel", "to camelcase", "case", 0)
+
 	fm = addToMap(
 		fm, tr.Bool, "bool",
-		"return boolean: 1, enable, enabled, on and true return true, everything else false (case doesn't matter)",
+		"return boolean: 1, enable, enabled, on and true return true, "+
+			"everything else false (case doesn't matter)",
 		"logical", 1,
 	)
-	fm = addToMap(
-		fm, tr.Md5, "md5", "md5 hash", "hashes", 2)
-	fm = addToMap(
-		fm, tr.Sha1, "sha1", "sha1 hash", "hashes", 2)
-	fm = addToMap(
-		fm, tr.Sha256, "sha256", "sha256 hash", "hashes", 2)
-	fm = addToMap(
-		fm, tr.Sha512, "sha512", "sha512 hash", "hashes", 2)
+
+	fm = addToMap(fm, tr.FromBase64, "fromb64", "from base64 to string", "encoding", 2)
+	fm = addToMap(fm, tr.ToBase64, "tob64", "to base64 from string", "encoding", 2)
+
+	fm = addToMap(fm, tr.Md5, "md5", "md5 hash", "hashes", 3)
+	fm = addToMap(fm, tr.Sha1, "sha1", "sha1 hash", "hashes", 3)
+	fm = addToMap(fm, tr.Sha256, "sha256", "sha256 hash", "hashes", 3)
+	fm = addToMap(fm, tr.Sha512, "sha512", "sha512 hash", "hashes", 3)
+
 	fm = addToMap(
 		fm, tr.TidyFileName1, "tfn1",
 		"tidy file names 1, remove multiple path separators",
