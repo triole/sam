@@ -6,7 +6,7 @@ require (
 	github.com/alecthomas/kong v0.2.17
 	github.com/gobeam/stringy v0.0.4
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
-	golang.org/x/text v0.3.5
+	golang.org/x/text v0.3.7
 )
 
 require (
@@ -20,5 +20,5 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	go.mongodb.org/mongo-driver v1.5.1 // indirect
-	golang.org/x/sys v0.0.0-20210927094055-39ccf1dd6fa6 // indirect
+	golang.org/x/sys v0.0.0-20211004093028-2c5d950f24ef // indirect
 )
