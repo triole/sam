@@ -32,7 +32,7 @@ func parseArgs() {
 		kong.ConfigureHelp(kong.HelpOptions{
 			Compact:      true,
 			Summary:      true,
-			NoAppSummary: true,
+			NoAppSummary: false,
 			FlagsLast:    false,
 		}),
 	)
