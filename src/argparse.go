@@ -19,10 +19,10 @@ var (
 )
 
 var CLI struct {
-	Command           string   `help:"string transformation command" arg optional`
-	StringToTransform []string `help:"string to process" arg optional passthrough`
-	List              bool     `help:"list the available template functions" short:l`
-	VersionFlag       bool     `help:"display version" short:V`
+	Command     string   `help:"string transformation command" arg optional`
+	Args        []string `help:"args that are passed to string processors" arg optional passthrough`
+	List        bool     `help:"list the available template functions" short:l`
+	VersionFlag bool     `help:"display version" short:V`
 }
 
 func parseArgs() {

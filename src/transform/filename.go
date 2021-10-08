@@ -17,14 +17,14 @@ var (
 )
 
 func (tr Transform) DirName(str string) (r string) {
-	r = tr.trimSuffixAggressive(str, sep)
+	r = tr.TrimSuffixAggressive(sep + " " + str)
 	r = tr.find("^.*"+sep, r)
 	r = strings.TrimSuffix(r, sep)
 	return
 }
 
 func (tr Transform) TidyFileName1(str string) (r string) {
-	r = tr.sub(str, "["+sep+"]+", "/")
+	r = tr.sub(str, "["+sep+"]+", sep)
 	return
 }
 
@@ -73,13 +73,6 @@ func (tr Transform) removeMultiples(s string) (r string) {
 	r = tr.sub(s, "[_]+", "_")
 	r = tr.sub(r, "[-]+", "-")
 	return
-}
-
-func (tr Transform) trimSuffixAggressive(str, suf string) string {
-	for strings.HasSuffix(str, suf) == true {
-		str = strings.TrimSuffix(str, suf)
-	}
-	return str
 }
 
 // regex functions

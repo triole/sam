@@ -22,6 +22,7 @@ type tFuncMap map[string]tFunc
 type tFunc struct {
 	Name     string
 	Desc     string
+	Args     string
 	Category string
 	Func     interface{}
 	Sorter   int
@@ -45,67 +46,99 @@ func (fl tFuncList) Swap(i, j int) {
 func makeFuncMap() (fm tFuncMap) {
 	tr := transform.Init()
 	fm = make(tFuncMap)
-	fm = addToMap(fm, tr.Title, "title", "title case", "case", 0)
-	fm = addToMap(fm, tr.LowerCase, "lower", "to lowercase", "case", 0)
-	fm = addToMap(fm, tr.UpperCase, "upper", "to uppercase", "case", 0)
-	fm = addToMap(fm, tr.SnakeCase, "snake", "to snakecase", "case", 0)
-	fm = addToMap(fm, tr.CamelCase, "camel", "to camelcase", "case", 0)
-
 	fm = addToMap(
-		fm, tr.Bool, "bool",
-		"return boolean: 1, enable, enabled, on and true return true, "+
-			"everything else false (case doesn't matter)",
-		"logical", 1,
+		fm, tr.TrimPrefix, "trimprefix", "prefix, str",
+		"remove prefix, requires two args: string, prefix to remove",
+		"trim", 0,
+	)
+	fm = addToMap(
+		fm, tr.TrimPrefixAggressive, "trimprefixag", "prefix, str",
+		"trim prefix aggressive, remove multiple occurences of prefix",
+		"trim", 0,
+	)
+	fm = addToMap(
+		fm, tr.TrimSuffix, "trimsuffix", "suffix, str",
+		"like trimprefix but removing end of a string, also two args",
+		"trim", 0,
+	)
+	fm = addToMap(
+		fm, tr.TrimSuffixAggressive, "trimsuffixag", "suffix, str",
+		"like trim suffix aggressive, you know...",
+		"trim", 0,
+	)
+	fm = addToMap(
+		fm, tr.TrimSpace, "trimspace", "str",
+		"remove spaces or tabs around a string",
+		"trim", 1,
+	)
+	fm = addToMap(
+		fm, tr.RemoveMultiSpace, "rmmultispace", "str",
+		"remove each occurence of multiple spaces or tabs in a string by one space",
+		"trim", 1,
 	)
 
-	fm = addToMap(fm, tr.FromBase64, "fr_b64", "from base64 to string", "encoding", 2)
-	fm = addToMap(fm, tr.ToBase64, "to_b64", "to base64 from string", "encoding", 2)
-
-	fm = addToMap(fm, tr.Md5, "md5", "md5 hash", "hash", 3)
-	fm = addToMap(fm, tr.Sha1, "sha1", "sha1 hash", "hash", 3)
-	fm = addToMap(fm, tr.Sha256, "sha256", "sha256 hash", "hash", 3)
-	fm = addToMap(fm, tr.Sha512, "sha512", "sha512 hash", "hash", 3)
+	fm = addToMap(fm, tr.Title, "title", "str", "title case", "case", 2)
+	fm = addToMap(fm, tr.LowerCase, "lower", "str", "to lowercase", "case", 2)
+	fm = addToMap(fm, tr.UpperCase, "upper", "str", "to uppercase", "case", 2)
+	fm = addToMap(fm, tr.SnakeCase, "snake", "str", "to snakecase", "case", 2)
+	fm = addToMap(fm, tr.CamelCase, "camel", "str", "to camelcase", "case", 2)
 
 	fm = addToMap(
-		fm, tr.DirName, "folder",
+		fm, tr.Bool, "bool", "str",
+		"return boolean: 1, enable, enabled, on and true return true, "+
+			"everything else false (case doesn't matter)",
+		"logical", 3,
+	)
+
+	fm = addToMap(fm, tr.FromBase64, "fromb64", "str", "from base64 to string", "encoding", 4)
+	fm = addToMap(fm, tr.ToBase64, "tob64", "str", "to base64 from string", "encoding", 4)
+
+	fm = addToMap(fm, tr.Md5, "md5", "str", "md5 hash", "hash", 5)
+	fm = addToMap(fm, tr.Sha1, "sha1", "str", "sha1 hash", "hash", 5)
+	fm = addToMap(fm, tr.Sha256, "sha256", "str", "sha256 hash", "hash", 5)
+	fm = addToMap(fm, tr.Sha512, "sha512", "str", "sha512 hash", "hash", 5)
+
+	fm = addToMap(
+		fm, tr.DirName, "folder", "str",
 		"folder of a path string, return everything up to last path separator, "+
 			"path separators trailing the input are ignored "+
 			"(i.e. /tmp/hello/ -> /tmp)",
-		"path", 4,
+		"path", 6,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName1, "tp1",
+		fm, tr.TidyFileName1, "tp1", "str",
 		"tidy path 1, remove multiple path separators",
-		"path", 4,
+		"path", 6,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName2, "tp2",
+		fm, tr.TidyFileName2, "tp2", "str",
 		"as tp1, but also remove all accents, then replace characters not being "+
 			"alpha numerics, dashes, underscores or path separators by underscores",
-		"path", 4,
+		"path", 6,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName3, "tp3",
+		fm, tr.TidyFileName3, "tp3", "str",
 		"as tp2, plus lower case conversion",
-		"path", 4,
+		"path", 6,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName4, "tp4",
+		fm, tr.TidyFileName4, "tp4", "str",
 		"as tp3, replace double underscores which may appear during conversion by a single one",
-		"path", 4,
+		"path", 6,
 	)
 	return
 }
 
-func addToMap(fm tFuncMap, f interface{}, name, desc, category string, sorter int) tFuncMap {
-	fm[name] = newFunc(f, name, desc, category, sorter)
+func addToMap(fm tFuncMap, f interface{}, name, args, desc, category string, sorter int) tFuncMap {
+	fm[name] = newFunc(f, name, args, desc, category, sorter)
 	return fm
 }
 
-func newFunc(function interface{}, name, desc, category string, sorter int) tFunc {
+func newFunc(function interface{}, name, args, desc, category string, sorter int) tFunc {
 	return tFunc{
 		Name:     name,
 		Desc:     desc,
+		Args:     args,
 		Category: category,
 		Func:     function,
 		Sorter:   sorter,
@@ -181,12 +214,15 @@ func ListFunctions() {
 
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
-		"command", "category", "description",
+		"command", "args", "description", "category",
 	})
 	for _, el := range fl {
 		t.AppendRow(
 			[]interface{}{
-				el.Name, fm[el.Name].Category, wordWrap(fm[el.Name].Desc, tableDescMaxWidth),
+				el.Name,
+				el.Args,
+				wordWrap(fm[el.Name].Desc, tableDescMaxWidth),
+				fm[el.Name].Category,
 			},
 		)
 	}

@@ -38,47 +38,67 @@ It is highly likely that there are more to come in the futre.
 
 ```go mdox-exec="r -l"
 
- NAME   | CATEGORY | DESCRIPTION                                         
---------+----------+-----------------------------------------------------
- camel  | case     | to camelcase                                        
---------+----------+-----------------------------------------------------
- lower  | case     | to lowercase                                        
---------+----------+-----------------------------------------------------
- snake  | case     | to snakecase                                        
---------+----------+-----------------------------------------------------
- title  | case     | title case                                          
---------+----------+-----------------------------------------------------
- upper  | case     | to uppercase                                        
---------+----------+-----------------------------------------------------
- bool   | logical  | return boolean: 1, enable, enabled, on and true     
-        |          | return true, everything else false (case doesn't    
-        |          | matter)                                             
---------+----------+-----------------------------------------------------
- fr_b64 | encoding | from base64 to string                               
---------+----------+-----------------------------------------------------
- to_b64 | encoding | to base64 from string                               
---------+----------+-----------------------------------------------------
- md5    | hash     | md5 hash                                            
---------+----------+-----------------------------------------------------
- sha1   | hash     | sha1 hash                                           
---------+----------+-----------------------------------------------------
- sha256 | hash     | sha256 hash                                         
---------+----------+-----------------------------------------------------
- sha512 | hash     | sha512 hash                                         
---------+----------+-----------------------------------------------------
- folder | path     | folder of a path string, return everything up to    
-        |          | last path separator, path separators trailing the   
-        |          | input are ignored (i.e. /tmp/hello/ -> /tmp)        
---------+----------+-----------------------------------------------------
- tp1    | path     | tidy path 1, remove multiple path separators        
---------+----------+-----------------------------------------------------
- tp2    | path     | as tp1, but also remove all accents, then replace   
-        |          | characters not being alpha numerics, dashes,        
-        |          | underscores or path separators by underscores       
---------+----------+-----------------------------------------------------
- tp3    | path     | as tp2, plus lower case conversion                  
---------+----------+-----------------------------------------------------
- tp4    | path     | as tp3, replace double underscores which may appear 
-        |          | during conversion by a single one                   
+ COMMAND      | ARGS        | DESCRIPTION                                         | CATEGORY 
+--------------+-------------+-----------------------------------------------------+----------
+ trimprefix   | prefix, str | remove prefix, requires two args: string, prefix to | trim     
+              |             | remove                                              |          
+--------------+-------------+-----------------------------------------------------+----------
+ trimprefixag | prefix, str | trim prefix aggressive, remove multiple occurences  | trim     
+              |             | of prefix                                           |          
+--------------+-------------+-----------------------------------------------------+----------
+ trimsuffix   | suffix, str | like trimprefix but removing end of a string, also  | trim     
+              |             | two args                                            |          
+--------------+-------------+-----------------------------------------------------+----------
+ trimsuffixag | suffix, str | like trim suffix aggressive, you know...            | trim     
+--------------+-------------+-----------------------------------------------------+----------
+ rmmultispace | str         | remove each occurence of multiple spaces or tabs in | trim     
+              |             | a string by one space                               |          
+--------------+-------------+-----------------------------------------------------+----------
+ trimspace    | str         | remove spaces or tabs around a string               | trim     
+--------------+-------------+-----------------------------------------------------+----------
+ camel        | str         | to camelcase                                        | case     
+--------------+-------------+-----------------------------------------------------+----------
+ lower        | str         | to lowercase                                        | case     
+--------------+-------------+-----------------------------------------------------+----------
+ snake        | str         | to snakecase                                        | case     
+--------------+-------------+-----------------------------------------------------+----------
+ title        | str         | title case                                          | case     
+--------------+-------------+-----------------------------------------------------+----------
+ upper        | str         | to uppercase                                        | case     
+--------------+-------------+-----------------------------------------------------+----------
+ bool         | str         | return boolean: 1, enable, enabled, on and true     | logical  
+              |             | return true, everything else false (case doesn't    |          
+              |             | matter)                                             |          
+--------------+-------------+-----------------------------------------------------+----------
+ fromb64      | str         | from base64 to string                               | encoding 
+--------------+-------------+-----------------------------------------------------+----------
+ tob64        | str         | to base64 from string                               | encoding 
+--------------+-------------+-----------------------------------------------------+----------
+ md5          | str         | md5 hash                                            | hash     
+--------------+-------------+-----------------------------------------------------+----------
+ sha1         | str         | sha1 hash                                           | hash     
+--------------+-------------+-----------------------------------------------------+----------
+ sha256       | str         | sha256 hash                                         | hash     
+--------------+-------------+-----------------------------------------------------+----------
+ sha512       | str         | sha512 hash                                         | hash     
+--------------+-------------+-----------------------------------------------------+----------
+ folder       | str         | folder of a path string, return everything up to    | path     
+              |             | last path separator, path separators trailing the   |          
+              |             | input are ignored (i.e. /tmp/hello/ -> /tmp)        |          
+--------------+-------------+-----------------------------------------------------+----------
+ tp1          | str         | tidy path 1, remove multiple path separators        | path     
+--------------+-------------+-----------------------------------------------------+----------
+ tp2          | str         | as tp1, but also remove all accents, then replace   | path     
+              |             | characters not being alpha numerics, dashes,        |          
+              |             | underscores or path separators by underscores       |          
+--------------+-------------+-----------------------------------------------------+----------
+ tp3          | str         | as tp2, plus lower case conversion                  | path     
+--------------+-------------+-----------------------------------------------------+----------
+ tp4          | str         | as tp3, replace double underscores which may appear | path     
+              |             | during conversion by a single one                   |          
 
 ```
+
+# Known problems
+
+When using string processors that take multiple args (i.e. trimprefix, trimsuffix et al) the first argument can not contain spaces. This is due to the way the cli args are passed through. A possible solution would be to introduce an additional flag but currently keeping sam's usage simple outweighed increasing cli's complexity.

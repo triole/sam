@@ -8,12 +8,12 @@ import (
 func main() {
 	parseArgs()
 
-	stringToTransform := strings.Join(CLI.StringToTransform, " ")
-	if stringToTransform == "" {
-		stringToTransform = getStdin()
+	args := strings.Join(CLI.Args, " ")
+	if args == "" {
+		args = getStdin()
 	}
 
-	res, _ := Call(CLI.Command, stringToTransform)
+	res, _ := Call(CLI.Command, args)
 	if res != nil {
 		fmt.Printf("%s\n", res)
 	} else {
