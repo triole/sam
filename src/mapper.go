@@ -93,6 +93,9 @@ func makeFuncMap() (fm tFuncMap) {
 	fm = addToMap(fm, tr.FromBase64, "fromb64", "str", "from base64 to string", "encoding", 4)
 	fm = addToMap(fm, tr.ToBase64, "tob64", "str", "to base64 from string", "encoding", 4)
 
+	fm = addToMap(fm, tr.FromURL, "fromurl", "str", "from url to plain string", "encoding", 4)
+	fm = addToMap(fm, tr.ToURL, "tourl", "str", "to url from plain string", "encoding", 4)
+
 	fm = addToMap(fm, tr.Md5, "md5", "str", "md5 hash", "hash", 5)
 	fm = addToMap(fm, tr.Sha1, "sha1", "str", "sha1 hash", "hash", 5)
 	fm = addToMap(fm, tr.Sha256, "sha256", "str", "sha256 hash", "hash", 5)
