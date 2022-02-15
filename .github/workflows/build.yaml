@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-    build:
+    release:
         runs-on: ubuntu-latest
         steps:
             -
@@ -20,20 +20,28 @@ jobs:
             -
                 name: Install Go
                 env:
-                    TARGET_FOLDER: /home/runner/.local/bin
+                    TARGET_FOLDER: /home/runner/.local/go
                 run: curl -sL https://raw.githubusercontent.com/triole/ghwfe/master/sh/go_install.sh | bash
+            -
+                name: Add packages in sub folders to GOROOT
+                env:
+                    GOROOT: /home/runner/.local/go
+                    SOURCE_FOLDER: src
+                run: curl -sL https://raw.githubusercontent.com/triole/ghwfe/master/sh/go_add_sub_packages.sh | bash
             -
                 name: Build
                 env:
+                    GOROOT: /home/runner/.local/go
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                    GO_BIN_PATH: /home/runner/.local/bin/go
-                    # SOURCE_FOLDER: /home/runner
-                    TARGET_FOLDER: build
+                    # APP_NAME: binary_name
+                    SOURCE_FOLDER: src
+                    # TARGET_FOLDER: build
                 run: curl -sL https://raw.githubusercontent.com/triole/ghwfe/master/sh/go_build.sh | bash
             -
                 name: Gzip assets
-                env:
-                    BASE_DIR: build
+                # env:
+                    # SOURCE_FOLDER: build
+                    # TARGET_FOLDER: /tmp/assets
                     # VERSION_COMMAND: date +%y.%m.%d
                 run: curl -sL https://raw.githubusercontent.com/triole/ghwfe/master/sh/gzip_builds.sh | bash
             -
