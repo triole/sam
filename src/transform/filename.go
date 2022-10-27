@@ -70,8 +70,8 @@ func (tr Transform) removeAccents(s string) string {
 }
 
 func (tr Transform) removeMultiples(s string) (r string) {
-	r = tr.sub(s, "[_]+", "_")
-	r = tr.sub(r, "[-]+", "-")
+	r = tr.sub(s, "[_-]+", "_")
+	// r = tr.sub(r, "[-]+", "-")
 	return
 }
 
