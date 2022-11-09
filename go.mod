@@ -14,6 +14,7 @@ require (
 	github.com/go-openapi/errors v0.19.8 // indirect
 	github.com/go-openapi/strfmt v0.20.2 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
+	github.com/jedib0t/go-pretty/v6 v6.4.2 // indirect
 	github.com/jzelinskie/whirlpool v0.0.0-20201016144138-0675e54bb004 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/mattn/go-runewidth v0.0.13 // indirect
