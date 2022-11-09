@@ -22,6 +22,7 @@ var CLI struct {
 	Command     string   `help:"string transformation command" arg optional`
 	Args        []string `help:"args that are passed to string processors" arg optional passthrough`
 	List        bool     `help:"list the available template functions" short:l`
+	ListShort   bool     `help:"short list of template functions"`
 	VersionFlag bool     `help:"display version" short:V`
 }
 

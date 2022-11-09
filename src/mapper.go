@@ -212,17 +212,32 @@ func ListFunctions() {
 	})
 
 	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(table.Row{
-		"category", "command", "args", "description", "usage",
-	})
-	for _, el := range fl {
-		t.AppendRow(
-			[]interface{}{
-				el.Category, el.Name, el.Args, el.Desc,
-				printUsage(el),
-			},
-		)
+	if CLI.ListShort == true {
+		t.AppendHeader(table.Row{
+			"category", "command", "args", "usage",
+		})
+		for _, el := range fl {
+			t.AppendRow(
+				[]interface{}{
+					el.Category, el.Name, el.Args,
+					printUsage(el),
+				},
+			)
+		}
+	} else {
+		t.AppendHeader(table.Row{
+			"category", "command", "args", "description", "usage",
+		})
+		for _, el := range fl {
+			t.AppendRow(
+				[]interface{}{
+					el.Category, el.Name, el.Args, el.Desc,
+					printUsage(el),
+				},
+			)
+		}
 	}
+
 	fmt.Printf("\n")
 	t.Render()
 	fmt.Printf("\n")

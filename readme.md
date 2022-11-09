@@ -36,73 +36,36 @@ sam -h
 
 It is highly likely that there are more to come in the futre.
 
-```go mdox-exec="r -l"
+```go mdox-exec="r --list-short"
 
- COMMAND      | ARGS        | DESCRIPTION                                         | CATEGORY 
---------------+-------------+-----------------------------------------------------+----------
- trimprefix   | prefix, str | remove prefix, requires two args: string, prefix to | trim     
-              |             | remove                                              |          
---------------+-------------+-----------------------------------------------------+----------
- trimprefixag | prefix, str | trim prefix aggressive, remove multiple occurences  | trim     
-              |             | of prefix                                           |          
---------------+-------------+-----------------------------------------------------+----------
- trimsuffix   | suffix, str | like trimprefix but removing end of a string, also  | trim     
-              |             | two args                                            |          
---------------+-------------+-----------------------------------------------------+----------
- trimsuffixag | suffix, str | like trim suffix aggressive, you know...            | trim     
---------------+-------------+-----------------------------------------------------+----------
- rmmultispace | str         | remove each occurence of multiple spaces or tabs in | trim     
-              |             | a string by one space                               |          
---------------+-------------+-----------------------------------------------------+----------
- trimspace    | str         | remove spaces or tabs around a string               | trim     
---------------+-------------+-----------------------------------------------------+----------
- camel        | str         | to camelcase                                        | case     
---------------+-------------+-----------------------------------------------------+----------
- lower        | str         | to lowercase                                        | case     
---------------+-------------+-----------------------------------------------------+----------
- snake        | str         | to snakecase                                        | case     
---------------+-------------+-----------------------------------------------------+----------
- title        | str         | title case                                          | case     
---------------+-------------+-----------------------------------------------------+----------
- upper        | str         | to uppercase                                        | case     
---------------+-------------+-----------------------------------------------------+----------
- bool         | str         | return boolean: 1, enable, enabled, on and true     | logical  
-              |             | return true, everything else false (case doesn't    |          
-              |             | matter)                                             |          
---------------+-------------+-----------------------------------------------------+----------
- b64-txt      | str         | to base64 from string                               | encoding 
---------------+-------------+-----------------------------------------------------+----------
- txt-b64      | str         | from base64 to string                               | encoding 
---------------+-------------+-----------------------------------------------------+----------
- txt-url      | str         | to url from plain string                            | encoding 
---------------+-------------+-----------------------------------------------------+----------
- url-txt      | str         | from url to plain string                            | encoding 
---------------+-------------+-----------------------------------------------------+----------
- blake3       | size, str   | blake3 hash, flexible hash size, usage: 'sam blake3 | hash     
-              |             | 128 hello')                                         |          
---------------+-------------+-----------------------------------------------------+----------
- md5          | str         | md5 hash                                            | hash     
---------------+-------------+-----------------------------------------------------+----------
- ripemd160    | str         | ripemd160 hash                                      | hash     
---------------+-------------+-----------------------------------------------------+----------
- sha1         | str         | sha1 hash                                           | hash     
---------------+-------------+-----------------------------------------------------+----------
- sha256       | str         | sha256 hash                                         | hash     
---------------+-------------+-----------------------------------------------------+----------
- sha512       | str         | sha512 hash                                         | hash     
---------------+-------------+-----------------------------------------------------+----------
- whirlpool    | str         | whirlpool hash                                      | hash     
---------------+-------------+-----------------------------------------------------+----------
- folder       | str         | folder of a path string, return everything up to    | path     
-              |             | last path separator, path separators trailing the   |          
-              |             | input are ignored (i.e. /tmp/hello/ -> /tmp)        |          
---------------+-------------+-----------------------------------------------------+----------
- tfn          | str         | tidy file name, replace multiple path separators by | path     
-              |             | one, only allow '[0-9a-z\-_]', replace multiple     |          
-              |             | underscores by one                                  |          
---------------+-------------+-----------------------------------------------------+----------
- tps          | str         | tidy path separators, replace multiple after one    | path     
-              |             | another by onlye one                                |          
+ CATEGORY | COMMAND      | ARGS        | USAGE                      
+----------+--------------+-------------+----------------------------
+ trim     | trimprefix   | prefix, str | sam trimprefix _ _hello    
+ trim     | trimprefixag | prefix, str | sam trimprefixag _ __hello 
+ trim     | trimsuffix   | suffix, str | sam trimsuffix _ hello_    
+ trim     | trimsuffixag | suffix, str | sam trimsuffixag _ hello__ 
+ trim     | trimspace    | str         |                            
+ replace  | rms          | str         |                            
+ case     | camel        | str         |                            
+ case     | lower        | str         |                            
+ case     | snake        | str         |                            
+ bool     | str          | logical     | sam str enabled            
+ case     | title        | str         |                            
+ case     | upper        | str         |                            
+ encoding | b64-txt      | str         |                            
+ encoding | txt-b64      | str         |                            
+ encoding | txt-url      | str         |                            
+ encoding | url-txt      | str         |                            
+ hash     | blake3       | size, str   | sam blake3 128 hello       
+ hash     | md5          | str         |                            
+ hash     | ripemd160    | str         |                            
+ hash     | sha1         | str         |                            
+ hash     | sha256       | str         |                            
+ hash     | sha512       | str         |                            
+ hash     | whirlpool    | str         |                            
+ path     | folder       | str         |                            
+ path     | tfn          | str         |                            
+ path     | tps          | str         |                            
 
 ```
 
