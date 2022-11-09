@@ -7,6 +7,10 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
+
+	"github.com/jzelinskie/whirlpool"
+	"golang.org/x/crypto/ripemd160"
+	"lukechampine.com/blake3"
 )
 
 func (tr Transform) Md5(str string) string {
@@ -31,6 +35,31 @@ func (tr Transform) Sha256(str string) string {
 
 func (tr Transform) Sha512(str string) string {
 	h := sha512.New()
+	h.Write([]byte(str))
+	bs := h.Sum(nil)
+	return fmt.Sprintf("%x", bs)
+}
+
+func (tr Transform) Blake3(args string) string {
+	lenstr, inp := separateFirstArg(args)
+	len := toInt(lenstr)
+	str := tr.TrimSpace(inp)
+	h := blake3.New(len, nil)
+	_, err := h.Write([]byte(str))
+	logFatal(err, "Error generating blake3")
+	bs := h.Sum(nil)
+	return fmt.Sprintf("%x", bs)
+}
+
+func (tr Transform) Ripemd160(str string) string {
+	h := ripemd160.New()
+	h.Write([]byte(str))
+	bs := h.Sum(nil)
+	return fmt.Sprintf("%x", bs)
+}
+
+func (tr Transform) Whirlpool(str string) string {
+	h := whirlpool.New()
 	h.Write([]byte(str))
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
