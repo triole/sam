@@ -70,15 +70,20 @@ It is highly likely that there are more to come in the futre.
               |             | return true, everything else false (case doesn't    |          
               |             | matter)                                             |          
 --------------+-------------+-----------------------------------------------------+----------
- fromb64      | str         | from base64 to string                               | encoding 
+ b64-txt      | str         | to base64 from string                               | encoding 
 --------------+-------------+-----------------------------------------------------+----------
- fromurl      | str         | from url to plain string                            | encoding 
+ txt-b64      | str         | from base64 to string                               | encoding 
 --------------+-------------+-----------------------------------------------------+----------
- tob64        | str         | to base64 from string                               | encoding 
+ txt-url      | str         | to url from plain string                            | encoding 
 --------------+-------------+-----------------------------------------------------+----------
- tourl        | str         | to url from plain string                            | encoding 
+ url-txt      | str         | from url to plain string                            | encoding 
+--------------+-------------+-----------------------------------------------------+----------
+ blake3       | size, str   | blake3 hash, flexible hash size, usage: 'sam blake3 | hash     
+              |             | 128 hello')                                         |          
 --------------+-------------+-----------------------------------------------------+----------
  md5          | str         | md5 hash                                            | hash     
+--------------+-------------+-----------------------------------------------------+----------
+ ripemd160    | str         | ripemd160 hash                                      | hash     
 --------------+-------------+-----------------------------------------------------+----------
  sha1         | str         | sha1 hash                                           | hash     
 --------------+-------------+-----------------------------------------------------+----------
@@ -86,20 +91,18 @@ It is highly likely that there are more to come in the futre.
 --------------+-------------+-----------------------------------------------------+----------
  sha512       | str         | sha512 hash                                         | hash     
 --------------+-------------+-----------------------------------------------------+----------
+ whirlpool    | str         | whirlpool hash                                      | hash     
+--------------+-------------+-----------------------------------------------------+----------
  folder       | str         | folder of a path string, return everything up to    | path     
               |             | last path separator, path separators trailing the   |          
               |             | input are ignored (i.e. /tmp/hello/ -> /tmp)        |          
 --------------+-------------+-----------------------------------------------------+----------
- tp1          | str         | tidy path 1, remove multiple path separators        | path     
+ tfn          | str         | tidy file name, replace multiple path separators by | path     
+              |             | one, only allow '[0-9a-z\-_]', replace multiple     |          
+              |             | underscores by one                                  |          
 --------------+-------------+-----------------------------------------------------+----------
- tp2          | str         | as tp1, but also remove all accents, then replace   | path     
-              |             | characters not being alpha numerics, dashes,        |          
-              |             | underscores or path separators by underscores       |          
---------------+-------------+-----------------------------------------------------+----------
- tp3          | str         | as tp2, plus lower case conversion                  | path     
---------------+-------------+-----------------------------------------------------+----------
- tp4          | str         | as tp3, replace double underscores which may appear | path     
-              |             | during conversion by a single one                   |          
+ tps          | str         | tidy path separators, replace multiple after one    | path     
+              |             | another by onlye one                                |          
 
 ```
 
