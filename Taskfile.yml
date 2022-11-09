@@ -29,6 +29,10 @@ tasks:
             - "{{.SOURCE_FOLDER}}/*"
         method: timestamp
         cmds:
+            - cmd: |
+                for fol in $(find {{.SOURCE_FOLDER}} -mindepth 1 -maxdepth 1 -type d | sort); do
+                    cd "${fol}" && go test
+                done
             - cmd: >-
                 go test -trace go.trace -race -cover -bench=.
                 {{.SOURCE_FOLDER}}/*.go
