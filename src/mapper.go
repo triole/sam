@@ -90,16 +90,23 @@ func makeFuncMap() (fm tFuncMap) {
 		"logical", 3,
 	)
 
-	fm = addToMap(fm, tr.FromBase64, "fromb64", "str", "from base64 to string", "encoding", 4)
-	fm = addToMap(fm, tr.ToBase64, "tob64", "str", "to base64 from string", "encoding", 4)
+	fm = addToMap(fm, tr.FromBase64, "txt-b64", "str", "from base64 to string", "encoding", 4)
+	fm = addToMap(fm, tr.ToBase64, "b64-txt", "str", "to base64 from string", "encoding", 4)
 
-	fm = addToMap(fm, tr.FromURL, "fromurl", "str", "from url to plain string", "encoding", 4)
-	fm = addToMap(fm, tr.ToURL, "tourl", "str", "to url from plain string", "encoding", 4)
+	fm = addToMap(fm, tr.FromURL, "url-txt", "str", "from url to plain string", "encoding", 4)
+	fm = addToMap(fm, tr.ToURL, "txt-url", "str", "to url from plain string", "encoding", 4)
 
 	fm = addToMap(fm, tr.Md5, "md5", "str", "md5 hash", "hash", 5)
 	fm = addToMap(fm, tr.Sha1, "sha1", "str", "sha1 hash", "hash", 5)
 	fm = addToMap(fm, tr.Sha256, "sha256", "str", "sha256 hash", "hash", 5)
 	fm = addToMap(fm, tr.Sha512, "sha512", "str", "sha512 hash", "hash", 5)
+	fm = addToMap(
+		fm, tr.Blake3, "blake3",
+		"size, str", "blake3 hash, flexible hash size, usage: 'sam blake3 128 hello')",
+		"hash", 5,
+	)
+	fm = addToMap(fm, tr.Ripemd160, "ripemd160", "str", "ripemd160 hash", "hash", 5)
+	fm = addToMap(fm, tr.Whirlpool, "whirlpool", "str", "whirlpool hash", "hash", 5)
 
 	fm = addToMap(
 		fm, tr.DirName, "folder", "str",
@@ -109,24 +116,18 @@ func makeFuncMap() (fm tFuncMap) {
 		"path", 6,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName1, "tp1", "str",
-		"tidy path 1, remove multiple path separators",
+		fm, tr.TidyFilePath, "tfn", "str",
+		"tidy file name, replace multiple path separators by one, only allow '[0-9a-z\\-_]', replace multiple underscores by one",
 		"path", 6,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName2, "tp2", "str",
-		"as tp1, but also remove all accents, then replace characters not being "+
-			"alpha numerics, dashes, underscores or path separators by underscores",
+		fm, tr.TidyPathSeparators, "tps", "str",
+		"tidy path separators, replace multiple after one another by onlye one",
 		"path", 6,
 	)
 	fm = addToMap(
-		fm, tr.TidyFileName3, "tp3", "str",
-		"as tp2, plus lower case conversion",
-		"path", 6,
-	)
-	fm = addToMap(
-		fm, tr.TidyFileName4, "tp4", "str",
-		"as tp3, replace double underscores which may appear during conversion by a single one",
+		fm, tr.TidyFilePath, "tfn", "str",
+		"tidy file name, replace multiple path separators by one, only allow '[0-9a-z\\-_]', replace multiple underscores by one",
 		"path", 6,
 	)
 	return
@@ -154,7 +155,7 @@ func Call(funcName string, params ...interface{}) (result interface{}, err error
 	if fn != nil {
 		f := reflect.ValueOf(fn)
 		if len(params) != f.Type().NumIn() {
-			err = errors.New("The number of params is out of index")
+			err = errors.New("Number of params is out of index")
 			return
 		}
 		in := make([]reflect.Value, len(params))
