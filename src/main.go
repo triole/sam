@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -13,7 +14,10 @@ func main() {
 		args = getStdin()
 	}
 
-	res, _ := Call(CLI.Command, args)
+	res, err := Call(CLI.Command, args)
+	if err != nil {
+		log.Fatalf("Error calling command: %+v\n", err.Error())
+	}
 	if res != nil {
 		fmt.Printf("%s\n", res)
 	} else {

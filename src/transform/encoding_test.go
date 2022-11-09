@@ -1,6 +1,8 @@
 package transform
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestBase64(t *testing.T) {
 	str := "hello world"
