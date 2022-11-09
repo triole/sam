@@ -23,27 +23,16 @@ func (tr Transform) DirName(str string) (r string) {
 	return
 }
 
-func (tr Transform) TidyFileName1(str string) (r string) {
+func (tr Transform) TidyPathSeparators(str string) (r string) {
 	r = tr.sub(str, "["+sep+"]+", sep)
 	return
 }
-
-func (tr Transform) TidyFileName2(str string) (r string) {
-	r = tr.TidyFileName1(str)
+func (tr Transform) TidyFilePath(str string) (r string) {
+	r = tr.TidyPathSeparators(str)
 	r = tr.specialCharacterTreatment(r)
 	r = tr.removeAccents(r)
 	r = tr.sub(r, rxScheme, "_")
-	return
-}
-
-func (tr Transform) TidyFileName3(str string) (r string) {
-	r = tr.TidyFileName2(str)
 	r = strings.ToLower(r)
-	return
-}
-
-func (tr Transform) TidyFileName4(str string) (r string) {
-	r = tr.TidyFileName3(str)
 	r = tr.removeMultiples(r)
 	return
 }
