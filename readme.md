@@ -40,7 +40,7 @@ It is highly likely that there are more to come in the futre.
 
  CATEGORY | COMMAND | ARGS        | USAGE               
 ----------+---------+-------------+---------------------
- case     | csc     | string      |                     
+ case     | csc     | str         |                     
  case     | csl     | str         |                     
  case     | css     | str         |                     
  case     | cst     | str         |                     

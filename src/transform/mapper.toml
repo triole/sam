@@ -64,7 +64,7 @@ func = "SnakeCase"
 
 [csc]
 category = "case"
-args = "string"
+args = "str"
 desc = "to camel case"
 func = "CamelCase"
 
