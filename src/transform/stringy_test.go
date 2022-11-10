@@ -24,4 +24,7 @@ func TestSnakeCase(t *testing.T) {
 	assert(tr.Bool("1"), "true", t)
 	assert(tr.Bool("0"), "false", t)
 	assert(tr.Bool("any_other_string"), "false", t)
+
+	assert(tr.AlignRight("8 hello"), "   hello", t)
+	assert(tr.AlignLeft("8 hello"), "hello   ", t)
 }
