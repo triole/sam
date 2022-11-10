@@ -38,34 +38,36 @@ It is highly likely that there are more to come in the futre.
 
 ```go mdox-exec="r --list-short"
 
- CATEGORY | COMMAND      | ARGS        | USAGE                      
-----------+--------------+-------------+----------------------------
- trim     | trimprefix   | prefix, str | sam trimprefix _ _hello    
- trim     | trimprefixag | prefix, str | sam trimprefixag _ __hello 
- trim     | trimsuffix   | suffix, str | sam trimsuffix _ hello_    
- trim     | trimsuffixag | suffix, str | sam trimsuffixag _ hello__ 
- trim     | trimspace    | str         |                            
- replace  | rms          | str         |                            
- case     | camel        | str         |                            
- case     | lower        | str         |                            
- case     | snake        | str         |                            
- bool     | str          | logical     | sam str enabled            
- case     | title        | str         |                            
- case     | upper        | str         |                            
- encoding | b64-txt      | str         |                            
- encoding | txt-b64      | str         |                            
- encoding | txt-url      | str         |                            
- encoding | url-txt      | str         |                            
- hash     | blake3       | size, str   | sam blake3 128 hello       
- hash     | md5          | str         |                            
- hash     | ripemd160    | str         |                            
- hash     | sha1         | str         |                            
- hash     | sha256       | str         |                            
- hash     | sha512       | str         |                            
- hash     | whirlpool    | str         |                            
- path     | folder       | str         |                            
- path     | tfn          | str         |                            
- path     | tps          | str         |                            
+ CATEGORY | COMMAND | ARGS        | USAGE               
+----------+---------+-------------+---------------------
+ case     | csc     | string      |                     
+ case     | csl     | str         |                     
+ case     | css     | str         |                     
+ case     | cst     | str         |                     
+ case     | csu     | str         |                     
+ encoding | b64-txt | str         |                     
+ encoding | txt-b64 | str         |                     
+ encoding | txt-url | str         |                     
+ encoding | url-txt | str         |                     
+ hash     | blake3  | str         | sam blake3 64 hello 
+ hash     | md5     | str         |                     
+ hash     | rmd     | str         |                     
+ hash     | sha1    | str         |                     
+ hash     | sha256  | str         |                     
+ hash     | sha512  | str         |                     
+ hash     | whp     | str         |                     
+ logical  | lb      | str         | sam lb enabled      
+ path     | pd      | str         |                     
+ path     | ptp     | str         |                     
+ path     | pts     | str         |                     
+ replace  | rspc    | str         |                     
+ style    | sal     | str         | sam sal 8 hello     
+ style    | sar     | str         | sam sar 8 hello     
+ trim     | tpre    | prefix, str | sam tpre _ _hello   
+ trim     | tpreg   | prefix, str | sam tpreg _ __hello 
+ trim     | tspc    | str         |                     
+ trim     | tsuf    | suffix, str | sam tsuf _ hello_   
+ trim     | tsufg   | suffix, str | sam tsufg _ hello__ 
 
 ```
 
