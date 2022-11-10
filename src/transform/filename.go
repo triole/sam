@@ -64,8 +64,7 @@ func (tr Transform) removeMultiples(s string) (r string) {
 	return
 }
 
-// regex functions
-// TODO: maybe move into an own package later
+// TODO: regex functions, maybe move into an own package later
 func (tr Transform) compile(str string) (r *regexp.Regexp) {
 	r, _ = regexp.Compile(str)
 	return

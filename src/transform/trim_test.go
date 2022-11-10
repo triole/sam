@@ -17,5 +17,5 @@ func TestTrimFunctions(t *testing.T) {
 	assert(tr.TrimSpace(" hello world  "), "hello world", t)
 	assert(tr.TrimSpace("\t   hello world\t"), "hello world", t)
 
-	assert(tr.RemoveMultiSpace("   \thello world\t"), " hello world ", t)
+	assert(tr.ReplaceMultiSpace("   \thello world\t"), " hello world ", t)
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"sam/src/transform"
 	"strings"
 )
 
@@ -14,14 +15,16 @@ func main() {
 		args = getStdin()
 	}
 
-	res, err := Call(CLI.Command, args)
+	tr := transform.Init(CLI.List, CLI.ListShort)
+
+	res, err := tr.Call(CLI.Command, args)
 	if err != nil {
 		log.Fatalf("Error calling command: %+v\n", err.Error())
 	}
 	if res != nil {
 		fmt.Printf("%s\n", res)
 	} else {
-		ListFunctions()
+		tr.ListFunctions()
 		if CLI.List == false && CLI.ListShort == false {
 			fmt.Printf("%s\n\n",
 				"String transformation command not found. "+

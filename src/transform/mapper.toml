@@ -1,0 +1,175 @@
+[tpre]
+category = "trim"
+args = "prefix, str"
+desc = "remove prefix, requires two args: string, prefix to remove"
+usage = "_ _hello"
+func = "TrimPrefix"
+
+[tpreg]
+category = "trim"
+args = "prefix, str"
+desc = "trim prefix aggressive, remove multiple occurences of prefix"
+usage = "_ __hello"
+func = "TrimPrefixAggressive"
+
+[tsuf]
+category = "trim"
+args = "suffix, str"
+desc = "like trimprefix but removing end of a string"
+usage = "_ hello_"
+func = "TrimSuffix"
+
+[tsufg]
+category =  "trim"
+args = "suffix, str"
+desc = "like trim prefix aggressive but at the end"
+usage = "_ hello__"
+func = "TrimSuffixAggressive"
+
+[tspc]
+category = "trim"
+args = "str"
+desc = "remove spaces or tabs around a string"
+func = "TrimSpaces"
+
+[rspc]
+category = "replace"
+args = "str"
+desc = "replace multiple spaces or tabs after one another by one space"
+func = "ReplaceMultiSpace"
+
+[cst]
+category = "case"
+args = "str"
+desc = "title case"
+func = "Title"
+
+[csl]
+category = "case"
+args = "str"
+desc = "to lower case"
+func = "LowerCase"
+
+[csu]
+category = "case"
+args = "str"
+desc = "to upper case"
+func = "UpperCase"
+
+[css]
+category = "case"
+args = "str"
+desc = "to snake case"
+func = "SnakeCase"
+
+[csc]
+category = "case"
+args = "string"
+desc = "to camel case"
+func = "CamelCase"
+
+[lb]
+category = "logical"
+args = "str"
+desc = "return bool; true on: 1, enable, enabled, on, true; false on everything else; case insensitive"
+func = "Bool"
+usage = "enabled"
+
+[txt-b64]
+category = "encoding"
+args = "str"
+desc = "from text to base64"
+func = "ToBase64"
+
+[b64-txt]
+category = "encoding"
+args = "str"
+desc = "from base64 to text"
+func = "FromBase64"
+
+[txt-url]
+category = "encoding"
+args = "str"
+desc = "from text to url encoding"
+func = "ToURL"
+
+[url-txt]
+category = "encoding"
+args = "str"
+desc = "from url encoding to text"
+func = "FromURL"
+
+[md5]
+category = "hash"
+args = "str"
+desc = "md5"
+func = "Md5"
+
+[sha1]
+category = "hash"
+args = "str"
+desc = "sha1"
+func = "Sha1"
+
+[sha256]
+category = "hash"
+args = "str"
+desc = "sha256"
+func = "Sha256"
+
+[sha512]
+category = "hash"
+args = "str"
+desc = "sha512"
+func = "Sha512"
+
+[blake3]
+category = "hash"
+args = "str"
+desc = "flexible length blake3 hash, requires bit size arg"
+func = "Blake3"
+usage = "64 hello"
+
+[rmd]
+category = "hash"
+args = "str"
+desc = "ripemd160"
+func = "Ripemd160"
+
+[whp]
+category = "hash"
+args = "str"
+desc = "whirlpool"
+func = "Whirlpool"
+
+[pd]
+category = "path"
+args = "str"
+desc = "dir name of a path, everything up to last path separator, trailing path separators ignored"
+func = "DirName"
+
+[ptp]
+category = "path"
+args = "str"
+desc = "tidy path, only allow '[0-9a-z\\-_]', replace multiple path separators, underscores and dashes"
+func = "TidyFilePath"
+
+[pts]
+category = "path"
+args = "str"
+desc = "tidy separators, replace multiple path separators after one another"
+func = "TidyPathSeparators"
+
+[sal]
+category = "style"
+args = "str"
+desc = "align string left, requires desired string length arg"
+func = "AlignLeft"
+usage = "8 hello"
+
+[sar]
+category = "style"
+args = "str"
+desc = "align string right, requires desired string length arg"
+func = "AlignRight"
+usage = "8 hello"

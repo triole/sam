@@ -31,6 +31,6 @@ func (tr Transform) TrimPrefix(args string) string {
 func (tr Transform) TrimSpace(str string) string {
 	return strings.TrimSpace(str)
 }
-func (tr Transform) RemoveMultiSpace(str string) string {
+func (tr Transform) ReplaceMultiSpace(str string) string {
 	return tr.sub(str, `\s+`, " ")
 }

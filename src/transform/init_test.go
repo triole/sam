@@ -3,7 +3,7 @@ package transform
 import "testing"
 
 var (
-	tr = Init()
+	tr = Init(false, false)
 )
 
 func assert(in, exp string, t *testing.T) {
