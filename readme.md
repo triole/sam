@@ -4,7 +4,7 @@
 
 1. [Synopsis](#synopsis)
 2. [How to Use?](#how-to-use-)
-3. [Available String Transformation Operations](#available-string-transformation-operations)<!--- mdtoc: toc end -->
+3. [Currently available string operations](#currently-available-string-operations)<!--- mdtoc: toc end -->
 
 ## Synopsis
 
@@ -31,9 +31,9 @@ sam -l
 sam -h
 ```
 
-## Available String Transformation Operations
+## Currently available string operations
 
-It is highly likely that there are more to come in the futre.
+This is a short overview. For more info use `-l`.
 
 ```go mdox-exec="r --list-short"
 
