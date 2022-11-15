@@ -9,19 +9,25 @@ var embedMapper []byte
 
 // Transform holds the class
 type Transform struct {
-	FuncList     tFuncList
-	FuncMap      tFuncMap
-	CLIList      bool
-	CLIListShort bool
+	FuncList tFuncList
+	FuncMap  tFuncMap
+	CLI      TransformCLI
+}
+
+type TransformCLI struct {
+	Command   string
+	Args      []string
+	File      string
+	List      bool
+	ListShort bool
 }
 
 // Init does what it says, it initialises the transform class
-func Init(CLIList bool, CLIListShort bool) (tr Transform) {
+func Init(tcli TransformCLI) (tr Transform) {
 	tr = Transform{
-		FuncList:     tFuncList{},
-		FuncMap:      make(tFuncMap),
-		CLIList:      CLIList,
-		CLIListShort: CLIListShort,
+		FuncList: tFuncList{},
+		FuncMap:  make(tFuncMap),
+		CLI:      tcli,
 	}
 	tr.makeFuncMap()
 	tr.makeFuncList()

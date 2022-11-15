@@ -1,9 +1,9 @@
 package transform
 
 import (
-	"errors"
 	"reflect"
 	"sort"
+	"strings"
 
 	"github.com/pelletier/go-toml"
 )
@@ -51,23 +51,26 @@ func (tr *Transform) makeFuncMap() {
 	logFatal(err, "Error unmarshal mapper toml")
 }
 
-func (tr Transform) Call(funcName string, params ...interface{}) (result interface{}, err error) {
-	if fn, ok := tr.FuncMap[funcName]; ok {
+func (tr Transform) Call() (result interface{}, err error) {
+	if fn, ok := tr.FuncMap[tr.CLI.Command]; ok {
 		fnct := reflect.ValueOf(&tr)
 		meth := fnct.MethodByName(fn.Func.(string))
+		methArgsInNo := meth.Type().NumIn()
 
-		if len(params) != meth.Type().NumIn() {
-			err = errors.New("Number of params does not fit")
-			return
+		methArgsInArr := []string{strings.Join(tr.CLI.Args, " ")}
+		if methArgsInNo > 1 {
+			methArgsInArr = []string{
+				tr.CLI.Args[0], strings.Join(tr.CLI.Args[1:], " "),
+			}
 		}
 
-		in := make([]reflect.Value, len(params))
-		for k, param := range params {
-			in[k] = reflect.ValueOf(param)
+		methArgsInRef := make([]reflect.Value, methArgsInNo)
+		for idx, param := range methArgsInArr {
+			methArgsInRef[idx] = reflect.ValueOf(param)
 		}
 
 		var res []reflect.Value
-		res = meth.Call(in)
+		res = meth.Call(methArgsInRef)
 		result = res[0].Interface()
 	}
 	return

@@ -4,20 +4,19 @@ import (
 	"fmt"
 	"log"
 	"sam/src/transform"
-	"strings"
 )
 
 func main() {
 	parseArgs()
 
-	args := strings.Join(CLI.Args, " ")
-	if args == "" {
-		args = getStdin()
-	}
+	var tcli transform.TransformCLI
+	tcli.Command = CLI.Command
+	tcli.List = CLI.List
+	tcli.ListShort = CLI.ListShort
+	tcli.Args = CLI.Args
 
-	tr := transform.Init(CLI.List, CLI.ListShort)
-
-	res, err := tr.Call(CLI.Command, args)
+	tr := transform.Init(tcli)
+	res, err := tr.Call()
 	if err != nil {
 		log.Fatalf("Error calling command: %+v\n", err.Error())
 	}

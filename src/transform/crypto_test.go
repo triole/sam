@@ -3,7 +3,8 @@ package transform
 import "testing"
 
 var (
-	v = "hello"
+	tr = Init(TransformCLI{})
+	v  = "hello"
 )
 
 func TestMd5(t *testing.T) {
