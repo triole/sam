@@ -70,7 +70,3 @@ It is highly likely that there are more to come in the futre.
  trim     | tsufg   | suffix, str | sam tsufg _ hello__ 
 
 ```
-
-# Known problems
-
-When using string processors that take multiple args (i.e. trimprefix, trimsuffix et al) the first argument can not contain spaces. This is due to the way the cli args are passed through. A possible solution would be to introduce an additional flag but currently keeping sam's usage simple outweighed increasing cli's complexity.
