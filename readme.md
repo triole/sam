@@ -21,8 +21,7 @@ sam uppercase hello world
 
 # or using stdin
 echo hello world | sam md5
-# which is, apart from the dash that md5sum
-# displays after the hash sum, equal to...
+# which's result is equal to...
 echo -n "hello world" | md5sum
 
 # show a list of available operations
