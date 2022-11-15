@@ -1,0 +1,12 @@
+md5 hello;5d41402abc4b2a76b9719d911017c592
+sha256 hello;2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+
+md5 hello world;5eb63bbbe01eeed093cb22bb8f5acdc3
+sha256 hello world;b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+
+md5 hello there hello world;55689c9ee34086aeb895b4c06bb7b8ff
+
+csc hello_world;HelloWorld
+css HelloWorld;hello_world
+
+# md5 -f tests/run.sh;haha

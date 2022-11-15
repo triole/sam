@@ -42,3 +42,8 @@ tasks:
         cmds:
             - task: build
             - cmd: cp -rpf build/* ${HOME}/tools/arch/mybins/
+
+    iotest:
+        desc: run full program with different parameters, check in and output
+        cmds:
+            - cmd: tests/run.sh
