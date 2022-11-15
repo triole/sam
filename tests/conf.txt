@@ -9,4 +9,6 @@ md5 hello there hello world;55689c9ee34086aeb895b4c06bb7b8ff
 csc hello_world;HelloWorld
 css HelloWorld;hello_world
 
+blake3 16 hello;ea8f163db38682925e4491c5e58d4bb3
+
 # md5 -f tests/run.sh;haha

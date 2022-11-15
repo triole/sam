@@ -43,7 +43,13 @@ tasks:
             - task: build
             - cmd: cp -rpf build/* ${HOME}/tools/arch/mybins/
 
-    iotest:
+    testio:
         desc: run full program with different parameters, check in and output
         cmds:
             - cmd: tests/run.sh
+
+    testall:
+        desc: run go and io tests
+        cmds:
+            - task: test
+            - task: testio
