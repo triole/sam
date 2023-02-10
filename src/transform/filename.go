@@ -50,7 +50,9 @@ func (tr Transform) specialCharacterTreatment(s string) (r string) {
 }
 
 func (tr Transform) removeAccents(s string) string {
-	t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
+	t := transform.Chain(
+		norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC,
+	)
 	output, _, e := transform.String(t, s)
 	if e != nil {
 		panic(e)
@@ -59,8 +61,9 @@ func (tr Transform) removeAccents(s string) string {
 }
 
 func (tr Transform) removeMultiples(s string) (r string) {
-	r = tr.sub(s, "[_-]+", "_")
-	// r = tr.sub(r, "[-]+", "-")
+	r = tr.sub(s, "[_]+", "_")
+	r = tr.sub(r, "[-]+", "-")
+	r = tr.sub(r, "[-_]{2,}", "_")
 	return
 }
 
