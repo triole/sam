@@ -1,10 +1,12 @@
 # Sam ![example workflow](https://github.com/triole/sam/actions/workflows/build.yaml/badge.svg)
 
-<!--- mdtoc: toc begin -->
+<!-- toc -->
 
-1. [Synopsis](#synopsis)
-2. [How to Use?](#how-to-use-)
-3. [Currently available string operations](#currently-available-string-operations)<!--- mdtoc: toc end -->
+- [Synopsis](#synopsis)
+- [How to Use?](#how-to-use)
+- [Currently available string operations](#currently-available-string-operations)
+
+<!-- /toc -->
 
 ## Synopsis
 
