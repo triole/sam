@@ -19,11 +19,11 @@ var (
 )
 
 var CLI struct {
-	Command     string   `help:"string transformation command" arg optional`
-	Args        []string `help:"args that are passed to string processor" arg optional passthrough`
-	List        bool     `help:"list the available template functions" short:l`
+	Command     string   `help:"string transformation command" arg:"" optional:""`
+	Args        []string `help:"args that are passed to string processor" arg:"" optional:"" passthrough:""`
+	List        bool     `help:"list the available template functions" short:"l"`
 	ListShort   bool     `help:"short list of template functions"`
-	VersionFlag bool     `help:"display version" short:V`
+	VersionFlag bool     `help:"display version" short:"V"`
 }
 
 func parseArgs() {
@@ -40,7 +40,7 @@ func parseArgs() {
 	)
 	_ = ctx.Run()
 
-	if CLI.VersionFlag == true {
+	if CLI.VersionFlag {
 		printBuildTags(BUILDTAGS)
 		os.Exit(0)
 	}
@@ -76,8 +76,8 @@ func printBuildTags(buildtags string) {
 	fmt.Printf("\n")
 }
 
-func alnum(s string) string {
-	s = strings.ToLower(s)
-	re := regexp.MustCompile("[^a-z0-9_-]")
-	return re.ReplaceAllString(s, "-")
-}
+// func alnum(s string) string {
+// 	s = strings.ToLower(s)
+// 	re := regexp.MustCompile("[^a-z0-9_-]")
+// 	return re.ReplaceAllString(s, "-")
+// }

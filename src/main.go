@@ -24,7 +24,7 @@ func main() {
 		fmt.Printf("%s\n", res)
 	} else {
 		tr.ListFunctions()
-		if CLI.List == false && CLI.ListShort == false {
+		if !CLI.List && !CLI.ListShort {
 			fmt.Printf("%s\n\n",
 				"String transformation command not found. "+
 					"Please use one of the above.",
