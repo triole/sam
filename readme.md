@@ -1,4 +1,4 @@
-# Sam ![example workflow](https://github.com/triole/sam/actions/workflows/build.yaml/badge.svg)
+# Sam ![build](https://github.com/triole/sam/actions/workflows/build.yaml/badge.svg) ![test](https://github.com/triole/sam/actions/workflows/test.yaml/badge.svg)
 
 <!-- toc -->
 
