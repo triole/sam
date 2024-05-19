@@ -20,7 +20,7 @@ usage = "_ hello_"
 func = "TrimSuffix"
 
 [tsufg]
-category =  "trim"
+category = "trim"
 args = "suffix, str"
 desc = "like trim prefix aggressive but at the end"
 usage = "_ hello__"
@@ -75,25 +75,25 @@ desc = "return bool; true on: 1, enable, enabled, on, true; false on everything 
 func = "Bool"
 usage = "enabled"
 
-[txt-b64]
+["txt.b64"]
 category = "encoding"
 args = "str"
 desc = "from text to base64"
 func = "ToBase64"
 
-[b64-txt]
+["b64.txt"]
 category = "encoding"
 args = "str"
 desc = "from base64 to text"
 func = "FromBase64"
 
-[txt-url]
+["txt.url"]
 category = "encoding"
 args = "str"
 desc = "from text to url encoding"
 func = "ToURL"
 
-[url-txt]
+["url.txt"]
 category = "encoding"
 args = "str"
 desc = "from url encoding to text"
@@ -117,6 +117,12 @@ args = "str"
 desc = "sha256"
 func = "Sha256"
 
+[sha384]
+category = "hash"
+args = "str"
+desc = "sha384"
+func = "Sha384"
+
 [sha512]
 category = "hash"
 args = "str"
@@ -129,12 +135,6 @@ args = "str"
 desc = "flexible length blake3 hash, requires bit size arg"
 func = "Blake3"
 usage = "64 hello"
-
-[rmd]
-category = "hash"
-args = "str"
-desc = "ripemd160"
-func = "Ripemd160"
 
 [whp]
 category = "hash"

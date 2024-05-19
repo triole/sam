@@ -9,7 +9,6 @@ import (
 	"fmt"
 
 	"github.com/jzelinskie/whirlpool"
-	"golang.org/x/crypto/ripemd160"
 	"lukechampine.com/blake3"
 )
 
@@ -33,6 +32,13 @@ func (tr Transform) Sha256(str string) string {
 	return fmt.Sprintf("%x", bs)
 }
 
+func (tr Transform) Sha384(str string) string {
+	h := sha512.New384()
+	h.Write([]byte(str))
+	bs := h.Sum(nil)
+	return fmt.Sprintf("%x", bs)
+}
+
 func (tr Transform) Sha512(str string) string {
 	h := sha512.New()
 	h.Write([]byte(str))
@@ -47,13 +53,6 @@ func (tr Transform) Blake3(args string) string {
 	h := blake3.New(len, nil)
 	_, err := h.Write([]byte(str))
 	logFatal(err, "Error generating blake3")
-	bs := h.Sum(nil)
-	return fmt.Sprintf("%x", bs)
-}
-
-func (tr Transform) Ripemd160(str string) string {
-	h := ripemd160.New()
-	h.Write([]byte(str))
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
