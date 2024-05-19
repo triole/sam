@@ -75,9 +75,3 @@ func printBuildTags(buildtags string) {
 	}
 	fmt.Printf("\n")
 }
-
-// func alnum(s string) string {
-// 	s = strings.ToLower(s)
-// 	re := regexp.MustCompile("[^a-z0-9_-]")
-// 	return re.ReplaceAllString(s, "-")
-// }
