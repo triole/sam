@@ -50,7 +50,7 @@ func (tr Transform) ListFunctions() {
 	})
 
 	t.SetOutputMirror(os.Stdout)
-	if tr.CLI.ListShort == true {
+	if tr.CLI.ListShort {
 		t.AppendHeader(table.Row{
 			"category", "command", "args", "usage",
 		})

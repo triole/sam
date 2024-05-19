@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/pelletier/go-toml"
+	toml "github.com/pelletier/go-toml"
 )
 
 type tFuncList []tFunc
@@ -69,8 +69,7 @@ func (tr Transform) Call() (result interface{}, err error) {
 			methArgsInRef[idx] = reflect.ValueOf(param)
 		}
 
-		var res []reflect.Value
-		res = meth.Call(methArgsInRef)
+		var res []reflect.Value = meth.Call(methArgsInRef)
 		result = res[0].Interface()
 	}
 	return

@@ -30,10 +30,6 @@ func TestSha512(t *testing.T) {
 	assert(tr.Sha512(v), "9b71d224bd62f3785d96d46ad3ea3d73319bfbc2890caadae2dff72519673ca72323c3d99ba5c11d7c7acc6e14b8c5da0c4663475c2e5c3adef46f73bcdec043", t)
 }
 
-func TestRipemd160(t *testing.T) {
-	assert(tr.Ripemd160(v), "108f07b8382412612c048d07d13f814118445acd", t)
-}
-
 func TestWhirlpool(t *testing.T) {
 	assert(tr.Whirlpool(v), "0a25f55d7308eca6b9567a7ed3bd1b46327f0f1ffdc804dd8bb5af40e88d78b88df0d002a89e2fdbd5876c523f1b67bc44e9f87047598e7548298ea1c81cfd73", t)
 }

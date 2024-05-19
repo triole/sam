@@ -9,7 +9,7 @@ func (tr Transform) TrimSuffix(args string) string {
 
 func (tr Transform) TrimSuffixAggressive(args string) string {
 	suf, str := separateFirstArg(args)
-	for strings.HasSuffix(str, suf) == true {
+	for strings.HasSuffix(str, suf) {
 		str = strings.TrimSuffix(str, suf)
 	}
 	return str
@@ -17,7 +17,7 @@ func (tr Transform) TrimSuffixAggressive(args string) string {
 
 func (tr Transform) TrimPrefixAggressive(args string) string {
 	pre, str := separateFirstArg(args)
-	for strings.HasPrefix(str, pre) == true {
+	for strings.HasPrefix(str, pre) {
 		str = strings.TrimPrefix(str, pre)
 	}
 	return str
