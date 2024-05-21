@@ -16,7 +16,7 @@ type tFunc struct {
 	Command  string
 	Args     string
 	Desc     string
-	Usage    string
+	Usage    interface{}
 	Func     interface{}
 }
 
@@ -48,7 +48,7 @@ func (tr *Transform) makeFuncMap() {
 		val.Command = key
 		tr.FuncMap[key] = val
 	}
-	logFatal(err, "Error unmarshal mapper toml")
+	logFatal(err, "error, can not unmarshal mapper toml")
 }
 
 func (tr Transform) Call() (result interface{}, err error) {

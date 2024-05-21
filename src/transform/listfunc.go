@@ -82,8 +82,21 @@ func (tr Transform) ListFunctions() {
 }
 
 func printUsage(fnct tFunc) (r string) {
-	if fnct.Usage != "" {
-		r = "sam " + fnct.Command + " " + fnct.Usage
+	var arr []string
+	switch val := fnct.Usage.(type) {
+	case string:
+		arr = append(arr, val)
+	case []interface{}:
+		for _, el := range val {
+			arr = append(arr, el.(string))
+		}
+	}
+	for idx, el := range arr {
+		suf := "\n"
+		if idx+1 == len(arr) {
+			suf = ""
+		}
+		r += "sam " + fnct.Command + " " + el + suf
 	}
 	return r
 }
