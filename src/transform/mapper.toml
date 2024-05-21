@@ -1,3 +1,40 @@
+[cst]
+category = "case"
+args = "str"
+desc = "title case"
+func = "Title"
+
+[csl]
+category = "case"
+args = "str"
+desc = "to lower case"
+func = "LowerCase"
+
+[csu]
+category = "case"
+args = "str"
+desc = "to upper case"
+func = "UpperCase"
+
+[css]
+category = "case"
+args = "str"
+desc = "to snake case"
+func = "SnakeCase"
+
+[csc]
+category = "case"
+args = "str"
+desc = "to camel case"
+func = "CamelCase"
+
+[col]
+category = "color"
+args = "str"
+desc = "display color different codes, input can be hex or rgb"
+func = "PrintColorInfo"
+usage = "#999, sam col 333777, sam col 11 22 33"
+
 [tpre]
 category = "trim"
 args = "prefix, str"
@@ -37,36 +74,6 @@ category = "replace"
 args = "str"
 desc = "replace multiple spaces or tabs after one another by one space"
 func = "ReplaceMultiSpace"
-
-[cst]
-category = "case"
-args = "str"
-desc = "title case"
-func = "Title"
-
-[csl]
-category = "case"
-args = "str"
-desc = "to lower case"
-func = "LowerCase"
-
-[csu]
-category = "case"
-args = "str"
-desc = "to upper case"
-func = "UpperCase"
-
-[css]
-category = "case"
-args = "str"
-desc = "to snake case"
-func = "SnakeCase"
-
-[csc]
-category = "case"
-args = "str"
-desc = "to camel case"
-func = "CamelCase"
 
 [lb]
 category = "logical"
