@@ -31,7 +31,7 @@ func = "CamelCase"
 [col]
 category = "color"
 args = "str"
-desc = "display color different codes, input can be hex or rgb"
+desc = "display different color codes, input can be hex or rgb"
 func = "PrintColorInfo"
 usage = ["#999", "333777", "11 22 33"]
 
