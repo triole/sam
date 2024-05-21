@@ -46,15 +46,18 @@ This is a short overview. For more info use `-l`.
  case     | css     | str         |                     
  case     | cst     | str         |                     
  case     | csu     | str         |                     
- encoding | b64-txt | str         |                     
- encoding | txt-b64 | str         |                     
- encoding | txt-url | str         |                     
- encoding | url-txt | str         |                     
+ color    | col     | str         | sam col #999        
+          |         |             | sam col 333777      
+          |         |             | sam col 11 22 33    
+ encoding | b64.txt | str         |                     
+ encoding | txt.b64 | str         |                     
+ encoding | txt.url | str         |                     
+ encoding | url.txt | str         |                     
  hash     | blake3  | str         | sam blake3 64 hello 
  hash     | md5     | str         |                     
- hash     | rmd     | str         |                     
  hash     | sha1    | str         |                     
  hash     | sha256  | str         |                     
+ hash     | sha384  | str         |                     
  hash     | sha512  | str         |                     
  hash     | whp     | str         |                     
  logical  | lb      | str         | sam lb enabled      
