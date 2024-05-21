@@ -26,29 +26,20 @@ tasks:
 
   test:
     desc: run go tests
-    method: timestamp
     cmds:
       - cmd: |
-          for fol in $(find {{.SOURCE_FOLDER}} -mindepth 1 -maxdepth 1 -type d | sort); do
-              cd "${fol}" && go test
+          for fol in {{.MODULES}}; do
+            echo -e "\nTest ${fol}"
+            cd "${fol}"
+            go test -timeout 30s -trace go.trace -race -cover -bench=. .
           done
-      - cmd: >-
-          go test -trace go.trace -race -cover -bench=. {{.SOURCE_FOLDER}}/*.go
+    vars:
+      MODULES:
+        sh: find $(pwd)/src -maxdepth 1 -type d | sort | tr '\n'
+          ' '
 
   deploy:
     desc: build and copy to my personal arch mybins folder
     cmds:
       - task: build
       - cmd: cp -rpf build/* ${HOME}/tools/arch/mybins/
-
-  testio:
-    desc: run full program with different parameters, check in
-      and output
-    cmds:
-      - cmd: tests/run.sh
-
-  testall:
-    desc: run go and io tests
-    cmds:
-      - task: test
-      - task: testio
