@@ -55,6 +55,7 @@ This is a short overview. For more info use `-l`.
  encoding | url.txt | str         |                     
  hash     | blake3  | str         | sam blake3 64 hello 
  hash     | md5     | str         |                     
+ hash     | rake    | str         |                     
  hash     | sha1    | str         |                     
  hash     | sha256  | str         |                     
  hash     | sha384  | str         |                     
