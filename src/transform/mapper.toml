@@ -149,6 +149,12 @@ args = "str"
 desc = "whirlpool"
 func = "Whirlpool"
 
+[rake]
+category = "hash"
+args = "str"
+desc = "a rotated version of blake3"
+func = "Rake"
+
 [pd]
 category = "path"
 args = "str"
