@@ -48,7 +48,7 @@ func (tr Transform) Sha512(str string) string {
 
 func (tr Transform) Blake3(args string) string {
 	lenstr, inp := separateFirstArg(args)
-	len := toInt(lenstr)
+	len := parseLengthStr(lenstr)
 	str := tr.TrimSpace(inp)
 	h := blake3.New(len, nil)
 	_, err := h.Write([]byte(str))

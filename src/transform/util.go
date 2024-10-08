@@ -2,6 +2,8 @@ package transform
 
 import (
 	"log"
+	"math"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -11,20 +13,34 @@ func separateFirstArg(s string) (string, string) {
 	return arr[0], strings.Join(arr[1:], " ")
 }
 
+func parseLengthStr(s string) (i int) {
+	arr := rxSplitToFloat("[a-zA-Z]+", s)
+	if len(arr) > 1 && strings.Contains(s, "e") {
+		i = int(arr[0] * math.Pow(10, arr[1]))
+	}
+	if len(arr) > 1 && strings.Contains(s, "p") {
+		i = int(math.Pow(arr[0], arr[1]))
+	}
+	if len(arr) <= 1 {
+		i = int(arr[0])
+	}
+	return
+}
+
+func rxSplitToFloat(rx, txt string) (arr []float64) {
+	re := regexp.MustCompile(rx)
+	split := re.Split(txt, -1)
+	for i := range split {
+		fl, err := strconv.ParseFloat(split[i], 32)
+		if err == nil {
+			arr = append(arr, fl)
+		}
+	}
+	return
+}
+
 func logFatal(err error, msg string) {
 	if err != nil {
 		log.Fatalf("%s: %s", msg, err.Error())
 	}
-}
-
-func toInt(itf interface{}) (i int) {
-	switch val := itf.(type) {
-	case string:
-		v, err := strconv.Atoi(val)
-		logFatal(err, "Can not convert "+val)
-		i = v
-	case int:
-		i = val
-	}
-	return
 }
