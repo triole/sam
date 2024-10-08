@@ -30,9 +30,9 @@ func (tr Transform) intToLetters(number int) (letters string) {
 	number--
 	if firstLetter := number / 26; firstLetter > 0 {
 		letters += tr.intToLetters(firstLetter)
-		letters += string('A' + number%26)
+		letters += string(rune('A' + number%26))
 	} else {
-		letters += string('A' + number)
+		letters += string(rune('A' + number))
 	}
 	if number%2 == 0 {
 		letters = strings.ToLower(letters)
