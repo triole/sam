@@ -15,7 +15,7 @@ var (
 	BUILDTAGS      string
 	appName        = "sam"
 	appDescription = "a string alteration machine to ease string processing in shell scripts"
-	appMainversion = "0.1"
+	appMainversion = "0.2"
 )
 
 var CLI struct {
