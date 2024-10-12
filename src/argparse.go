@@ -34,7 +34,7 @@ var CLI struct {
 
 	Case struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
-		Target string   `help:"target case, can be: [${enum}]" enum:"lower, upper, camel, snake" short:"t" default:"lower"`
+		Target string   `help:"target case, can be: [${enum}]" enum:"lower, upper, camel, snake, title" short:"t" default:"lower"`
 	} `cmd:"" help:"convert string case"`
 
 	Color struct {
@@ -66,7 +66,7 @@ var CLI struct {
 	Trim struct {
 		Args       []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Type       string   `help:"which string part to trim, can be: [${enum}]" enum:"prefix, suffix, both" short:"t" default:"both"`
-		Aggressive bool     `help:"aggressive mode, remove multiple occurences of the prefix" short:"a"`
+		Aggressive bool     `help:"aggressive mode, remove multiple occurences of the match" short:"a"`
 	} `cmd:"" help:"remove part of a string"`
 	// keep-sorted end
 }

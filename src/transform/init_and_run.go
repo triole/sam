@@ -14,6 +14,10 @@ func Init(conf conf.Conf) (tr Transform) {
 	return
 }
 
+func InitTest() (tr Transform) {
+	return
+}
+
 func (tr Transform) Run() {
 	switch tr.Conf.SubCommand {
 	// keep-sorted start block=yes

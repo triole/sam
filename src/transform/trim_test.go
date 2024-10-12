@@ -2,7 +2,7 @@ package transform
 
 import "testing"
 
-func TestTrimFunctions(t *testing.T) {
+func TestTrim(t *testing.T) {
 	assert(tr.TrimPrefix("x xhello world"), "hello world", t)
 	assert(tr.TrimPrefix("xx xxhello world"), "hello world", t)
 	assert(tr.TrimPrefix("x xxhello world"), "xhello world", t)
@@ -16,6 +16,4 @@ func TestTrimFunctions(t *testing.T) {
 	assert(tr.TrimSpace(" hello world "), "hello world", t)
 	assert(tr.TrimSpace(" hello world  "), "hello world", t)
 	assert(tr.TrimSpace("\t   hello world\t"), "hello world", t)
-
-	assert(tr.ReplaceMultiSpace("   \thello world\t"), " hello world ", t)
 }

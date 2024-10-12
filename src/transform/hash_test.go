@@ -3,7 +3,7 @@ package transform
 import "testing"
 
 var (
-	tr = Init(TransformCLI{})
+	tr = InitTest()
 	v  = "hello"
 )
 
