@@ -1,19 +1,22 @@
 package transform
 
 import (
+	"sam/src/conf"
 	"testing"
 )
 
-func TestBase64(t *testing.T) {
-	str := "hello world"
-	b64 := "aGVsbG8gd29ybGQ="
-	assert(tr.ToBase64(str), b64, t)
-	assert(tr.FromBase64(b64), str, t)
+func TestEncode(t *testing.T) {
+	assertEncode("hello world", "base64", false, "aGVsbG8gd29ybGQ=", t)
+	assertEncode("aGVsbG8gd29ybGQ=", "base64", true, "hello world", t)
+	assertEncode("hello world, this is terrific!!=", "url", false, "hello+world%2C+this+is+terrific%21%21%3D", t)
+	assertEncode("hello+world%2C+this+is+terrific%21%21%3D", "url", true, "hello world, this is terrific!!=", t)
 }
 
-func TestURL(t *testing.T) {
-	str := "hello world, this is good!!"
-	url := "hello+world%2C+this+is+good%21%21"
-	assert(tr.ToURL(str), url, t)
-	assert(tr.FromURL(url), str, t)
+func assertEncode(str, target string, reverse bool, exp string, t *testing.T) {
+	conf := conf.New()
+	conf.String = str
+	conf.Target = target
+	conf.Reverse = reverse
+	tr = Init(conf)
+	assert(tr.runEncode(), exp, t)
 }
