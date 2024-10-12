@@ -28,6 +28,10 @@ var CLI struct {
 		Target string   `help:"where to align string to, can be: [${enum}]" enum:"left, right, l, r" short:"t" default:"left"`
 	} `cmd:"" help:"align string"`
 
+	Bool struct {
+		Args []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
+	} `cmd:"" help:"return bool value; returns 'true' on: 1, enable, enabled, on, true; returns 'false' on everything else; case insensitive"`
+
 	Case struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Target string   `help:"target case, can be: [${enum}]" enum:"lower, upper, camel, snake" short:"t" default:"lower"`
@@ -48,10 +52,6 @@ var CLI struct {
 		Length int      `help:"hash length if hash type suports it" short:"l" default:"1024"`
 		Target string   `help:"target case, can be: [${enum}]" enum:"md5, sha1, sha256, sha384, sha512, blake3, rake, whirlpool" short:"t" default:"sha512"`
 	} `cmd:"" help:"calculate hash of a string"`
-
-	Log struct {
-		Args []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
-	} `cmd:"" help:"return bool value; returns 'true' on: 1, enable, enabled, on, true; returns 'false' on everything else; case insensitive"`
 
 	Path struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
