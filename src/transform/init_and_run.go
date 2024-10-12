@@ -25,7 +25,7 @@ func (tr Transform) Run() {
 	case "align":
 		r = tr.runAlign()
 	case "bool":
-		fmt.Println("In two days.")
+		r = fmt.Sprintf("%v", tr.bool())
 	case "case":
 		fmt.Println("Tomorrow.")
 	case "color":
