@@ -27,6 +27,23 @@ func parseLengthStr(s string) (i int) {
 	return
 }
 
+func rxCompile(str string) (r *regexp.Regexp) {
+	r, _ = regexp.Compile(str)
+	return
+}
+
+func rxFind(rx string, content string) (r string) {
+	temp := rxCompile(rx)
+	r = temp.FindString(content)
+	return
+}
+
+func rxSub(str string, rx string, rep string) (r string) {
+	re := regexp.MustCompile(rx)
+	r = re.ReplaceAllString(str, rep)
+	return
+}
+
 func rxSplitToFloat(rx, txt string) (arr []float64) {
 	re := regexp.MustCompile(rx)
 	split := re.Split(txt, -1)

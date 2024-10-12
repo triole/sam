@@ -35,7 +35,7 @@ func (tr Transform) Run() {
 	case "hash":
 		r = tr.runHash()
 	case "path":
-		fmt.Println("...to be implemented soon...")
+		r = tr.runPath()
 	case "tidy":
 		fmt.Println("...to be implemented soon...")
 	case "trim":
