@@ -62,7 +62,7 @@ var CLI struct {
 
 	Tidy struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
-		Target string   `help:"target characters groups to tidy, can be: [${enum}]" enum:"spaces,psep" default:"spaces"`
+		Target string   `help:"target characters groups to tidy, can be: [${enum}]" enum:"spaces,pseps" short:"t" default:"spaces"`
 	} `cmd:"" help:"tidy string, replace multiple occurences of spaces or path separators by a single one"`
 
 	Trim struct {
