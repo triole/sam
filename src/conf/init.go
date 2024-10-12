@@ -9,8 +9,9 @@ import (
 func Init(cli interface{}) (conf Conf) {
 	conf.SubCommand = strings.Split(getcli(cli, "SubCommand", "str").(string), " ")[0]
 	cap := capitalize(conf.SubCommand)
-	conf.Target = getcli(cli, cap+".Target", "").(string)
 	conf.String = getcli(cli, cap+".Args", "").(string)
+	conf.Target = getcli(cli, cap+".Target", "").(string)
+	conf.SubString = getcli(cli, cap+".Substring", "").(string)
 	conf.Language = getcli(cli, cap+".Language", "english").(string)
 	conf.Length = getcli(cli, cap+".Length", 0).(int)
 	conf.Reverse = getcli(cli, cap+".Reverse", false).(bool)

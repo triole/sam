@@ -1,19 +1,30 @@
 package transform
 
-import "testing"
+import (
+	"sam/src/conf"
+	"testing"
+)
 
 func TestTrim(t *testing.T) {
-	// assert(tr.TrimPrefix("x xhello world"), "hello world", t)
-	// assert(tr.TrimPrefix("xx xxhello world"), "hello world", t)
-	// assert(tr.TrimPrefix("x xxhello world"), "xhello world", t)
-	// assert(tr.TrimPrefixAggressive("x xxxhello world"), "hello world", t)
+	assertTrim("xhello world", "x", "prefix", false, "hello world", t)
+	assertTrim("xxhello world", "xx", "prefix", false, "hello world", t)
+	assertTrim("xxhello world", "x", "prefix", false, "xhello world", t)
+	assertTrim("xxxhello world", "x", "prefix", true, "hello world", t)
+	assertTrim("hello worldx", "x", "suffix", false, "hello world", t)
+	assertTrim("hello worldxx", "xx", "suffix", false, "hello world", t)
+	assertTrim("hello worldxx", "x", "suffix", true, "hello world", t)
+	assertTrim("hello worldxxx", "x", "suffix", true, "hello world", t)
+	assertTrim("xhello worldx", "x", "both", false, "hello world", t)
+	assertTrim("xxhello worldxx", "x", "both", false, "xhello worldx", t)
+	assertTrim("xxxhello worldxxx", "x", "both", true, "hello world", t)
+}
 
-	// assert(tr.TrimSuffix("x hello worldx"), "hello world", t)
-	// assert(tr.TrimSuffix("xx hello worldxx"), "hello world", t)
-	// assert(tr.TrimSuffix("x hello worldxx"), "hello worldx", t)
-	// assert(tr.TrimSuffixAggressive("x hello worldxxx"), "hello world", t)
-
-	// assert(tr.TrimSpace(" hello world "), "hello world", t)
-	// assert(tr.TrimSpace(" hello world  "), "hello world", t)
-	// assert(tr.TrimSpace("\t   hello world\t"), "hello world", t)
+func assertTrim(str, sub, target string, agg bool, exp string, t *testing.T) {
+	conf := conf.New()
+	conf.String = str
+	conf.Target = target
+	conf.SubString = sub
+	conf.Aggressive = agg
+	tr := Init(conf)
+	assert(tr.runTrim(), exp, t)
 }

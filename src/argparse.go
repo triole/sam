@@ -67,7 +67,8 @@ var CLI struct {
 
 	Trim struct {
 		Args       []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
-		Type       string   `help:"which string part to trim, can be: [${enum}]" enum:"prefix, suffix, both" short:"t" default:"both"`
+		Substring  string   `help:"substring to trim" short:"s" required:""`
+		Target     string   `help:"which string part to trim, can be: [${enum}]" enum:"prefix, suffix, both" short:"t" default:"both"`
 		Aggressive bool     `help:"aggressive mode, remove multiple occurences of the match" short:"a"`
 	} `cmd:"" help:"remove part of a string"`
 	// keep-sorted end

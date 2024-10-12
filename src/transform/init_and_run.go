@@ -39,7 +39,7 @@ func (tr Transform) Run() {
 	case "tidy":
 		r = tr.runTidy()
 	case "trim":
-		fmt.Println("...to be implemented soon...")
+		r = tr.runTrim()
 	}
 	// keep-sorted end
 	fmt.Printf("%s\n", r)
