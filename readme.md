@@ -43,7 +43,7 @@ Commands:
   bool      return bool value; returns 'true' on: 1, enable, enabled, on, true;
             returns 'false' on everything else; case insensitive
   case      convert string case
-  color     display color codes, input can be hex or rgb
+  color     display color code list, input can be hex or rgb
   encode    encode string to
   hash      calculate hash of a string
   path      get parts of a file path
