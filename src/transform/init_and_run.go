@@ -27,7 +27,7 @@ func (tr Transform) Run() {
 	case "bool":
 		r = fmt.Sprintf("%v", tr.bool())
 	case "case":
-		fmt.Println("Tomorrow.")
+		r = tr.runCase()
 	case "color":
 		fmt.Println("In two days.")
 	case "encode":

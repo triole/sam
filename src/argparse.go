@@ -34,8 +34,9 @@ var CLI struct {
 	} `cmd:"" help:"return bool value; returns 'true' on: 1, enable, enabled, on, true; returns 'false' on everything else; case insensitive"`
 
 	Case struct {
-		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
-		Target string   `help:"target case, can be: [${enum}]" enum:"lower, upper, camel, snake, title" short:"t" default:"lower"`
+		Args     []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
+		Target   string   `help:"target case, can be: [${enum}]" enum:"lower, upper, camel, snake, title" short:"t" default:"lower"`
+		Language string   `help:"set language" short:"l" default:"english"`
 	} `cmd:"" help:"convert string case"`
 
 	Color struct {

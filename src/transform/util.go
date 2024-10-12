@@ -39,8 +39,14 @@ func rxSplitToFloat(rx, txt string) (arr []float64) {
 	return
 }
 
+func logErr(err error, msg string) {
+	if err != nil {
+		log.Printf("[error] %s: %s", msg, err.Error())
+	}
+}
+
 func logFatal(err error, msg string) {
 	if err != nil {
-		log.Fatalf("%s: %s", msg, err.Error())
+		log.Fatalf("[fatal] %s: %s", msg, err.Error())
 	}
 }
