@@ -19,10 +19,11 @@ func InitTest() (tr Transform) {
 }
 
 func (tr Transform) Run() {
+	var r string
 	switch tr.Conf.SubCommand {
 	// keep-sorted start block=yes
 	case "align":
-		fmt.Println("Today.")
+		r = tr.runAlign()
 	case "bool":
 		fmt.Println("In two days.")
 	case "case":
@@ -41,4 +42,5 @@ func (tr Transform) Run() {
 		fmt.Println("In two days.")
 	}
 	// keep-sorted end
+	fmt.Printf("%s\n", r)
 }

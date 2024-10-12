@@ -25,6 +25,7 @@ var CLI struct {
 	// keep-sorted start block=yes newline_separated=yes
 	Align struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
+		Length int      `help:"target string length" short:"l" required:""`
 		Target string   `help:"where to align string to, can be: [${enum}]" enum:"left, right, l, r" short:"t" default:"left"`
 	} `cmd:"" help:"align string"`
 

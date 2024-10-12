@@ -11,8 +11,13 @@ func Init(cli interface{}) (conf Conf) {
 	cap := capitalize(conf.SubCommand)
 	conf.Target = getcli(cli, cap+".Target").(string)
 	conf.String = getcli(cli, cap+".Args").(string)
+	conf.Length = getcli(cli, cap+".Length").(int)
 	conf.Reverse = getcli(cli, cap+".Reverse").(bool)
 	conf.Aggressive = getcli(cli, cap+".Aggressive").(bool)
+	return
+}
+
+func InitTest() (conf Conf) {
 	return
 }
 

@@ -1,10 +1,15 @@
 package transform
 
 import (
+	"sam/src/conf"
 	"testing"
 )
 
 func TestAlign(t *testing.T) {
-	assert(tr.AlignRight("8 hello"), "   hello", t)
-	assert(tr.AlignLeft("8 hello"), "hello   ", t)
+	conf := conf.InitTest()
+	conf.String = "hello"
+	conf.Length = 8
+	tr = Init(conf)
+	assert(tr.alignRight(), "   hello", t)
+	assert(tr.alignLeft(), "hello   ", t)
 }
