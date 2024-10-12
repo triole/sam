@@ -41,7 +41,7 @@ var CLI struct {
 
 	Color struct {
 		Args []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
-	} `cmd:"" help:"display color codes, input can be hex or rgb"`
+	} `cmd:"" help:"display color code list, input can be hex or rgb"`
 
 	Encode struct {
 		Args    []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
