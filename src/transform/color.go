@@ -16,8 +16,8 @@ type tColorCodes struct {
 	YCbCr []uint8
 }
 
-func (tr Transform) PrintColorInfo(s string) string {
-	cc := tr.colorInfo(s)
+func (tr Transform) runColor() string {
+	cc := tr.colorInfo(tr.Conf.String)
 	return tr.printableColorCodesString(cc)
 }
 

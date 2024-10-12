@@ -29,7 +29,7 @@ func (tr Transform) Run() {
 	case "case":
 		r = tr.runCase()
 	case "color":
-		fmt.Println("In two days.")
+		r = tr.runColor()
 	case "encode":
 		fmt.Println("In two days.")
 	case "hash":
