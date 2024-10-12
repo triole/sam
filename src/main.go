@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"sam/src/conf"
+	"sam/src/transform"
 )
 
 func main() {
 	parseArgs()
 	conf := conf.Init(CLI)
-	fmt.Printf("%+v\n", conf)
+	tr := transform.Init(conf)
+
+	fmt.Printf("%+v\n", tr)
 
 	// var tcli transform.TransformCLI
 	// tcli.Command = CLI.Command

@@ -1,7 +1,6 @@
 package conf
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 	"unicode"
@@ -10,10 +9,10 @@ import (
 func Init(cli interface{}) (conf Conf) {
 	conf.SubCommand = strings.Split(getcli(cli, "SubCommand").(string), " ")[0]
 	cap := capitalize(conf.SubCommand)
-	// conf.Target = getcli(cli, cap+".Target").(string)
+	conf.Target = getcli(cli, cap+".Target").(string)
 	conf.String = getcli(cli, cap+".Args").(string)
-	// conf.Reverse = getcli(cli, cap+".Reverse").(bool)
-	// conf.Aggressive = getcli(cli, cap+".Aggressive").(bool)
+	conf.Reverse = getcli(cli, cap+".Reverse").(bool)
+	conf.Aggressive = getcli(cli, cap+".Aggressive").(bool)
 	return
 }
 
@@ -25,21 +24,20 @@ func getcli(cli interface{}, keypath string) (r interface{}) {
 	for i := 0; i < val.NumField(); i++ {
 		field := val.Field(i)
 		fieldType := typ.Field(i)
-
 		if fieldType.Name == key[0] {
 			r = field.Interface()
 			if len(key) > 1 {
 				return getcli(r, key[1])
 			}
-			if fieldType.Type.Name() == "" {
-				r = true
+			if fieldType.Type.String() == "[]string" {
+				arr := field.Interface().([]string)
+				r = strings.Join(arr, " ")
 			} else {
 				r = field.Interface()
 			}
 		}
 	}
-	fmt.Printf("%+v\n", r)
-	// make sure not to return nil
+	// make sure not to return nil on empty bools
 	if r == nil {
 		r = false
 	}
