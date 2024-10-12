@@ -4,13 +4,13 @@
 
 - [Synopsis](#synopsis)
 - [How to Use?](#how-to-use)
-- [Currently available string operations](#currently-available-string-operations)
+- [Help](#help)
 
 <!-- /toc -->
 
 ## Synopsis
 
-The **S**tring **A**lteration **M**achine is a tool that can be used to manipulate and process strings. Why? Because I wanted something for simple string operations that can be used in bash scripts. I know there is `awk` and `tr` but some things (like i.e. title case) are just to complicated using these two. Sam is expandable and designed to do the job.
+The **S**tring **A**lteration **M**achine is a tool that can be used to manipulate and process strings. Why? Because I wanted something for simple string operations that can be used in bash scripts. I know there is `awk` and `tr` but some things (e.g. title case) are just to complicated using these two. Sam is simpler and does the job.
 
 ## How to Use?
 
@@ -18,60 +18,38 @@ Having simplicity in mind the syntax basically consists of two parts. The first 
 
 ```shell
 # transform to title case or uppercase
-sam title hello world
-sam uppercase hello world
+sam case -t title hello world
 
 # or using stdin
-echo hello world | sam md5
-# which's result is equal to...
-echo -n "hello world" | md5sum
-
-# show a list of available operations
-sam -l
+echo hello world | sam hash -t md5
 
 # display help
 sam -h
 ```
 
-## Currently available string operations
+## Help
 
-This is a short overview. For more info use `-l`.
+```go mdox-exec="r -h"
+Usage: sam <command>
 
-```go mdox-exec="r --list-short"
+a string alteration machine to ease string processing in shell scripts
 
- CATEGORY | COMMAND | ARGS        | USAGE               
-----------+---------+-------------+---------------------
- case     | csc     | str         |                     
- case     | csl     | str         |                     
- case     | css     | str         |                     
- case     | cst     | str         |                     
- case     | csu     | str         |                     
- color    | col     | str         | sam col #999        
-          |         |             | sam col 333777      
-          |         |             | sam col 11 22 33    
- encoding | b64.txt | str         |                     
- encoding | txt.b64 | str         |                     
- encoding | txt.url | str         |                     
- encoding | url.txt | str         |                     
- hash     | blake3  | str         | sam blake3 64 hello 
- hash     | md5     | str         |                     
- hash     | rake    | str         |                     
- hash     | sha1    | str         |                     
- hash     | sha256  | str         |                     
- hash     | sha384  | str         |                     
- hash     | sha512  | str         |                     
- hash     | whp     | str         |                     
- logical  | lb      | str         | sam lb enabled      
- path     | pd      | str         |                     
- path     | ptp     | str         |                     
- path     | pts     | str         |                     
- replace  | rspc    | str         |                     
- style    | sal     | str         | sam sal 8 hello     
- style    | sar     | str         | sam sar 8 hello     
- trim     | tpre    | prefix, str | sam tpre _ _hello   
- trim     | tpreg   | prefix, str | sam tpreg _ __hello 
- trim     | tspc    | str         |                     
- trim     | tsuf    | suffix, str | sam tsuf _ hello_   
- trim     | tsufg   | suffix, str | sam tsufg _ hello__ 
+Flags:
+  -h, --help            Show context-sensitive help.
+  -V, --version-flag    display version
 
+Commands:
+  align     align string
+  bool      return bool value; returns 'true' on: 1, enable, enabled, on, true;
+            returns 'false' on everything else; case insensitive
+  case      convert string case
+  color     display color codes, input can be hex or rgb
+  encode    encode string to
+  hash      calculate hash of a string
+  path      get parts of a file path
+  tidy      tidy string, replace multiple occurences of spaces or path
+            separators by a single one
+  trim      remove part of a string
+
+Run "sam <command> --help" for more information on a command.
 ```
