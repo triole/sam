@@ -35,11 +35,11 @@ func (tr Transform) Run() {
 	case "hash":
 		r = tr.runHash()
 	case "path":
-		fmt.Println("In two days.")
+		fmt.Println("...to be implemented soon...")
 	case "tidy":
-		fmt.Println("In two days.")
+		fmt.Println("...to be implemented soon...")
 	case "trim":
-		fmt.Println("In two days.")
+		fmt.Println("...to be implemented soon...")
 	}
 	// keep-sorted end
 	fmt.Printf("%s\n", r)
