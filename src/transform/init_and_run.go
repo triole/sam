@@ -33,7 +33,7 @@ func (tr Transform) Run() {
 	case "encode":
 		r = tr.runEncode()
 	case "hash":
-		fmt.Println("In two days.")
+		r = tr.runHash()
 	case "path":
 		fmt.Println("In two days.")
 	case "tidy":

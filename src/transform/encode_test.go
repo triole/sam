@@ -17,6 +17,6 @@ func assertEncode(str, target string, reverse bool, exp string, t *testing.T) {
 	conf.String = str
 	conf.Target = target
 	conf.Reverse = reverse
-	tr = Init(conf)
+	tr := Init(conf)
 	assert(tr.runEncode(), exp, t)
 }

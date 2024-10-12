@@ -14,61 +14,80 @@ import (
 	"lukechampine.com/blake3"
 )
 
-func (tr Transform) Md5(str string) string {
+func (tr Transform) runHash() (r string) {
+	switch tr.Conf.Target {
+	case "md5":
+		r = tr.md5()
+	case "sha1":
+		r = tr.sha1()
+	case "sha256":
+		r = tr.sha256()
+	case "sha384":
+		r = tr.sha384()
+	case "sha512":
+		r = tr.sha512()
+	case "blake3":
+		r = tr.blake3()
+	case "whirlpool":
+		r = tr.whirlpool()
+	case "rake":
+		r = tr.rake()
+	}
+	return
+}
+
+func (tr Transform) md5() string {
 	hasher := md5.New()
-	hasher.Write([]byte(str))
+	hasher.Write([]byte(tr.Conf.String))
 	return hex.EncodeToString(hasher.Sum(nil))
 }
 
-func (tr Transform) Sha1(str string) string {
+func (tr Transform) sha1() string {
 	h := sha1.New()
-	h.Write([]byte(str))
+	h.Write([]byte(tr.Conf.String))
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
-func (tr Transform) Sha256(str string) string {
+func (tr Transform) sha256() string {
 	h := sha256.New()
-	h.Write([]byte(str))
+	h.Write([]byte(tr.Conf.String))
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
-func (tr Transform) Sha384(str string) string {
+func (tr Transform) sha384() string {
 	h := sha512.New384()
-	h.Write([]byte(str))
+	h.Write([]byte(tr.Conf.String))
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
-func (tr Transform) Sha512(str string) string {
+func (tr Transform) sha512() string {
 	h := sha512.New()
-	h.Write([]byte(str))
+	h.Write([]byte(tr.Conf.String))
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
-func (tr Transform) Blake3(args string) string {
-	lenstr, inp := separateFirstArg(args)
-	len := parseLengthStr(lenstr)
-	str := tr.TrimSpace(inp)
-	h := blake3.New(len, nil)
-	_, err := h.Write([]byte(str))
+func (tr Transform) blake3() string {
+	h := blake3.New(tr.Conf.Length, nil)
+	_, err := h.Write([]byte(tr.Conf.String))
 	logFatal(err, "Error generating blake3")
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
-func (tr Transform) Whirlpool(str string) string {
+func (tr Transform) whirlpool() string {
 	h := whirlpool.New()
-	h.Write([]byte(str))
+	h.Write([]byte(tr.Conf.String))
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
 // *** rake part below ***
-func (tr Transform) Rake(args string) (r string) {
-	hash := []rune(tr.Blake3(args))
+func (tr Transform) rake() (r string) {
+	hash := []rune(tr.blake3())
 	for pos, char := range hash {
 		r += tr.toNewChar(pos, int(char))
 	}
