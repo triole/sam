@@ -19,11 +19,56 @@ var (
 )
 
 var CLI struct {
-	Command     string   `help:"string transformation command" arg:"" optional:""`
-	Args        []string `help:"args that are passed to string processor" arg:"" optional:"" passthrough:""`
-	List        bool     `help:"list the available template functions" short:"l"`
-	ListShort   bool     `help:"short list of template functions"`
-	VersionFlag bool     `help:"display version" short:"V"`
+	SubCommand  string `kong:"-"`
+	VersionFlag bool   `help:"display version" short:"V"`
+
+	// keep-sorted start block=yes newline_separated=yes
+	Align struct {
+		Args   []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+		Target string   `help:"where to align string to, can be: [${enum}]" enum:"left, right, l, r" short:"t" default:"left"`
+	} `cmd:"" help:"align string"`
+
+	Case struct {
+		Args   []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+		Target string   `help:"target case, can be: [${enum}]" enum:"lower, upper, camel, snake" short:"t" default:"lower"`
+	} `cmd:"" help:"convert string case"`
+
+	Color struct {
+		Args []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+	} `cmd:"" help:"display color codes, input can be hex or rgb"`
+
+	Encode struct {
+		Args    []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+		Type    string   `help:"encode target, can be: [${enum}]" enum:"url, base64" short:"t" default:"base64"`
+		Reverse bool     `help:"convert the other way round" short:"r"`
+	} `cmd:"" help:"encode string to"`
+
+	Hash struct {
+		Args   []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+		Length int      `help:"hash length if hash type suports it" short:"l" default:"1024"`
+		Type   string   `help:"target case, can be: [${enum}]" enum:"md5, sha1, sha256, sha384, sha512, blake3, rake, whirlpool" short:"t" default:"sha512"`
+	} `cmd:"" help:"calculate hash of a string"`
+
+	Log struct {
+		Args []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+	} `cmd:"" help:"return bool value; returns 'true' on: 1, enable, enabled, on, true; returns 'false' on everything else; case insensitive"`
+
+	Path struct {
+		Args   []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+		Target string   `help:"which part to get, can be: [${enum}]" enum:"dir, bn, ext" short:"t" default:"dir"`
+	} `cmd:"" help:"get parts of a file path"`
+
+	Tidy struct {
+		Args   []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+		Target string   `help:"target characters groups to tidy, can be: [${enum}]" enum:"spaces,psep" default:"spaces"`
+	} `cmd:"" help:"tidy string, replace multiple occurences of spaces or path separators by a single one"`
+
+	Trim struct {
+		Args       []string `help:"args passed through" arg:"" optional:"" passthrough:""`
+		Type       string   `help:"which string part to trim, can be: [${enum}]" enum:"prefix, suffix, both" short:"t" default:"both"`
+		Aggressive bool     `help:"aggressive mode, remove multiple occurences of the prefix" short:"a"`
+	} `cmd:"" help:"remove part of a string"`
+	// keep-sorted end
 }
 
 func parseArgs() {
@@ -32,10 +77,9 @@ func parseArgs() {
 		kong.Description(appDescription),
 		kong.UsageOnError(),
 		kong.ConfigureHelp(kong.HelpOptions{
-			Compact:      true,
-			Summary:      true,
-			NoAppSummary: false,
-			FlagsLast:    false,
+			Compact:   true,
+			Summary:   true,
+			FlagsLast: false,
 		}),
 	)
 	_ = ctx.Run()
