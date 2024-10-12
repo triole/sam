@@ -6,7 +6,7 @@ import (
 )
 
 func TestAlign(t *testing.T) {
-	conf := conf.InitTest()
+	conf := conf.New()
 	conf.String = "hello"
 	conf.Length = 8
 	tr = Init(conf)

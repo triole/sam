@@ -17,7 +17,7 @@ func Init(cli interface{}) (conf Conf) {
 	return
 }
 
-func InitTest() (conf Conf) {
+func New() (conf Conf) {
 	return
 }
 
