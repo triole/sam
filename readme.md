@@ -3,7 +3,7 @@
 <!-- toc -->
 
 - [Synopsis](#synopsis)
-- [How to Use?](#how-to-use)
+- [Usage Examples](#usage-examples)
 - [Help](#help)
 
 <!-- /toc -->
@@ -12,19 +12,38 @@
 
 The **S**tring **A**lteration **M**achine is a tool that can be used to manipulate and process strings. Why? Because I wanted something for simple string operations that can be used in bash scripts. I know there is `awk` and `tr` but some things (e.g. title case) are just to complicated using these two. Sam is simpler and does the job.
 
-## How to Use?
+## Usage Examples
 
-Having simplicity in mind the syntax basically consists of two parts. The first part is the first arg and defines the command. Meaning what to do with the string afterwards. Everything from the second argument on is the string. It looks like this:
+```go mdox-exec="sh/pre case -t title hello world"
+$ sam case -t title hello world
+Hello World
+```
 
-```shell
-# transform to title case or uppercase
-sam case -t title hello world
+```go mdox-exec="sh/pre hash -t sha1 hello world"
+$ sam hash -t sha1 hello world
+2aae6c35c94fcfb415dbe95f408b9ce91ee846ed
+```
 
-# or using stdin
-echo hello world | sam hash -t md5
+```go mdox-exec="sh/pre color ff1199"
+$ sam color ff1199
+   Hex #ff1199
+   RGB [255 17 153]
+  RGBA [255 17 153 255]
+  CMYK [0 238 104 0]
+ YCbCr [104 156 236]
+```
 
-# display help
+```go mdox-exec="sh/pre encode -t base64 hello world"
+$ sam encode -t base64 hello world
+aGVsbG8gd29ybGQ=
+```
+
+*Note that you can also pass the input string by stdin.* Like `echo hello world | sam hash -t md5`.
+
+# Help
+
 sam -h
+
 ```
 
 ## Help

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+args="${*}"
+
+echo "$ sam ${args}"
+r ${args}
