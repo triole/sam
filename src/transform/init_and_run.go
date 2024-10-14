@@ -26,6 +26,8 @@ func (tr Transform) Run() {
 		r = tr.runAlign()
 	case "bool":
 		r = fmt.Sprintf("%v", tr.bool())
+	case "calc":
+		r = tr.runCalc()
 	case "case":
 		r = tr.runCase()
 	case "color":
@@ -40,7 +42,7 @@ func (tr Transform) Run() {
 		r = tr.runTidy()
 	case "trim":
 		r = tr.runTrim()
+		// keep-sorted end
 	}
-	// keep-sorted end
 	fmt.Printf("%s\n", r)
 }

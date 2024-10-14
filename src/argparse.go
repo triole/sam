@@ -33,6 +33,11 @@ var CLI struct {
 		Args []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 	} `cmd:"" help:"return bool value; returns 'true' on: 1, enable, enabled, on, true; returns 'false' on everything else; case insensitive"`
 
+	Calc struct {
+		Args      []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
+		Precision int      `help:"amount of decimal places" short:"p" default:"-1"`
+	} `cmd:"" help:"evaluate mathematical expressions"`
+
 	Case struct {
 		Args     []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Target   string   `help:"target case, can be: [${enum}]" enum:"lower, upper, camel, snake, title" short:"t" default:"lower"`

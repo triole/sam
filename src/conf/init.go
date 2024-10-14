@@ -15,6 +15,7 @@ func Init(cli interface{}) (conf Conf) {
 	conf.Language = getcli(cli, cap+".Language", "english").(string)
 	conf.Length = getcli(cli, cap+".Length", 0).(int)
 	conf.Reverse = getcli(cli, cap+".Reverse", false).(bool)
+	conf.Precision = getcli(cli, cap+".Precision", "").(int)
 	conf.Aggressive = getcli(cli, cap+".Aggressive", false).(bool)
 	return
 }

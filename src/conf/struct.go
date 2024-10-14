@@ -8,5 +8,6 @@ type Conf struct {
 	Language   string
 	Length     int
 	Reverse    bool
+	Precision  int
 	Aggressive bool
 }
