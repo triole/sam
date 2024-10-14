@@ -24,6 +24,11 @@ $ sam hash -t sha1 hello world
 2aae6c35c94fcfb415dbe95f408b9ce91ee846ed
 ```
 
+```go mdox-exec="sh/pre calc -p 3 '6*(3+3.111)'"
+$ sam calc -p 3 6*(3+3.111)
+36.666
+```
+
 ```go mdox-exec="sh/pre color ff1199"
 $ sam color ff1199
    Hex #ff1199
