@@ -4,7 +4,6 @@
 
 - [Synopsis](#synopsis)
 - [Usage Examples](#usage-examples)
-- [Help](#help)
 
 <!-- /toc -->
 
@@ -45,12 +44,6 @@ aGVsbG8gd29ybGQ=
 
 *Note that you can also pass the input string by stdin.* Like `echo hello world | sam hash -t md5`.
 
-# Help
-
-sam -h
-
-```
-
 ## Help
 
 ```go mdox-exec="r -h"
@@ -66,6 +59,7 @@ Commands:
   align     align string
   bool      return bool value; returns 'true' on: 1, enable, enabled, on, true;
             returns 'false' on everything else; case insensitive
+  calc      evaluate mathematical expressions
   case      convert string case
   color     display color code list, input can be hex or rgb
   encode    encode string to
