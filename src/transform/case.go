@@ -17,37 +17,37 @@ func (tr Transform) runCase() (r string) {
 	}
 	switch tr.Conf.Target {
 	case "lower":
-		r = tr.LowerCase(lang)
+		r = tr.lowerCase(lang)
 	case "upper":
-		r = tr.UpperCase(lang)
+		r = tr.upperCase(lang)
 	case "camel":
-		r = tr.CamelCase()
+		r = tr.camelCase()
 	case "snake":
-		r = tr.SnakeCase()
+		r = tr.snakeCase()
 	case "title":
-		r = tr.TitleCase(lang)
+		r = tr.titleCase(lang)
 	}
 	return
 }
 
-func (tr Transform) LowerCase(lang language.Tag) string {
+func (tr Transform) lowerCase(lang language.Tag) string {
 	return cases.Lower(lang).String(tr.Conf.String)
 }
 
-func (tr Transform) UpperCase(lang language.Tag) string {
+func (tr Transform) upperCase(lang language.Tag) string {
 	return cases.Upper(lang).String(tr.Conf.String)
 }
 
-func (tr Transform) CamelCase() string {
+func (tr Transform) camelCase() string {
 	sn := stringy.New(tr.Conf.String)
 	return sn.CamelCase("?", "")
 }
 
-func (tr Transform) SnakeCase() string {
+func (tr Transform) snakeCase() string {
 	sn := stringy.New(tr.Conf.String)
 	return sn.SnakeCase("?", "").ToLower()
 }
 
-func (tr Transform) TitleCase(lang language.Tag) string {
+func (tr Transform) titleCase(lang language.Tag) string {
 	return cases.Title(lang).String(tr.Conf.String)
 }
