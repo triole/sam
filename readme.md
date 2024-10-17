@@ -52,22 +52,22 @@ Usage: sam <command>
 a string alteration machine to ease string processing in shell scripts
 
 Flags:
-  -h, --help            Show context-sensitive help.
-  -V, --version-flag    display version
+  -h, --help    Show context-sensitive help.
 
 Commands:
-  align     align string
-  bool      return bool value; returns 'true' on: 1, enable, enabled, on, true;
-            returns 'false' on everything else; case insensitive
-  calc      evaluate mathematical expressions
-  case      convert string case
-  color     display color code list, input can be hex or rgb
-  encode    encode string to
-  hash      calculate hash of a string
-  path      get parts of a file path
-  tidy      tidy string, replace multiple occurences of spaces or path
-            separators by a single one
-  trim      remove part of a string
+  align      align string
+  bool       return bool value; returns 'true' on: 1, enable, enabled, on, true;
+             returns 'false' on everything else; case insensitive
+  calc       evaluate mathematical expressions
+  case       convert string case
+  color      display color code list, input can be hex or rgb
+  encode     encode string to
+  hash       calculate hash of a string
+  path       get parts of a file path
+  tidy       tidy string, replace multiple occurences of spaces or path
+             separators by a single one
+  trim       remove part of a string
+  version    display version
 
 Run "sam <command> --help" for more information on a command.
 ```
