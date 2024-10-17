@@ -19,8 +19,7 @@ var (
 )
 
 var CLI struct {
-	SubCommand  string `kong:"-"`
-	VersionFlag bool   `help:"display version" short:"V"`
+	SubCommand string `kong:"-"`
 
 	// keep-sorted start block=yes newline_separated=yes
 	Align struct {
@@ -76,6 +75,8 @@ var CLI struct {
 		Target     string   `help:"which string part to trim, can be: [${enum}]" enum:"prefix, suffix, both" short:"t" default:"both"`
 		Aggressive bool     `help:"aggressive mode, remove multiple occurences of the match" short:"a"`
 	} `cmd:"" help:"remove part of a string"`
+
+	Version struct{} `cmd:"" help:"display version"`
 	// keep-sorted end
 }
 
@@ -90,14 +91,15 @@ func parseArgs() {
 			FlagsLast: false,
 		}),
 	)
-	CLI.SubCommand = ctx.Command()
 	_ = ctx.Run()
 
-	if CLI.VersionFlag {
+	if ctx.Command() == "version" {
 		printBuildTags(BUILDTAGS)
 		os.Exit(0)
 	}
 	// ctx.FatalIfErrorf(err)
+
+	CLI.SubCommand = ctx.Command()
 }
 
 type tPrinter []tPrinterEl
