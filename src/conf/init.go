@@ -13,6 +13,7 @@ func Init(cli interface{}) (conf Conf) {
 	conf.Target = getcli(cli, cap+".Target", "").(string)
 	conf.SubString = getcli(cli, cap+".Substring", "").(string)
 	conf.Language = getcli(cli, cap+".Language", "english").(string)
+	conf.File = getcli(cli, cap+".File", "").(string)
 	conf.Length = getcli(cli, cap+".Length", 0).(int)
 	conf.Reverse = getcli(cli, cap+".Reverse", false).(bool)
 	conf.Precision = getcli(cli, cap+".Precision", -1).(int)

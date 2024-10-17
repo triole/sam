@@ -7,6 +7,10 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
+	"hash"
+	"io"
+	"log"
+	"os"
 	"strconv"
 	"strings"
 
@@ -36,52 +40,66 @@ func (tr Transform) runHash() (r string) {
 	return
 }
 
+func (tr Transform) calculateHash(hasher hash.Hash) {
+	if tr.Conf.File != "" {
+		fil, err := os.Open(tr.Conf.File)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer fil.Close()
+		if _, err := io.Copy(hasher, fil); err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		hasher.Write([]byte(tr.Conf.String))
+	}
+}
+
 func (tr Transform) md5() string {
 	hasher := md5.New()
-	hasher.Write([]byte(tr.Conf.String))
+	tr.calculateHash(hasher)
 	return hex.EncodeToString(hasher.Sum(nil))
 }
 
 func (tr Transform) sha1() string {
-	h := sha1.New()
-	h.Write([]byte(tr.Conf.String))
-	bs := h.Sum(nil)
+	hasher := sha1.New()
+	tr.calculateHash(hasher)
+	bs := hasher.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
 func (tr Transform) sha256() string {
-	h := sha256.New()
-	h.Write([]byte(tr.Conf.String))
-	bs := h.Sum(nil)
+	hasher := sha256.New()
+	tr.calculateHash(hasher)
+	bs := hasher.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
 func (tr Transform) sha384() string {
-	h := sha512.New384()
-	h.Write([]byte(tr.Conf.String))
-	bs := h.Sum(nil)
+	hasher := sha512.New384()
+	tr.calculateHash(hasher)
+	bs := hasher.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
 func (tr Transform) sha512() string {
-	h := sha512.New()
-	h.Write([]byte(tr.Conf.String))
-	bs := h.Sum(nil)
+	hasher := sha512.New()
+	tr.calculateHash(hasher)
+	bs := hasher.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
 func (tr Transform) blake3() string {
-	h := blake3.New(tr.Conf.Length, nil)
-	_, err := h.Write([]byte(tr.Conf.String))
-	logFatal(err, "Error generating blake3")
-	bs := h.Sum(nil)
+	hasher := blake3.New(tr.Conf.Length, nil)
+	tr.calculateHash(hasher)
+	bs := hasher.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 
 func (tr Transform) whirlpool() string {
-	h := whirlpool.New()
-	h.Write([]byte(tr.Conf.String))
-	bs := h.Sum(nil)
+	hasher := whirlpool.New()
+	tr.calculateHash(hasher)
+	bs := hasher.Sum(nil)
 	return fmt.Sprintf("%x", bs)
 }
 

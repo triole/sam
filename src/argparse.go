@@ -57,6 +57,7 @@ var CLI struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Length int      `help:"hash length if hash type suports it" short:"l" default:"1024"`
 		Target string   `help:"target case, can be: [${enum}]" enum:"md5, sha1, sha256, sha384, sha512, blake3, rake, whirlpool" short:"t" default:"sha512"`
+		File   string   `help:"calculate hash for a file" short:"f" type:"existingFile"`
 	} `cmd:"" help:"calculate hash of a string"`
 
 	Path struct {
