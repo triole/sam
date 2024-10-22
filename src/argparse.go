@@ -47,6 +47,10 @@ var CLI struct {
 		Args []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 	} `cmd:"" help:"display color code list, input can be hex or rgb"`
 
+	Date struct {
+		Args []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:"" default:"now"`
+	} `cmd:"" help:"print different date formats"`
+
 	Encode struct {
 		Args    []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Target  string   `help:"encode target, can be: [${enum}]" enum:"url, base64" short:"t" default:"base64"`

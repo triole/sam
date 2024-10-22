@@ -32,6 +32,8 @@ func (tr Transform) Run() {
 		r = tr.runCase()
 	case "color":
 		r = tr.runColor()
+	case "date":
+		r = tr.runDate()
 	case "encode":
 		r = tr.runEncode()
 	case "hash":
