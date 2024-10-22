@@ -38,6 +38,12 @@ func rxFind(rx string, content string) (r string) {
 	return
 }
 
+func rxMatch(rx string, str string) (b bool) {
+	re, _ := regexp.Compile(rx)
+	b = re.MatchString(str)
+	return
+}
+
 func rxSub(str string, rx string, rep string) (r string) {
 	re := regexp.MustCompile(rx)
 	r = re.ReplaceAllString(str, rep)

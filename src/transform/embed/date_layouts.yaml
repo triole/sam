@@ -1,0 +1,36 @@
+---
+- desc: YYYY-MM-DDTHH:MM:SS
+  layout: "UnixDate"
+  matcher: "^([A-Z][a-z]{2} ){2}[0-9]{1,2} ([0-9]{2}:){2}[0-9]{2}
+    [A-Z]{3,4} [0-9]{4}$"
+
+- desc: YYYY-MM-DDTHH:MM
+  layout: 2006-01-02T15:04
+  matcher: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$"
+
+- desc: YYYY-MM-DDTHH
+  layout: 2006-01-02T15
+  matcher: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}$"
+
+- desc: YYYY-MM-DD
+  layout: "2006-01-02"
+  matcher: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+  comment: exact time set to 0:00:00
+
+- desc: MM-DD
+  layout: 01-02
+  matcher: "^[0-9]{2}-[0-9]{2}"
+  comment: parser assumes date is current year
+
+- desc: YYYYMMDD
+  layout: "20060102"
+  matcher: "^[0-9]{8}"
+
+- desc: UnixTimeStamp
+  layout: unix
+  matcher: "[0-9]{10}"
+
+- desc: MMDD
+  layout: "0102"
+  matcher: "^[0-9]{4}"
+
