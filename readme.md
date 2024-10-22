@@ -61,6 +61,7 @@ Commands:
   calc       evaluate mathematical expressions
   case       convert string case
   color      display color code list, input can be hex or rgb
+  date       print different date formats
   encode     encode string to
   hash       calculate hash of a string
   path       get parts of a file path
