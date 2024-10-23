@@ -4,6 +4,7 @@
 
 - [Synopsis](#synopsis)
 - [Usage Examples](#usage-examples)
+- [Help](#help)
 
 <!-- /toc -->
 
@@ -30,16 +31,35 @@ $ sam calc -p 3 6*(3+3.111)
 
 ```go mdox-exec="sh/pre color ff1199"
 $ sam color ff1199
-   Hex #ff1199
-   RGB [255 17 153]
-  RGBA [255 17 153 255]
-  CMYK [0 238 104 0]
- YCbCr [104 156 236]
+
+ TYPE   VALUE            
+ Hex    #ff1199          
+ RGB    [255 17 153]     
+ RGBA   [255 17 153 255] 
+ CMYK   [0 238 104 0]    
+ YCbCr  [104 156 236]    
+
 ```
 
 ```go mdox-exec="sh/pre encode -t base64 hello world"
 $ sam encode -t base64 hello world
 aGVsbG8gd29ybGQ=
+```
+
+```go mdox-exec="sh/pre date 2025-01-01T15:33:11"
+$ sam date 2025-01-01T15:33:11
+
+ FORMAT           DATE                              
+ Unix Time Stamp  1735741991                        
+ Unix Date        Wed Jan 01 15:33:11 CET 2025      
+ RFC3339          2025-01-01T15:33:11+01:00         
+ RFC3339Nano      2025-01-01T15:33:11+01:00         
+ RFC822Z          01 Jan 25 15:33 +0100             
+ RFC850           Wednesday, 01-Jan-25 15:33:11 CET 
+ RFC1123Z         Wed, 01 Jan 2025 15:33:11 +0100   
+ Stamp            Jan  1 15:33:11                   
+ StampNano        Jan  1 15:33:11.000000000         
+
 ```
 
 *Note that you can also pass the input string by stdin.* Like `echo hello world | sam hash -t md5`.
