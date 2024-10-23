@@ -22,6 +22,6 @@ func assertDate(str string, exp int, t *testing.T) {
 	conf.String = str
 	tr := Init(conf)
 	tr.loadLayouts()
-	dat := tr.strToDate()
+	dat, _ := tr.strToDate()
 	assert(conf, strconv.Itoa(int(dat.Unix())), strconv.Itoa(exp), t)
 }
