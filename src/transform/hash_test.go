@@ -35,5 +35,5 @@ func assertHash(str, target, file string, length int, exp string, t *testing.T) 
 	conf.File = file
 	conf.Length = length
 	tr := Init(conf)
-	assert(tr.runHash(), exp, t)
+	assert(conf, tr.runHash(), exp, t)
 }

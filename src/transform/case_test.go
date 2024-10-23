@@ -23,5 +23,5 @@ func assertCase(str, target, exp string, t *testing.T) {
 	conf.Target = target
 	conf.Language = "english"
 	tr := Init(conf)
-	assert(tr.runCase(), exp, t)
+	assert(conf, tr.runCase(), exp, t)
 }

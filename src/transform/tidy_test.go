@@ -15,5 +15,5 @@ func assertTidy(str, target, exp string, t *testing.T) {
 	conf.String = str
 	conf.Target = target
 	tr := Init(conf)
-	assert(tr.runTidy(), exp, t)
+	assert(conf, tr.runTidy(), exp, t)
 }

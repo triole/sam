@@ -25,16 +25,17 @@ type dateLayout struct {
 }
 
 func (tr Transform) runDate() {
-	tr.DateLayouts = tr.loadLayouts()
+	tr.loadLayouts()
 	inputDate := tr.strToDate()
 	printTable(tr.assembleDateTableContent(inputDate))
 }
 
-func (tr Transform) loadLayouts() (dl dateLayouts) {
+func (tr *Transform) loadLayouts() (dl dateLayouts) {
 	err := yaml.Unmarshal(layouts, &dl)
 	if err != nil {
 		log.Fatal(err)
 	}
+	tr.DateLayouts = dl
 	return
 }
 

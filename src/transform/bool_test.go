@@ -25,5 +25,5 @@ func assertBool(str string, exp bool, t *testing.T) {
 	conf.String = str
 	tr := Init(conf)
 	res := fmt.Sprintf("%v", tr.bool())
-	assert(res, fmt.Sprintf("%v", exp), t)
+	assert(conf, res, fmt.Sprintf("%v", exp), t)
 }

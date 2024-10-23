@@ -17,5 +17,5 @@ func assertPath(str, target string, exp string, t *testing.T) {
 	conf.String = str
 	conf.Target = target
 	tr := Init(conf)
-	assert(tr.runPath(), exp, t)
+	assert(conf, tr.runPath(), exp, t)
 }

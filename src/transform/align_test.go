@@ -18,5 +18,5 @@ func assertAlign(str, target, exp string, t *testing.T) {
 	conf.Target = target
 	conf.Length = 8
 	tr := Init(conf)
-	assert(tr.runAlign(), exp, t)
+	assert(conf, tr.runAlign(), exp, t)
 }

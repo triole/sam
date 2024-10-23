@@ -26,5 +26,5 @@ func assertTrim(str, sub, target string, agg bool, exp string, t *testing.T) {
 	conf.SubString = sub
 	conf.Aggressive = agg
 	tr := Init(conf)
-	assert(tr.runTrim(), exp, t)
+	assert(conf, tr.runTrim(), exp, t)
 }
