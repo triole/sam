@@ -2,7 +2,6 @@ package transform
 
 import (
 	_ "embed"
-	"fmt"
 	"log"
 	"time"
 
@@ -23,9 +22,9 @@ type dateLayout struct {
 	Matcher string
 }
 
-func (tr Transform) runDate() (r string) {
+func (tr Transform) runDate() {
 	input := tr.strToDate()
-	return tr.printableDateStrings(input)
+	printTable(tr.assembleTableContent(input))
 }
 
 func (tr Transform) loadLayouts() (dl dateLayouts) {
@@ -73,7 +72,7 @@ func (tr Transform) getLocation() (zone string, loc *time.Location) {
 	}
 	loc, err = time.LoadLocation(zone)
 	if err != nil {
-		log.Fatal("can not load zone location: %v", err)
+		logFatal(err, "can not load zone location")
 	}
 	return
 }
@@ -105,13 +104,12 @@ func (tr Transform) now() time.Time {
 // 	return dp.addDays(1, dp.today())
 // }
 
-func (tr Transform) printableDateStrings(tim time.Time) (r string) {
-	r = fmt.Sprintf("%14s %d\n", "UnixTimeStamp", tim.Unix())
-	r += fmt.Sprintf("%14s %s\n", "UnixDate", tim.Format(time.UnixDate))
-	r += fmt.Sprintf("%14s %s\n", "RFC822", tim.Format(time.RFC822))
-	r += fmt.Sprintf("%14s %s\n", "RFC822Z", tim.Format(time.RFC822Z))
-	r += fmt.Sprintf("%14s %s\n", "RFC1123", tim.Format(time.RFC1123))
-	r += fmt.Sprintf("%14s %s\n", "RFC1123Z", tim.Format(time.RFC1123Z))
-	r += fmt.Sprintf("%14s %s\n", "RFC3339", tim.Format(time.RFC3339))
+func (tr Transform) assembleTableContent(tim time.Time) (r [][]interface{}) {
+	r = append(r, []interface{}{"Format", "Date"})
+	r = append(r, []interface{}{"Unix Time Stamp", tim.Unix()})
+	r = append(r, []interface{}{"Unix Date", tim.Format(time.UnixDate)})
+	r = append(r, []interface{}{"RFC3339", tim.Format(time.RFC3339)})
+	r = append(r, []interface{}{"RFC822Z", tim.Format(time.RFC822Z)})
+	r = append(r, []interface{}{"RFC1123Z", tim.Format(time.RFC1123Z)})
 	return
 }

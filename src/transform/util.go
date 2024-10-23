@@ -3,15 +3,14 @@ package transform
 import (
 	"log"
 	"math"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
-)
 
-func separateFirstArg(s string) (string, string) {
-	arr := strings.Split(s, " ")
-	return arr[0], strings.Join(arr[1:], " ")
-}
+	"github.com/jedib0t/go-pretty/v6/table"
+	"github.com/jedib0t/go-pretty/v6/text"
+)
 
 func parseLengthStr(s string) (i int) {
 	arr := rxSplitToFloat("[a-zA-Z]+", s)
@@ -28,18 +27,20 @@ func parseLengthStr(s string) (i int) {
 }
 
 func rxCompile(str string) (r *regexp.Regexp) {
-	r, _ = regexp.Compile(str)
+	var err error
+	r, err = regexp.Compile(str)
+	logFatal(err, "can not compile regex")
 	return
 }
 
-func rxFind(rx string, content string) (r string) {
-	temp := rxCompile(rx)
-	r = temp.FindString(content)
-	return
-}
+// func rxFind(rx string, content string) (r string) {
+// 	temp := rxCompile(rx)
+// 	r = temp.FindString(content)
+// 	return
+// }
 
 func rxMatch(rx string, str string) (b bool) {
-	re, _ := regexp.Compile(rx)
+	re := rxCompile(rx)
 	b = re.MatchString(str)
 	return
 }
@@ -60,6 +61,37 @@ func rxSplitToFloat(rx, txt string) (arr []float64) {
 		}
 	}
 	return
+}
+
+func printTable(arr [][]interface{}) {
+	t := table.NewWriter()
+	t.SetStyle(table.Style{
+		Box: table.BoxStyle{
+			MiddleVertical: "|",
+			PaddingLeft:    " ",
+			PaddingRight:   " ",
+		},
+		Options: table.Options{
+			DrawBorder:      false,
+			SeparateColumns: false,
+			SeparateFooter:  false,
+			SeparateHeader:  false,
+			SeparateRows:    false,
+		},
+		Format: table.FormatOptions{
+			Footer: text.FormatUpper,
+			Header: text.FormatUpper,
+			Row:    text.FormatDefault,
+		},
+	})
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(arr[0])
+	for _, el := range arr[1:] {
+		t.AppendRow(el)
+	}
+	println()
+	t.Render()
+	println()
 }
 
 func logFatal(err error, msg string) {
