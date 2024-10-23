@@ -62,7 +62,12 @@ $ sam date 2025-01-01T15:33:11
 
 ```
 
-*Note that you can also pass the input string by stdin.* Like `echo hello world | sam hash -t md5`.
+*Note that you can also pass the input string by stdin.* Like...
+
+```
+echo hello world | sam hash -t md5
+echo now | sam date
+```
 
 ## Help
 
