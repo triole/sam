@@ -24,7 +24,7 @@ type dateLayout struct {
 
 func (tr Transform) runDate() {
 	input := tr.strToDate()
-	printTable(tr.assembleTableContent(input))
+	printTable(tr.assembleDateTableContent(input))
 }
 
 func (tr Transform) loadLayouts() (dl dateLayouts) {
@@ -104,7 +104,7 @@ func (tr Transform) now() time.Time {
 // 	return dp.addDays(1, dp.today())
 // }
 
-func (tr Transform) assembleTableContent(tim time.Time) (r [][]interface{}) {
+func (tr Transform) assembleDateTableContent(tim time.Time) (r [][]interface{}) {
 	r = append(r, []interface{}{"Format", "Date"})
 	r = append(r, []interface{}{"Unix Time Stamp", tim.Unix()})
 	r = append(r, []interface{}{"Unix Date", tim.Format(time.UnixDate)})

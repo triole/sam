@@ -16,9 +16,9 @@ type tColorCodes struct {
 	YCbCr []uint8
 }
 
-func (tr Transform) runColor() string {
+func (tr Transform) runColor() {
 	cc := tr.colorInfo(tr.Conf.String)
-	return tr.printableColorCodesString(cc)
+	printTable(tr.assembleColorTableContent(cc))
 }
 
 func (tr Transform) colorInfo(s string) (cc tColorCodes) {
@@ -90,5 +90,15 @@ func (tr Transform) printableColorCodesString(cc tColorCodes) (r string) {
 	r += fmt.Sprintf("%6s %+v\n", "RGBA", cc.RGBA)
 	r += fmt.Sprintf("%6s %+v\n", "CMYK", cc.CMYK)
 	r += fmt.Sprintf("%6s %+v", "YCbCr", cc.YCbCr)
+	return
+}
+
+func (tr Transform) assembleColorTableContent(cc tColorCodes) (r [][]interface{}) {
+	r = append(r, []interface{}{"Type", "Value"})
+	r = append(r, []interface{}{"Hex", cc.Hex})
+	r = append(r, []interface{}{"RGB", cc.RGB})
+	r = append(r, []interface{}{"RGBA", cc.RGBA})
+	r = append(r, []interface{}{"CMYK", cc.CMYK})
+	r = append(r, []interface{}{"YCbCr", cc.YCbCr})
 	return
 }
