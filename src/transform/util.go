@@ -91,7 +91,6 @@ func printTable(arr [][]interface{}) {
 	}
 	println()
 	t.Render()
-	println()
 }
 
 func logFatal(err error, msg string) {
