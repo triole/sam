@@ -112,9 +112,10 @@ func (tr Transform) now() time.Time {
 func (tr Transform) assembleDateTableContent(tim time.Time) (r [][]interface{}) {
 	r = append(r, []interface{}{"Format", "Date"})
 	r = append(r, []interface{}{"Unix Time Stamp", tim.Unix()})
-	r = append(r, []interface{}{"Unix Date", tim.Format(time.UnixDate)})
-	r = append(r, []interface{}{"RFC3339", tim.Format(time.RFC3339)})
-	r = append(r, []interface{}{"RFC822Z", tim.Format(time.RFC822Z)})
-	r = append(r, []interface{}{"RFC1123Z", tim.Format(time.RFC1123Z)})
+	for _, el := range tr.DateLayouts {
+		if el.Print {
+			r = append(r, []interface{}{el.Name, tim.Format(el.Layout)})
+		}
+	}
 	return
 }
