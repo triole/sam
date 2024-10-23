@@ -51,9 +51,6 @@ func (tr Transform) strToDate() (tim time.Time) {
 		tr.Conf.String = tr.now().Format(time.UnixDate)
 	}
 	layout := tr.detectLayout(tr.Conf.String)
-	if layout == "UnixDate" {
-		layout = time.UnixDate
-	}
 	var err error
 	tim, err = time.ParseInLocation(
 		layout, tr.Conf.String, time.Local,
