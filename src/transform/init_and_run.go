@@ -6,7 +6,8 @@ import (
 )
 
 type Transform struct {
-	Conf conf.Conf
+	Conf        conf.Conf
+	DateLayouts dateLayouts
 }
 
 func Init(conf conf.Conf) (tr Transform) {

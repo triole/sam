@@ -2,6 +2,7 @@ package transform
 
 import (
 	_ "embed"
+	"errors"
 	"log"
 	"time"
 
@@ -17,14 +18,16 @@ var (
 type dateLayouts []dateLayout
 
 type dateLayout struct {
-	Desc    string
 	Layout  string
 	Matcher string
+	Name    string
+	Print   bool
 }
 
 func (tr Transform) runDate() {
-	input := tr.strToDate()
-	printTable(tr.assembleDateTableContent(input))
+	tr.DateLayouts = tr.loadLayouts()
+	inputDate := tr.strToDate()
+	printTable(tr.assembleDateTableContent(inputDate))
 }
 
 func (tr Transform) loadLayouts() (dl dateLayouts) {
@@ -35,28 +38,33 @@ func (tr Transform) loadLayouts() (dl dateLayouts) {
 	return
 }
 
-func (tr Transform) detectLayout(str string) (r string) {
-	dl := tr.loadLayouts()
-	for _, el := range dl {
+func (tr Transform) detectLayout(str string) (r dateLayout, err error) {
+	for _, el := range tr.DateLayouts {
 		if rxMatch(el.Matcher, str) {
-			r = el.Layout
+			r = el
 			break
 		}
+	}
+	if r.Layout == "" {
+		err = errors.New("no fitting date layout for: " + str)
 	}
 	return
 }
 
 func (tr Transform) strToDate() (tim time.Time) {
 	if tr.Conf.String == "now" {
-		tr.Conf.String = tr.now().Format(time.UnixDate)
+		tr.Conf.String = tr.now().Format(time.RFC3339Nano)
 	}
-	layout := tr.detectLayout(tr.Conf.String)
-	var err error
-	tim, err = time.ParseInLocation(
-		layout, tr.Conf.String, time.Local,
-	)
+	layout, err := tr.detectLayout(tr.Conf.String)
 	if err != nil {
-		log.Fatalf("can not parse string to date: %v", err)
+		logFatal(err, "detect layout failed")
+	} else {
+		tim, err = time.ParseInLocation(
+			layout.Layout, tr.Conf.String, time.Local,
+		)
+		if err != nil {
+			logFatal(err, "unable to parse string to date, layout name: "+layout.Name)
+		}
 	}
 	return
 }
