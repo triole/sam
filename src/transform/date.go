@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"errors"
 	"log"
+	"strconv"
 	"time"
 
 	timezone "github.com/gandarez/go-olson-timezone"
@@ -45,6 +46,10 @@ func (tr *Transform) loadLayouts() (dl dateLayouts) {
 func (tr Transform) strToDate() (tim time.Time, err error) {
 	if tr.Conf.String == "now" {
 		tr.Conf.String = tr.now().Format(time.RFC3339Nano)
+	}
+	if rxMatch("[0-9]{10,}", tr.Conf.String) {
+		tim = tr.unixToDate(tr.Conf.String)
+		tr.Conf.String = tim.Format(time.RFC3339Nano)
 	}
 	for _, el := range tr.DateLayouts {
 		tim, err = time.ParseInLocation(
@@ -108,5 +113,14 @@ func (tr Transform) assembleDateTableContent(tim time.Time) (r [][]interface{}) 
 			r = append(r, []interface{}{el.Name, tim.Format(el.Layout), el.Layout})
 		}
 	}
+	return
+}
+
+func (tr Transform) unixToDate(s string) (tim time.Time) {
+	i, err := strconv.ParseInt(s, 10, 64)
+	if err != nil {
+		logFatal(err, "unable to parse string to int: "+s)
+	}
+	tim = time.Unix(i, 0)
 	return
 }
