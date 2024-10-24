@@ -84,15 +84,6 @@ func (tr Transform) rgbToHex(r, g, b uint8) string {
 	return fmt.Sprintf("0x%02x%02x%02x", r, g, b)
 }
 
-func (tr Transform) printableColorCodesString(cc tColorCodes) (r string) {
-	r = fmt.Sprintf("%6s %s\n", "Hex", cc.Hex)
-	r += fmt.Sprintf("%6s %+v\n", "RGB", cc.RGB)
-	r += fmt.Sprintf("%6s %+v\n", "RGBA", cc.RGBA)
-	r += fmt.Sprintf("%6s %+v\n", "CMYK", cc.CMYK)
-	r += fmt.Sprintf("%6s %+v", "YCbCr", cc.YCbCr)
-	return
-}
-
 func (tr Transform) assembleColorTableContent(cc tColorCodes) (r [][]interface{}) {
 	r = append(r, []interface{}{"Type", "Value"})
 	r = append(r, []interface{}{"Hex", cc.Hex})
