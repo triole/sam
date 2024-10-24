@@ -4,11 +4,13 @@ import (
 	"sam/src/conf"
 	"sam/src/implant"
 	"strconv"
+	"strings"
 	"testing"
+	"time"
 )
 
 func TestDate(t *testing.T) {
-	winterTimeExp := 1737556391
+	winterTimeExp := prepExpectationTime("Wed Jan 22 15:33:11 CET 2025")
 	assertDate("Wed Jan 22 15:33:11 CET 2025", winterTimeExp, t)
 	assertDate("2025-01-22T15:33:11+01:00", winterTimeExp, t)
 	assertDate("2025-01-22T15:33:11.00000000+01:00", winterTimeExp, t)
@@ -18,7 +20,7 @@ func TestDate(t *testing.T) {
 	assertDate("2025-01-22T15:33:11", winterTimeExp, t)
 	assertDate("2025-01-22t15:33:11", winterTimeExp, t)
 
-	summerTimeExp := 1750599191
+	summerTimeExp := prepExpectationTime("Sun Jun 22 15:33:11 CEST 2025")
 	assertDate("Sun Jun 22 15:33:11 CEST 2025", summerTimeExp, t)
 	assertDate("2025-06-22T15:33:11+02:00", summerTimeExp, t)
 	assertDate("2025-06-22T15:33:11.00000000+02:00", summerTimeExp, t)
@@ -35,4 +37,12 @@ func assertDate(str string, exp int, t *testing.T) {
 	tr := Init(conf, implant.Init())
 	dat, _ := tr.strToDate()
 	assert(conf, strconv.Itoa(int(dat.Unix())), strconv.Itoa(exp), t)
+}
+
+func prepExpectationTime(str string) (ts int) {
+	tim, _ := time.ParseInLocation(
+		time.UnixDate, strings.ToUpper(str), time.Local,
+	)
+	ts = int(tim.Unix())
+	return
 }
