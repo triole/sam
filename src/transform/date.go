@@ -37,7 +37,7 @@ func (tr Transform) strToDate() (tim time.Time, err error) {
 	}
 	for _, el := range tr.Impl.DateLayouts {
 		tim, err = time.ParseInLocation(
-			el.Layout, tr.Conf.String, time.Local,
+			el.Layout, strings.ToUpper(tr.Conf.String), time.Local,
 		)
 		if err == nil {
 			break
