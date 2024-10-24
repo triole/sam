@@ -2,6 +2,7 @@ package transform
 
 import (
 	"sam/src/conf"
+	"sam/src/implant"
 	"testing"
 )
 
@@ -16,7 +17,7 @@ func TestColor(t *testing.T) {
 }
 
 func validateTestColor(inp string, exp []uint8, t *testing.T) {
-	tr := Init(conf.New())
+	tr := Init(conf.New(), implant.Init())
 	cc := tr.colorInfo(inp)
 	if cc.RGB[0] != exp[0] || cc.RGB[1] != exp[1] || cc.RGB[2] != exp[2] {
 		t.Errorf(

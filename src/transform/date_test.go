@@ -2,6 +2,7 @@ package transform
 
 import (
 	"sam/src/conf"
+	"sam/src/implant"
 	"strconv"
 	"testing"
 )
@@ -20,8 +21,7 @@ func TestDate(t *testing.T) {
 func assertDate(str string, exp int, t *testing.T) {
 	conf := conf.New()
 	conf.String = str
-	tr := Init(conf)
-	tr.loadLayouts()
+	tr := Init(conf, implant.Init())
 	dat, _ := tr.strToDate()
 	assert(conf, strconv.Itoa(int(dat.Unix())), strconv.Itoa(exp), t)
 }

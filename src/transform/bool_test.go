@@ -3,6 +3,7 @@ package transform
 import (
 	"fmt"
 	"sam/src/conf"
+	"sam/src/implant"
 	"testing"
 )
 
@@ -23,7 +24,7 @@ func TestBool(t *testing.T) {
 func assertBool(str string, exp bool, t *testing.T) {
 	conf := conf.New()
 	conf.String = str
-	tr := Init(conf)
+	tr := Init(conf, implant.Init())
 	res := fmt.Sprintf("%v", tr.bool())
 	assert(conf, res, fmt.Sprintf("%v", exp), t)
 }

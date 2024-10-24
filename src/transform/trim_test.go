@@ -2,6 +2,7 @@ package transform
 
 import (
 	"sam/src/conf"
+	"sam/src/implant"
 	"testing"
 )
 
@@ -25,6 +26,6 @@ func assertTrim(str, sub, target string, agg bool, exp string, t *testing.T) {
 	conf.Target = target
 	conf.SubString = sub
 	conf.Aggressive = agg
-	tr := Init(conf)
+	tr := Init(conf, implant.Init())
 	assert(conf, tr.runTrim(), exp, t)
 }

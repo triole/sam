@@ -2,6 +2,7 @@ package transform
 
 import (
 	"sam/src/conf"
+	"sam/src/implant"
 	"testing"
 )
 
@@ -34,6 +35,6 @@ func assertHash(str, target, file string, length int, exp string, t *testing.T) 
 	conf.Target = target
 	conf.File = file
 	conf.Length = length
-	tr := Init(conf)
+	tr := Init(conf, implant.Init())
 	assert(conf, tr.runHash(), exp, t)
 }

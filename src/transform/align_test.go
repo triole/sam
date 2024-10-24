@@ -2,6 +2,7 @@ package transform
 
 import (
 	"sam/src/conf"
+	"sam/src/implant"
 	"testing"
 )
 
@@ -17,6 +18,6 @@ func assertAlign(str, target, exp string, t *testing.T) {
 	conf.String = str
 	conf.Target = target
 	conf.Length = 8
-	tr := Init(conf)
+	tr := Init(conf, implant.Init())
 	assert(conf, tr.runAlign(), exp, t)
 }

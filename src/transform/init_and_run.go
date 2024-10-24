@@ -3,15 +3,17 @@ package transform
 import (
 	"fmt"
 	"sam/src/conf"
+	"sam/src/implant"
 )
 
 type Transform struct {
-	Conf        conf.Conf
-	DateLayouts dateLayouts
+	Conf conf.Conf
+	Impl implant.Implant
 }
 
-func Init(conf conf.Conf) (tr Transform) {
+func Init(conf conf.Conf, impl implant.Implant) (tr Transform) {
 	tr.Conf = conf
+	tr.Impl = impl
 	return
 }
 

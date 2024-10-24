@@ -1,46 +1,20 @@
 package transform
 
 import (
-	_ "embed"
 	"errors"
 	"log"
 	"strconv"
 	"time"
 
 	timezone "github.com/gandarez/go-olson-timezone"
-	yaml "gopkg.in/yaml.v2"
 )
-
-var (
-	//go:embed embed/date_layouts.yaml
-	layouts []byte
-)
-
-type dateLayouts []dateLayout
-
-type dateLayout struct {
-	Layout  string
-	Matcher string
-	Name    string
-	Print   bool
-}
 
 func (tr Transform) runDate() {
-	tr.loadLayouts()
 	inputDate, err := tr.strToDate()
 	if err != nil {
 		logFatal(err, "date processing failure")
 	}
 	printTable(tr.assembleDateTableContent(inputDate))
-}
-
-func (tr *Transform) loadLayouts() (dl dateLayouts) {
-	err := yaml.Unmarshal(layouts, &dl)
-	if err != nil {
-		log.Fatal(err)
-	}
-	tr.DateLayouts = dl
-	return
 }
 
 func (tr Transform) strToDate() (tim time.Time, err error) {
@@ -51,7 +25,7 @@ func (tr Transform) strToDate() (tim time.Time, err error) {
 		tim = tr.unixToDate(tr.Conf.String)
 		tr.Conf.String = tim.Format(time.RFC3339Nano)
 	}
-	for _, el := range tr.DateLayouts {
+	for _, el := range tr.Impl.DateLayouts {
 		tim, err = time.ParseInLocation(
 			el.Layout, tr.Conf.String, time.Local,
 		)
@@ -112,7 +86,7 @@ func (tr Transform) assembleDateTableContent(tim time.Time) (r [][]interface{}) 
 	}
 	r = append(r, header)
 	r = append(r, []interface{}{"UnixTimeStamp", tim.Unix()})
-	for _, el := range tr.DateLayouts {
+	for _, el := range tr.Impl.DateLayouts {
 		if el.Print {
 			line := []interface{}{el.Name, tim.Format(el.Layout)}
 			if tr.Conf.Layout {

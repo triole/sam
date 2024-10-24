@@ -2,6 +2,7 @@ package transform
 
 import (
 	"sam/src/conf"
+	"sam/src/implant"
 	"testing"
 )
 
@@ -14,6 +15,6 @@ func assertTidy(str, target, exp string, t *testing.T) {
 	conf := conf.New()
 	conf.String = str
 	conf.Target = target
-	tr := Init(conf)
+	tr := Init(conf, implant.Init())
 	assert(conf, tr.runTidy(), exp, t)
 }

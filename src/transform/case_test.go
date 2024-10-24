@@ -2,6 +2,7 @@ package transform
 
 import (
 	"sam/src/conf"
+	"sam/src/implant"
 	"testing"
 )
 
@@ -22,6 +23,6 @@ func assertCase(str, target, exp string, t *testing.T) {
 	conf.String = str
 	conf.Target = target
 	conf.Language = "english"
-	tr := Init(conf)
+	tr := Init(conf, implant.Init())
 	assert(conf, tr.runCase(), exp, t)
 }

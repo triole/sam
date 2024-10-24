@@ -1,9 +1,11 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"os"
 	"regexp"
+	"sam/src/implant"
 	"strconv"
 	"strings"
 
@@ -50,6 +52,7 @@ var CLI struct {
 	Date struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:"" default:"now"`
 		Layout bool     `help:"display go date layout" short:"l"`
+		Target string   `help:"print certain date layout only, can be: [${dateLayoutsList}]" enum:"${dateLayoutsList}, all" short:"t" default:"all"`
 	} `cmd:"" help:"print different date formats"`
 
 	Encode struct {
@@ -86,7 +89,7 @@ var CLI struct {
 	// keep-sorted end
 }
 
-func parseArgs() {
+func parseArgs(impl implant.Implant) {
 	ctx := kong.Parse(&CLI,
 		kong.Name(appName),
 		kong.Description(appDescription),
@@ -96,6 +99,9 @@ func parseArgs() {
 			Summary:   true,
 			FlagsLast: false,
 		}),
+		kong.Vars{
+			"dateLayoutsList": strings.Join(impl.DateLayouts.List(), ", "),
+		},
 	)
 	_ = ctx.Run()
 

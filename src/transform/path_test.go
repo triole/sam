@@ -2,6 +2,7 @@ package transform
 
 import (
 	"sam/src/conf"
+	"sam/src/implant"
 	"testing"
 )
 
@@ -16,6 +17,6 @@ func assertPath(str, target string, exp string, t *testing.T) {
 	conf := conf.New()
 	conf.String = str
 	conf.Target = target
-	tr := Init(conf)
+	tr := Init(conf, implant.Init())
 	assert(conf, tr.runPath(), exp, t)
 }
