@@ -18,6 +18,7 @@ func Init(cli interface{}) (conf Conf) {
 	conf.Reverse = getcli(cli, cap+".Reverse", false).(bool)
 	conf.Precision = getcli(cli, cap+".Precision", -1).(int)
 	conf.Aggressive = getcli(cli, cap+".Aggressive", false).(bool)
+	conf.Layout = getcli(cli, cap+".Layout", false).(bool)
 	return
 }
 

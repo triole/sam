@@ -1,6 +1,6 @@
 ---
 - layout: Mon Jan 02 15:04:05 MST 2006
-  name: Unix Date
+  name: UnixDate
   print: true
 
 - layout: 2006-01-02T15:04:05Z07:00

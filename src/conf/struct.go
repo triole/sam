@@ -11,4 +11,5 @@ type Conf struct {
 	Reverse    bool
 	Precision  int
 	Aggressive bool
+	Layout     bool
 }

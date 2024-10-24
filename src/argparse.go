@@ -48,7 +48,8 @@ var CLI struct {
 	} `cmd:"" help:"display color code list, input can be hex or rgb"`
 
 	Date struct {
-		Args []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:"" default:"now"`
+		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:"" default:"now"`
+		Layout bool     `help:"display go date layout" short:"l"`
 	} `cmd:"" help:"print different date formats"`
 
 	Encode struct {
