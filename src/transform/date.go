@@ -2,8 +2,10 @@ package transform
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"strconv"
+	"strings"
 	"time"
 
 	timezone "github.com/gandarez/go-olson-timezone"
@@ -14,7 +16,15 @@ func (tr Transform) runDate() {
 	if err != nil {
 		logFatal(err, "date processing failure")
 	}
-	printTable(tr.assembleDateTableContent(inputDate))
+	if tr.Conf.Target == "all" {
+		printTable(tr.assembleDateTableContent(inputDate))
+	} else {
+		for _, el := range tr.Impl.DateLayouts {
+			if strings.EqualFold(tr.Conf.Target, el.Name) {
+				fmt.Printf("%s", inputDate.Format(el.Layout))
+			}
+		}
+	}
 }
 
 func (tr Transform) strToDate() (tim time.Time, err error) {

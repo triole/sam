@@ -5,6 +5,7 @@ import (
 	_ "embed"
 	"log"
 	"path/filepath"
+	"strings"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -52,7 +53,7 @@ func readFile(path string) (by []byte) {
 func (dl DateLayouts) List() (arr []string) {
 	for _, el := range dl {
 		if el.Print {
-			arr = append(arr, el.Name)
+			arr = append(arr, strings.ToLower(el.Name))
 		}
 	}
 	return
