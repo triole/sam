@@ -8,14 +8,25 @@ import (
 )
 
 func TestDate(t *testing.T) {
-	exp := 1737552791
-	assertDate("Wed Jan 22 15:33:11 CEST 2025", exp, t)
-	assertDate("2025-01-22T15:33:11+02:00", exp, t)
-	assertDate("2025-01-22T15:33:11.00000000+02:00", exp, t)
-	assertDate("22 Jan 25 15:33 +0200", exp-11, t)
-	assertDate("Wednesday, 22-Jan-25 15:33:11 CEST", exp, t)
-	assertDate("Wed, 22 Jan 2025 15:33:11 +0200", exp, t)
-	// assertDate("2025-01-22T15:33:11", exp, t)
+	winterTimeExp := 1737556391
+	assertDate("Wed Jan 22 15:33:11 CET 2025", winterTimeExp, t)
+	assertDate("2025-01-22T15:33:11+01:00", winterTimeExp, t)
+	assertDate("2025-01-22T15:33:11.00000000+01:00", winterTimeExp, t)
+	assertDate("22 Jan 25 15:33 +0100", winterTimeExp-11, t)
+	assertDate("Wednesday, 22-Jan-25 15:33:11 CET", winterTimeExp, t)
+	assertDate("Wed, 22 Jan 2025 15:33:11 +0100", winterTimeExp, t)
+	assertDate("2025-01-22T15:33:11", winterTimeExp, t)
+	assertDate("2025-01-22t15:33:11", winterTimeExp, t)
+
+	summerTimeExp := 1750599191
+	assertDate("Sun Jun 22 15:33:11 CEST 2025", summerTimeExp, t)
+	assertDate("2025-06-22T15:33:11+02:00", summerTimeExp, t)
+	assertDate("2025-06-22T15:33:11.00000000+02:00", summerTimeExp, t)
+	assertDate("22 Jun 25 15:33 +0200", summerTimeExp-11, t)
+	assertDate("Sunday, 22-Jun-25 15:33:11 CEST", summerTimeExp, t)
+	assertDate("Sun, 22 Jun 2025 15:33:11 +0200", summerTimeExp, t)
+	assertDate("2025-06-22T15:33:11", summerTimeExp, t)
+	assertDate("2025-06-22t15:33:11", summerTimeExp, t)
 }
 
 func assertDate(str string, exp int, t *testing.T) {
