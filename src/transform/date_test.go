@@ -9,40 +9,77 @@ import (
 	"time"
 )
 
-func TestDate(t *testing.T) {
-	winterTimeExp := prepExpectationTime("Wed Jan 22 15:33:11 CET 2025")
-	assertDate("Wed Jan 22 15:33:11 CET 2025", winterTimeExp, t)
-	assertDate("2025-01-22T15:33:11+01:00", winterTimeExp, t)
-	assertDate("2025-01-22T15:33:11.00000000+01:00", winterTimeExp, t)
-	assertDate("22 Jan 25 15:33 +0100", winterTimeExp-11, t)
-	assertDate("Wednesday, 22-Jan-25 15:33:11 CET", winterTimeExp, t)
-	assertDate("Wed, 22 Jan 2025 15:33:11 +0100", winterTimeExp, t)
-	assertDate("2025-01-22T15:33:11", winterTimeExp, t)
-	assertDate("2025-01-22t15:33:11", winterTimeExp, t)
-
-	summerTimeExp := prepExpectationTime("Sun Jun 22 15:33:11 CEST 2025")
-	assertDate("Sun Jun 22 15:33:11 CEST 2025", summerTimeExp, t)
-	assertDate("2025-06-22T15:33:11+02:00", summerTimeExp, t)
-	assertDate("2025-06-22T15:33:11.00000000+02:00", summerTimeExp, t)
-	assertDate("22 Jun 25 15:33 +0200", summerTimeExp-11, t)
-	assertDate("Sunday, 22-Jun-25 15:33:11 CEST", summerTimeExp, t)
-	assertDate("Sun, 22 Jun 2025 15:33:11 +0200", summerTimeExp, t)
-	assertDate("2025-06-22T15:33:11", summerTimeExp, t)
-	assertDate("2025-06-22t15:33:11", summerTimeExp, t)
+type timeZoneStrings struct {
+	Abbreviation string
+	Offset       string
+	OffsetColon  string
 }
 
-func assertDate(str string, exp int, t *testing.T) {
+func TestDate(t *testing.T) {
+	// map key is the expected result, list contains test input values
+	inp := make(map[string][]string)
+	inp["Wed Jan 22 15:33:00 [TZ_ABB] 2025"] = []string{
+		"Wed Jan 22 15:33:00 [TZ_ABB] 2025",
+		"2025-01-22T15:33:00[TZ_COL]",
+		"2025-01-22T15:33:00.00000000[TZ_COL]",
+		"22 Jan 25 15:33 [TZ_OFF]",
+		"Wednesday, 22-Jan-25 15:33:00 [TZ_ABB]",
+		"Wed, 22 Jan 2025 15:33:00 [TZ_OFF]",
+		"2025-01-22T15:33:00",
+		"2025-01-22t15:33:00",
+	}
+	inp["Sun Jun 22 15:33:00 [TZ_ABB] 2025"] = []string{
+		"Sun Jun 22 15:33:00 [TZ_ABB] 2025",
+		"2025-06-22T15:33:00[TZ_COL]",
+		"2025-06-22T15:33:00.00000000[TZ_COL]",
+		"22 Jun 25 15:33 [TZ_OFF]",
+		"Sunday, 22-Jun-25 15:33:00 [TZ_ABB]",
+		"Sun, 22 Jun 2025 15:33:00 [TZ_OFF]",
+		"2025-06-22T15:33:00",
+		"2025-06-22t15:33:00",
+	}
+	for expectedString, el := range inp {
+		inpList := el[1:]
+		for _, input := range inpList {
+			exString := replaceTimeZonesStrings(expectedString)
+			inString := replaceTimeZonesStrings(input)
+			assertDate(inString, exString, t)
+		}
+	}
+}
+
+func assertDate(str, expString string, t *testing.T) {
 	conf := conf.New()
 	conf.String = str
 	tr := Init(conf, implant.Init())
 	dat, _ := tr.strToDate()
-	assert(conf, strconv.Itoa(int(dat.Unix())), strconv.Itoa(exp), t)
+	exp, _ := time.ParseInLocation(time.UnixDate, expString, time.Local)
+	assert(
+		conf,
+		strconv.Itoa(int(dat.Unix())),
+		strconv.Itoa(int(exp.Unix())),
+		t,
+	)
 }
 
-func prepExpectationTime(str string) (ts int) {
-	tim, _ := time.ParseInLocation(
-		time.UnixDate, strings.ToUpper(str), time.Local,
-	)
-	ts = int(tim.Unix())
+func getCorrectTimeZones(month time.Month) (tzs timeZoneStrings) {
+	tim := time.Date(2025, month, 22, 15, 33, 00, 00, time.Local)
+	tzs.Abbreviation = tim.Format("MST")
+	tzs.Offset = tim.Format("-0700")
+	tzs.OffsetColon = tim.Format("-07:00")
+	return
+}
+
+func replaceTimeZonesStrings(str string) (r string) {
+	winterTZ := getCorrectTimeZones(1)
+	summerTZ := getCorrectTimeZones(6)
+	r = strings.Replace(str, "[TZ_ABB]", summerTZ.Abbreviation, -1)
+	r = strings.Replace(r, "[TZ_OFF]", summerTZ.Offset, -1)
+	r = strings.Replace(r, "[TZ_COL]", summerTZ.OffsetColon, -1)
+	if strings.Contains(str, "Jan") || strings.Contains(str, "2025-01-") {
+		r = strings.Replace(str, "[TZ_ABB]", winterTZ.Abbreviation, -1)
+		r = strings.Replace(r, "[TZ_OFF]", winterTZ.Offset, -1)
+		r = strings.Replace(r, "[TZ_COL]", winterTZ.OffsetColon, -1)
+	}
 	return
 }
