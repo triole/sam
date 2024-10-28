@@ -67,28 +67,6 @@ func (tr Transform) now() time.Time {
 	return time.Now().UTC().In(zone)
 }
 
-// func (tr Transform) nowUTC() (now time.Time) {
-// 	_, zone := tr.getLocation()
-// 	now = time.Now().UTC().In(zone)
-// 	return
-// }
-
-// func (tr Transform) yesterday() time.Time {
-// 	return dp.addDays(-1, dp.today())
-// }
-
-// func (tr Transform) today() (today time.Time) {
-// 	n := dp.now()
-// 	today = time.Date(
-// 		n.Year(), n.Month(), n.Day(), 0, 0, 0, 0, dp.TimeZoneLocation,
-// 	)
-// 	return
-// }
-
-// func (tr Transform) tomorrow() time.Time {
-// 	return dp.addDays(1, dp.today())
-// }
-
 func (tr Transform) assembleDateTableContent(tim time.Time) (r [][]interface{}) {
 	header := []interface{}{"Format", "Date"}
 	if tr.Conf.Layout {
