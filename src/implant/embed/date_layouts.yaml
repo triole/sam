@@ -52,3 +52,6 @@
 
 - layout: "20060102"
   print: false
+
+- layout: "060102"
+  print: false
