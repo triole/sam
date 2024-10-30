@@ -51,8 +51,9 @@ var CLI struct {
 
 	Date struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:"" default:"now"`
-		Layout bool     `help:"additioanlly display go date layout in final table" short:"l"`
 		Target string   `help:"print certain date layout only, can be: [${dateLayoutsList}], default: all" enum:"${dateLayoutsList}, all" short:"t" default:"all"`
+		Layout bool     `help:"additioanlly display go date layout in final table" short:"l"`
+		Diff   string   `help:"date to calculate difference between the given two" short:"d"`
 	} `cmd:"" help:"print different date formats"`
 
 	Encode struct {

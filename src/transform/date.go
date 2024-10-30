@@ -9,42 +9,52 @@ import (
 	"time"
 
 	timezone "github.com/gandarez/go-olson-timezone"
+	"github.com/hako/durafmt"
 )
 
 func (tr Transform) runDate() {
-	inputDate, err := tr.strToDate()
+	inputDate, err := tr.strToDate(tr.Conf.String)
 	if err != nil {
-		logFatal(err, "date processing failure")
+		logFatal(err, "input date processing failure")
 	}
-	if tr.Conf.Target == "all" {
-		printTable(tr.assembleDateTableContent(inputDate))
+	if tr.Conf.Diff != "" {
+		diffDate, err := tr.strToDate(tr.Conf.Diff)
+		if err != nil {
+			logFatal(err, "diff date processing failure")
+		}
+		diff := diffDate.Sub(inputDate)
+		fmt.Printf("%+v\n", durafmt.Parse(diff))
 	} else {
-		for _, el := range tr.Impl.DateLayouts {
-			if strings.EqualFold(tr.Conf.Target, el.Name) {
-				fmt.Printf("%s", inputDate.Format(el.Layout))
+		if tr.Conf.Target == "all" {
+			printTable(tr.assembleDateTableContent(inputDate))
+		} else {
+			for _, el := range tr.Impl.DateLayouts {
+				if strings.EqualFold(tr.Conf.Target, el.Name) {
+					fmt.Printf("%s", inputDate.Format(el.Layout))
+				}
 			}
 		}
 	}
 }
 
-func (tr Transform) strToDate() (tim time.Time, err error) {
-	if tr.Conf.String == "now" {
-		tr.Conf.String = tr.now().Format(time.RFC3339Nano)
+func (tr Transform) strToDate(inputStr string) (tim time.Time, err error) {
+	if inputStr == "now" {
+		inputStr = tr.now().Format(time.RFC3339Nano)
 	}
-	if rxMatch("[0-9]{10,}", tr.Conf.String) {
-		tim = tr.unixToDate(tr.Conf.String)
-		tr.Conf.String = tim.Format(time.RFC3339Nano)
+	if rxMatch("[0-9]{10,}", inputStr) {
+		tim = tr.unixToDate(inputStr)
+		inputStr = tim.Format(time.RFC3339Nano)
 	}
 	for _, el := range tr.Impl.DateLayouts {
 		tim, err = time.ParseInLocation(
-			el.Layout, strings.ToUpper(tr.Conf.String), time.Local,
+			el.Layout, strings.ToUpper(inputStr), time.Local,
 		)
 		if err == nil {
 			break
 		}
 	}
 	if tim.Unix() < 0 {
-		err = errors.New("can not parse string to date: " + tr.Conf.String)
+		err = errors.New("can not parse string to date: " + inputStr)
 	}
 	return
 }

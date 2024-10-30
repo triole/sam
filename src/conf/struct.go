@@ -7,6 +7,7 @@ type Conf struct {
 	SubString  string
 	Language   string
 	File       string
+	Diff       string
 	Length     int
 	Reverse    bool
 	Precision  int
