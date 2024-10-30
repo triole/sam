@@ -52,7 +52,7 @@ func assertDate(str, expString string, t *testing.T) {
 	conf := conf.New()
 	conf.String = str
 	tr := Init(conf, implant.Init())
-	dat, _ := tr.strToDate()
+	dat, _ := tr.strToDate(conf.String)
 	exp, _ := time.ParseInLocation(time.UnixDate, expString, time.Local)
 	assert(
 		conf,
