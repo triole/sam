@@ -39,6 +39,8 @@ func (tr Transform) Run() {
 		tr.runDate()
 	case "encode":
 		r = tr.runEncode()
+	case "geo":
+		r = tr.runGeo()
 	case "hash":
 		r = tr.runHash()
 	case "path":

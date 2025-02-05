@@ -63,6 +63,10 @@ func rxSplitToFloat(rx, txt string) (arr []float64) {
 	return
 }
 
+func stringToFloat(str string) (fl float64, err error) {
+	return strconv.ParseFloat(str, 32)
+}
+
 func printTable(arr [][]interface{}) {
 	t := table.NewWriter()
 	t.SetStyle(table.Style{

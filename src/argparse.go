@@ -62,6 +62,12 @@ var CLI struct {
 		Reverse bool     `help:"convert the other way round" short:"r"`
 	} `cmd:"" help:"encode string to"`
 
+	Geo struct {
+		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
+		Length int      `help:"hash length, maximum precision is 32" short:"l" default:"32"`
+		Target string   `help:"target case, can be: [${enum}]" enum:"enc,dec" short:"t" default:"enc"`
+	} `cmd:"" help:"calculate geo hash"`
+
 	Hash struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Length int      `help:"hash length if hash type suports it" short:"l" default:"1024"`
