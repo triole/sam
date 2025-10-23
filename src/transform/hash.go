@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/jameskeane/bcrypt"
 	"github.com/jzelinskie/whirlpool"
 	"lukechampine.com/blake3"
 )
@@ -36,6 +37,8 @@ func (tr Transform) runHash() (r string) {
 		r = tr.whirlpool()
 	case "rake":
 		r = tr.rake()
+	case "bcrypt":
+		r = tr.bcrypt()
 	}
 	return
 }
@@ -53,6 +56,12 @@ func (tr Transform) calculateHash(hasher hash.Hash) {
 	} else {
 		hasher.Write([]byte(tr.Conf.String))
 	}
+}
+
+func (tr Transform) bcrypt() string {
+	salt, _ := bcrypt.Salt(tr.Conf.Rounds)
+	hash, _ := bcrypt.Hash(tr.Conf.String, salt)
+	return fmt.Sprintf("%s", hash)
 }
 
 func (tr Transform) md5() string {

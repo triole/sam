@@ -9,6 +9,7 @@ type Conf struct {
 	File       string
 	Diff       string
 	Length     int
+	Rounds     int
 	Reverse    bool
 	Precision  int
 	Aggressive bool
