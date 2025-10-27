@@ -43,6 +43,8 @@ func (tr Transform) Run() {
 		r = tr.runGeo()
 	case "hash":
 		r = tr.runHash()
+	case "match":
+		r = tr.runMatch()
 	case "path":
 		r = tr.runPath()
 	case "tidy":

@@ -76,6 +76,12 @@ var CLI struct {
 		File   string   `help:"calculate hash for a file, not with bcrypt" short:"f" type:"existingFile"`
 	} `cmd:"" help:"calculate hash of a string"`
 
+	Match struct {
+		Args   []string `help:"check if hash matches input string" arg:"" optional:"" passthrough:""`
+		Target string   `help:"target case, can be: [${enum}]" enum:"md5, sha1, sha256, sha384, sha512, blake3, rake, whirlpool" short:"t" default:"sha512"`
+		File   string   `help:"calculate hash for a file, not with bcrypt" short:"f" type:"existingFile"`
+	} `cmd:"" help:"calculate hash of a string, usage: md5 5d41402abc4b2a76b9719d911017c592 hello"`
+
 	Path struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Target string   `help:"which part to get, can be: [${enum}]" enum:"dir, bn, ext" short:"t" default:"dir"`
