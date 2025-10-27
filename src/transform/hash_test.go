@@ -17,6 +17,8 @@ func TestHash(t *testing.T) {
 	assertHash(s, "sha256", "", 0, "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", t)
 	assertHash(s, "sha512", "", 0, "9b71d224bd62f3785d96d46ad3ea3d73319bfbc2890caadae2dff72519673ca72323c3d99ba5c11d7c7acc6e14b8c5da0c4663475c2e5c3adef46f73bcdec043", t)
 	assertHash(s, "whirlpool", "", 0, "0a25f55d7308eca6b9567a7ed3bd1b46327f0f1ffdc804dd8bb5af40e88d78b88df0d002a89e2fdbd5876c523f1b67bc44e9f87047598e7548298ea1c81cfd73", t)
+	assertHash(s, "rake", "", 8, "obinaP2ouXcuwDRNdgu1157eDZ5dqDeyqDTZ", t)
+	assertHash(s, "rake", "", 16, "obinaP2ouXcuwDRNdgu1157eDZ5dqDeyqDTZejqqPJ27flueaXqrs4rqoFBZ218RJR1FDV", t)
 
 	fil := "../../tests/hash.txt"
 	assertHash(s, "md5", fil, 0, "6f5902ac237024bdd0c176cb93063dc4", t)
@@ -26,7 +28,6 @@ func TestHash(t *testing.T) {
 	assertHash(s, "sha256", fil, 0, "a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447", t)
 	assertHash(s, "sha512", fil, 0, "db3974a97f2407b7cae1ae637c0030687a11913274d578492558e39c16c017de84eacdc8c62fe34ee4e12b4b1428817f09b6a2760c3f8a664ceae94d2434a593", t)
 	assertHash(s, "whirlpool", fil, 0, "813350ea4f5299958f338ee9c860df4546e7955f18867f5cdd9364960c68e76b15ed599a6d1758a4450d069379ba31fa7193c90ffe2f9d045d42a3526f10aea4", t)
-
 }
 
 func assertHash(str, target, file string, length int, exp string, t *testing.T) {

@@ -36,35 +36,35 @@ func (tr Transform) md5Match(hash string) string {
 
 func (tr Transform) sha1Match(hash string) string {
 	compHash := tr.sha1()
-	return fmt.Sprintf("%v", compHash == hash)
+	return fmt.Sprintf("%s :: %s :: %v", tr.Conf.String, hash, compHash == hash)
 }
 
 func (tr Transform) sha256Match(hash string) string {
 	compHash := tr.sha256()
-	return fmt.Sprintf("%v", compHash == hash)
+	return fmt.Sprintf("%s :: %s :: %v", tr.Conf.String, hash, compHash == hash)
 }
 
 func (tr Transform) sha384Match(hash string) string {
 	compHash := tr.sha384()
-	return fmt.Sprintf("%v", compHash == hash)
+	return fmt.Sprintf("%s :: %s :: %v", tr.Conf.String, hash, compHash == hash)
 }
 
 func (tr Transform) sha512Match(hash string) string {
 	compHash := tr.sha512()
-	return fmt.Sprintf("%v", compHash == hash)
+	return fmt.Sprintf("%s :: %s :: %v", tr.Conf.String, hash, compHash == hash)
 }
 
 func (tr Transform) blake3Match(hash string) string {
 	compHash := tr.blake3()
-	return fmt.Sprintf("%v", compHash == hash)
+	return fmt.Sprintf("%s :: %s :: %v", tr.Conf.String, hash, compHash == hash)
 }
 
 func (tr Transform) whirlpoolMatch(hash string) string {
 	compHash := tr.whirlpool()
-	return fmt.Sprintf("%v", compHash == hash)
+	return fmt.Sprintf("%s :: %s :: %v", tr.Conf.String, hash, compHash == hash)
 }
 
 func (tr Transform) rakeMatch(hash string) string {
 	compHash := tr.rake()
-	return fmt.Sprintf("%v", compHash == hash)
+	return fmt.Sprintf("%s :: %s :: %v", tr.Conf.String, hash, compHash == hash)
 }

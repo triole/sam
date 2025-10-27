@@ -112,7 +112,6 @@ func (tr Transform) whirlpool() string {
 	return fmt.Sprintf("%x", bs)
 }
 
-// *** rake part below ***
 func (tr Transform) rake() (r string) {
 	hash := []rune(tr.blake3())
 	for pos, char := range hash {
