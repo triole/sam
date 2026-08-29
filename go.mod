@@ -1,8 +1,6 @@
 module sam
 
-go 1.23.0
-
-toolchain go1.23.6
+go 1.25.0
 
 require (
 	github.com/alecthomas/kong v0.2.17
@@ -12,9 +10,10 @@ require (
 	github.com/jameskeane/bcrypt v0.0.0-20120420032655-c3cd44c1e20f
 	github.com/jedib0t/go-pretty/v6 v6.6.1
 	github.com/jzelinskie/whirlpool v0.0.0-20201016144138-0675e54bb004
+	github.com/matthewhartstonge/argon2 v1.5.7
 	github.com/mnogu/go-calculator v0.0.1
 	github.com/pierrre/geohash v1.1.2
-	golang.org/x/text v0.14.0
+	golang.org/x/text v0.41.0
 	gopkg.in/yaml.v2 v2.4.0
 	lukechampine.com/blake3 v1.1.7
 )
@@ -28,6 +27,7 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/yookoala/realpath v1.0.0 // indirect
-	golang.org/x/sys v0.17.0 // indirect
+	golang.org/x/crypto v0.55.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 )

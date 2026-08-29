@@ -72,7 +72,7 @@ var CLI struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Length int      `help:"hash length if hash type suports it" short:"l" default:"1024"`
 		Rounds int      `help:"bcrypt rounds" short:"r" default:"16"`
-		Target string   `help:"target case, can be: [${enum}]" enum:"md5, sha1, sha256, sha384, sha512, blake3, rake, whirlpool, bcrypt" short:"t" default:"sha512"`
+		Target string   `help:"target case, can be: [${enum}]" enum:"md5, sha1, sha256, sha384, sha512, blake3, rake, whirlpool, argon2, bcrypt" short:"t" default:"sha512"`
 		File   string   `help:"calculate hash for a file, not with bcrypt" short:"f" type:"existingFile"`
 	} `cmd:"" help:"calculate hash of a string"`
 

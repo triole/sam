@@ -15,12 +15,16 @@ import (
 	"strings"
 
 	"github.com/jameskeane/bcrypt"
+
 	"github.com/jzelinskie/whirlpool"
+	"github.com/matthewhartstonge/argon2"
 	"lukechampine.com/blake3"
 )
 
 func (tr Transform) runHash() (r string) {
 	switch tr.Conf.Target {
+	case "argon2":
+		r = tr.argon2()
 	case "md5":
 		r = tr.md5()
 	case "sha1":
@@ -56,6 +60,15 @@ func (tr Transform) calculateHash(hasher hash.Hash) {
 	} else {
 		hasher.Write([]byte(tr.Conf.String))
 	}
+}
+
+func (tr Transform) argon2() string {
+	argon := argon2.DefaultConfig()
+	hash, err := argon.HashEncoded([]byte(tr.Conf.String))
+	if err != nil {
+		logFatal(err, "argon2 hashing failure")
+	}
+	return fmt.Sprintf("%s", hash)
 }
 
 func (tr Transform) bcrypt() string {
