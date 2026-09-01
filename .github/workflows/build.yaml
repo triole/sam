@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        run: |
+        run: >
           sudo apt install -y curl
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
       - name: Install Go
         run: >
           curl -sL https://raw.githubusercontent.com/triole/ghwfe/master/sh/go_install.sh
-          | bash
+          | bash -s -- --sudo
       - name: Add packages in sub folders to GOROOT
         env:
           SOURCE_FOLDER: src
