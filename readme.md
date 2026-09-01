@@ -64,7 +64,7 @@ $ sam date 2025-01-01T15:33:11
 
 *Note that you can also pass the input string by stdin.* Like...
 
-```
+```text
 echo hello world | sam hash -t md5
 echo now | sam date
 ```
@@ -88,7 +88,10 @@ Commands:
   color      display color code list, input can be hex or rgb
   date       print different date formats
   encode     encode string to
+  geo        calculate geo hash
   hash       calculate hash of a string
+  match      check if hash matches string, usage: -t md5
+             5eb63bbbe01eeed093cb22bb8f5acdc3 hello world
   path       get parts of a file path
   tidy       tidy string, replace multiple occurences of spaces or path
              separators by a single one
