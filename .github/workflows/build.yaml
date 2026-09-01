@@ -17,6 +17,9 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: |
+          apt install -y curl
       - name: Checkout
         uses: actions/checkout@v2
         with:
