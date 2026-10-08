@@ -1,8 +1,8 @@
 package main
 
 import (
-	_ "embed"
 	"fmt"
+	"io"
 	"os"
 	"regexp"
 	"sam/src/implant"
@@ -123,9 +123,90 @@ func parseArgs(impl implant.Implant) {
 		printBuildTags(BUILDTAGS)
 		os.Exit(0)
 	}
-	// ctx.FatalIfErrorf(err)
-
 	CLI.SubCommand = ctx.Command()
+	readStdinIntoArgs()
+}
+
+func readStdinIntoArgs() {
+	stat, err := os.Stdin.Stat()
+	if err != nil {
+		return
+	}
+	if stat.Mode()&os.ModeCharDevice == 0 {
+		cmd := capitalize(strings.TrimSuffix(CLI.SubCommand, " "))
+		data, err := io.ReadAll(os.Stdin)
+		if err != nil {
+			return
+		}
+
+		text := strings.TrimRight(string(data), "\n\r")
+		if text == "" {
+			return
+		}
+
+		switch cmd {
+		case "Align":
+			if len(CLI.Align.Args) == 0 {
+				CLI.Align.Args = []string{text}
+			}
+		case "Bool":
+			if len(CLI.Bool.Args) == 0 {
+				CLI.Bool.Args = []string{text}
+			}
+		case "Calc":
+			if len(CLI.Calc.Args) == 0 {
+				CLI.Calc.Args = []string{text}
+			}
+		case "Case":
+			if len(CLI.Case.Args) == 0 {
+				CLI.Case.Args = []string{text}
+			}
+		case "Color":
+			if len(CLI.Color.Args) == 0 {
+				CLI.Color.Args = []string{text}
+			}
+		case "Date":
+			if len(CLI.Date.Args) == 0 {
+				CLI.Date.Args = []string{text}
+			}
+		case "Encode":
+			if len(CLI.Encode.Args) == 0 {
+				CLI.Encode.Args = []string{text}
+			}
+		case "Geo":
+			if len(CLI.Geo.Args) == 0 {
+				CLI.Geo.Args = []string{text}
+			}
+		case "Hash":
+			if len(CLI.Hash.Args) == 0 {
+				CLI.Hash.Args = []string{text}
+			}
+		case "Match":
+			if len(CLI.Match.Args) == 0 {
+				CLI.Match.Args = []string{text}
+			}
+		case "Path":
+			if len(CLI.Path.Args) == 0 {
+				CLI.Path.Args = []string{text}
+			}
+		case "Tidy":
+			if len(CLI.Tidy.Args) == 0 {
+				CLI.Tidy.Args = []string{text}
+			}
+		case "Trim":
+			if len(CLI.Trim.Args) == 0 {
+				CLI.Trim.Args = []string{text}
+			}
+		}
+	}
+}
+
+func capitalize(s string) string {
+	r := []rune(s)
+	if len(r) > 0 {
+		r[0] = r[0] - 'a' + 'A'
+	}
+	return string(r)
 }
 
 type tPrinter []tPrinterEl
