@@ -40,7 +40,7 @@ func (tr Transform) upperCase(lang language.Tag) string {
 
 func (tr Transform) camelCase() string {
 	sn := stringy.New(tr.Conf.String)
-	return sn.CamelCase("?", "")
+	return sn.PascalCase("?", "").Get()
 }
 
 func (tr Transform) snakeCase() string {
