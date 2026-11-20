@@ -47,6 +47,8 @@ func (tr Transform) Run() {
 		r = tr.runMatch()
 	case "path":
 		r = tr.runPath()
+	case "sani":
+		r = tr.runSani()
 	case "tidy":
 		r = tr.runTidy()
 	case "trim":

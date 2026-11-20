@@ -87,6 +87,10 @@ var CLI struct {
 		Target string   `help:"which part to get, can be: [${enum}]" enum:"dir, bn, ext" short:"t" default:"dir"`
 	} `cmd:"" help:"get parts of a file path"`
 
+	Sani struct {
+		Args []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
+	} `cmd:"" help:"sanitize string, transliterate odd characters to ascii and normalize separators"`
+
 	Tidy struct {
 		Args   []string `help:"args passed through as string to process" arg:"" optional:"" passthrough:""`
 		Target string   `help:"target characters groups to tidy, can be: [${enum}]" enum:"spaces,pseps" short:"t" default:"spaces"`
@@ -188,6 +192,10 @@ func readStdinIntoArgs() {
 		case "Path":
 			if len(CLI.Path.Args) == 0 {
 				CLI.Path.Args = []string{text}
+			}
+		case "Sani":
+			if len(CLI.Sani.Args) == 0 {
+				CLI.Sani.Args = []string{text}
 			}
 		case "Tidy":
 			if len(CLI.Tidy.Args) == 0 {

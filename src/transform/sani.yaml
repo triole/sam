@@ -1,0 +1,66 @@
+---
+# German umlauts are transliterated, not just stripped. This rule must
+# run before the generic combining-mark cleanup below.
+- rx: '([aou])\x{0308}'
+  nu: '${1}e'
+
+# Selected Latin letters that NFD leaves as-is (no canonical decomposition)
+# but that should transliterate to ASCII.
+- rx: ß
+  nu: ss
+
+- rx: æ
+  nu: ae
+
+- rx: œ
+  nu: oe
+
+- rx: ø
+  nu: o
+
+- rx: þ
+  nu: th
+
+- rx: (đ|ð)
+  nu: d
+
+- rx: ħ
+  nu: h
+
+- rx: ı
+  nu: i
+
+- rx: (ł|ŀ)
+  nu: l
+
+- rx: ſ
+  nu: s
+
+- rx: ŧ
+  nu: t
+
+# normalize() applies NFD first, so accents on ASCII base letters arrive
+# as separate combining marks. Remove the marks.
+- rx: '\p{Mn}+'
+  nu: ""
+
+- rx: "[^a-z0-9_-]+"
+  nu: _
+
+# Three or more separators in a row mark a word boundary and become a
+# single underscore. Exactly two dashes are a valid separator and collapse
+# to one dash, everything else is handled below.
+- rx: '[-_]{3,}'
+  nu: _
+
+- rx: '--'
+  nu: '-'
+
+- rx: '[-_]{2,}'
+  nu: _
+
+- rx: "[-_]+$"
+  nu: ""
+
+- rx: "([a-z]+)_([0-9]{1,2})$"
+  nu: "$1$2"
